@@ -1,0 +1,43 @@
+alias ll="ls -alh"
+alias cls="clear"
+alias atom="atom.sh"
+alias start_mongodb="sh ~/mongodb/start.sh"
+alias json="python -m json.tool"
+
+# Kubernetes
+alias mk="minikube"
+alias k="kubectl"
+alias kcc="kubectl config current-context"
+alias kgc="kubectl config get-contexts -o name"
+alias kuc="kubectl config use-context"
+
+# Docker
+alias dc="docker-compose"
+alias dm="docker-machine"
+
+# Git
+alias gs="git status"
+alias gf="git fetch"
+alias gco="git checkout"
+alias gcod="git checkout develop"
+alias gcm="git commit -m"
+alias gr="git rebase"
+alias gl="git log"
+
+# Curl
+alias curlg="curl -XGET"
+alias curlp="curl -XPOST"
+
+# Maven
+alias mcp="mvn clean package"
+
+# Vim
+alias vi=vim
+alias v="view"
+
+# Ansible
+alias ap="ansible-playbook"
+alias av="ansible-vault"
+
+# Zsh stuff
+alias sz="source ~/.zshrc"
