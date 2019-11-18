@@ -17,6 +17,7 @@ alias dm="docker-machine"
 
 # Git
 alias gs="git status"
+alias gsa="git status -uall"
 alias gf="git fetch"
 alias gco="git checkout"
 alias gcod="git checkout develop"
