@@ -23,11 +23,13 @@ alias gco="git checkout"
 alias gcod="git checkout develop"
 alias gcm="git commit -m"
 alias gr="git rebase"
+alias gri="git rebase -i"
 alias gl="git log"
 
 # Curl
 alias curlg="curl -XGET"
 alias curlp="curl -XPOST"
+alias curlpj="curl -XPOST -H "Content-Type: application/json" "
 
 # Maven
 alias mcp="mvn clean package"
