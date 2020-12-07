@@ -1,47 +1,30 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins from Vim Plug Package Manger - https://github.com/junegunn/vim-plug
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Run :PlugInstall to install any listed plugins here
-" Run :PlugClean to remove any unused plugins that were previously installed
-
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
-
-" Shorthand notation fetches from GitHub
-Plug 'rafi/awesome-vim-colorschemes'
-
-" Initialize plugin system
-call plug#end()
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Keep visual mode enabled after indent
-:vnoremap < <gv
-:vnoremap > >gv
-
-" Turn on syntax highlighting
-syntax on
-colorscheme dracula
-
-" Set line numbers on 
+" Change <leader> to Spacebar
+let mapleader = " " 
 set number
+set relativenumber
+syntax on
 
-" Set highlight search on 
 set hlsearch
+set incsearch
+
+
+set ignorecase smartcase " Ignore case in searches unless a capital is present
+
+set path+=**
+set wildmenu " Display matching files on tab completion
+set wildignore=.swp
+nnoremap <leader>f :find *
+
+set noerrorbells
 
 " Set tab to 2 spaces
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
+set smartindent
 
-" Auto close stuff
-
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap < <><left>
-" Auto close and indent after pressing enter
-inoremap {<CR> {<CR>}<ESC>O<TAB>
-inoremap [<CR> [<CR>]<ESC>O<TAB>
-inoremap (<CR> (<CR>)<ESC>O<TAB>
+" Current line highlighting
+" set cursorline 
+" Highlight current line
+" highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkblue
+" Change colour of highlight when entering/leaving insert mode
+" autocmd InsertEnter * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkgreen
+" autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkblue
