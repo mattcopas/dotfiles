@@ -8,6 +8,8 @@ alias json="python -m json.tool"
 alias mk="minikube"
 alias k="kubectl"
 alias kcc="kubectl config current-context"
+alias kun="k config set-context --current --namespace"
+alias kcn="k config view --minify -o jsonpath='{..namespace}'" 
 alias kgc="kubectl config get-contexts -o name"
 alias kuc="kubectl config use-context"
 
@@ -25,6 +27,7 @@ alias gcm="git commit -m"
 alias gr="git rebase"
 alias gri="git rebase -i"
 alias gl="git log"
+alias glo"git log --oneline"
 
 # Curl
 alias curlg="curl -XGET"
@@ -37,6 +40,8 @@ alias mcp="mvn clean package"
 # Vim
 alias vi=vim
 alias v="view"
+alias vv="vi ~/.vimrc"
+alias ":wq"="exit" # Just for fun
 
 # Ansible
 alias ap="ansible-playbook"
@@ -44,3 +49,9 @@ alias av="ansible-vault"
 
 # Zsh stuff
 alias sz="source ~/.zshrc"
+
+# TODO List
+if [ -f "$HOME/todo.txt" ]; 
+then
+alias todo="vi ~/todo.txt"
+fi
