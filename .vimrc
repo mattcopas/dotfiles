@@ -3,13 +3,34 @@ try
   call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-fugitive'
   Plug 'morhetz/gruvbox'
+  Plug 'dense-analysis/ale'
+  Plug 'pangloss/vim-javascript'    " JavaScript support
+  Plug 'leafgarland/typescript-vim' " TypeScript syntax
+  Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
   " List ends here. Plugins become visible to Vim after this call.
   call plug#end()
 
+  " Ale config
+  let g:ale_fixers = {
+  \   'typescript': ['prettier', 'eslint'],
+  \   'typescriptreact': ['prettier', 'eslint'],
+  \}
+  let g:ale_linters = {}
+  let g:ale_linters.typescript = ['eslint', 'tsserver']
+  let g:ale_linters.typescriptreact = ['eslint', 'tsserver']
+  let g:ale_typescript_prettier_use_local_config = 1
+  let g:ale_fix_on_save = 1
+  let g:ale_linters_explicit = 1
+  let g:ale_completion_enabled = 1
+  " Use j to cycle ale autocomplete suggestions
+  inoremap <silent><expr> j
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+
   " Git fugitive aliases
   nmap <leader>gs :G<CR>
+
 catch
-  echo "vim-plug error - not installed?"
+  echo "vim-plug error - not installed?" . v:exception
 endtry
 
 " use gruvbox color scheme
@@ -22,12 +43,15 @@ endtry
 
 " Change <leader> to Spacebar
 map <Space> <leader>
+
 set number
 set relativenumber
 syntax on
 
-set hlsearch
+set hlsearch " use :nohl to remove highlighting after search
 set incsearch
+
+set scrolloff=8 " start scrolling when cursor is 8 lines from the bottom
 
 
 set ignorecase smartcase " Ignore case in searches unless a capital is present
@@ -43,6 +67,10 @@ set noerrorbells
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set smartindent
 
+if $TERM == 'screen'
+  " Workaround to get colors to work in tmux
+  set t_Co=256
+endif
 set background=dark
 " Current line highlighting
 " set cursorline 
