@@ -7,6 +7,12 @@ try
   Plug 'pangloss/vim-javascript'    " JavaScript support
   Plug 'leafgarland/typescript-vim' " TypeScript syntax
   Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  " Set better search command to include hidden files
+  " Consider changing this to use rg (ripgrep)
+  let $FZF_DEFAULT_COMMAND="find ." " Note that this searches from whichever dir
+  " we were in when running the vim command
+  Plug 'junegunn/fzf.vim' 
   " List ends here. Plugins become visible to Vim after this call.
   call plug#end()
 
@@ -23,8 +29,8 @@ try
   let g:ale_linters_explicit = 1
   let g:ale_completion_enabled = 1
   " Use j to cycle ale autocomplete suggestions
-  inoremap <silent><expr> j
-      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <silent><expr> "j"
+      \ pumvisible() ? "\<C-n>" : j
 
   " Git fugitive aliases
   nmap <leader>gs :G<CR>
@@ -59,7 +65,8 @@ set ignorecase smartcase " Ignore case in searches unless a capital is present
 set path+=**
 set wildmenu " Display matching files on tab completion
 set wildignore=.swp
-nnoremap <leader>f :find *
+
+nnoremap <C-p> :FZF<CR>
 
 set noerrorbells
 
