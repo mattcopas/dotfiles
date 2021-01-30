@@ -6,18 +6,22 @@ try
   " List ends here. Plugins become visible to Vim after this call.
   call plug#end()
 
-  " Alias for git status
-  nmap <leader>gh :diffget //3<CR>
-  nmap <leader>gu :diffget //2<CR>
+  " Git fugitive aliases
+  nmap <leader>gs :G<CR>
 catch
   echo "vim-plug error - not installed?"
 endtry
 
-" use grivbox color scheme
-colorscheme gruvbox
+" use gruvbox color scheme
+try
+  colorscheme gruvbox
+catch
+  echo "Could not use gruvbox - Plugins installed?"
+  echo "If a vim-plug is installed, run :PlugInstall"
+endtry
 
 " Change <leader> to Spacebar
-let mapleader = " " 
+map <Space> <leader>
 set number
 set relativenumber
 syntax on
