@@ -37,6 +37,9 @@ alias curlpj="curl -XPOST -H 'Content-Type: application/json' "
 # Maven
 alias mcp="mvn clean package"
 
+# Tmux
+alias tmux="tmux -2"
+
 # Vim
 alias vi=vim
 alias v="view"
