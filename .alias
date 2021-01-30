@@ -43,6 +43,12 @@ alias v="view"
 alias vv="vi ~/.vimrc"
 alias ":wq"="exit" # Just for fun
 
+# Neovim
+if [ -x "$(command -v nvim)" ]; then
+# If nvim installed, alias vim to nvim
+  alias vim='nvim'
+fi
+#
 # Ansible
 alias ap="ansible-playbook"
 alias av="ansible-vault"
