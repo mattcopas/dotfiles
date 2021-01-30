@@ -1,3 +1,17 @@
+try
+  " Plugins will be downloaded under the specified directory.
+  call plug#begin('~/.vim/plugged')
+  Plug 'tpope/vim-fugitive'
+  Plug 'morhetz/gruvbox'
+  " List ends here. Plugins become visible to Vim after this call.
+  call plug#end()
+catch
+  echo "vim-plug error - not installed?"
+endtry
+
+" use grivbox color scheme
+colorscheme gruvbox
+
 " Change <leader> to Spacebar
 let mapleader = " " 
 set number
@@ -21,6 +35,7 @@ set noerrorbells
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set smartindent
 
+set background=dark
 " Current line highlighting
 " set cursorline 
 " Highlight current line
