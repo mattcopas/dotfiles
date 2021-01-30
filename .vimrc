@@ -5,6 +5,10 @@ try
   Plug 'morhetz/gruvbox'
   " List ends here. Plugins become visible to Vim after this call.
   call plug#end()
+
+  " Alias for git status
+  nmap <leader>gh :diffget //3<CR>
+  nmap <leader>gu :diffget //2<CR>
 catch
   echo "vim-plug error - not installed?"
 endtry
