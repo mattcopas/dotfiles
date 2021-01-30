@@ -21,3 +21,8 @@ cp ~/git/dotfiles/init.vim ~/.config/nvim/init.vim
 
 # Install vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
+
+# Example usage - add this to .devcontainer/Dockerfile
+# ARG EXTRAS=.devcontainer-extras.sh
+# COPY $EXTRAS .
+# RUN chmod a+x $EXTRAS && sh $EXTRAS
