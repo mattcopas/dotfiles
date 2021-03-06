@@ -1,3 +1,4 @@
+set nocompatible
 " Uncommant to install plugins
 " source .vimrc-load-plugins
 
