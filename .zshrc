@@ -108,3 +108,4 @@ if test -f ~/.secrets/.secrets; then
   source ~/.secret/.secrets
 fi
 export PATH=$PATH:~/.local/lib/aws/bin/
+export EDITOR=vim
