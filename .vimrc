@@ -40,3 +40,13 @@ set background=dark
 " Change colour of highlight when entering/leaving insert mode
 " autocmd InsertEnter * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkgreen
 " autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkblue
+
+"Display error when using arrow keys in normal mode
+noremap <up>    :echom 'USE K TO GO UP'<CR>
+noremap <down>  :echom 'USE J TO GO DOWN'<CR>
+noremap <left>  :echom 'USE H TO GO LEFT'<CR>
+noremap <right> :echom 'USE L TO GO RIGHT'<CR>
+inoremap <up>    <ESC>:echom 'USE K TO GO UP'<CR>
+inoremap <down>  <ESC>:echom 'USE J TO GO DOWN'<CR>
+inoremap <right> <ESC>:echom 'USE L TO GO RIGHT'<CR>
+inoremap <left>  <ESC>:echom 'USE H TO GO LEFT'<CR>  
