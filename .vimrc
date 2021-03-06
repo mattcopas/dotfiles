@@ -4,6 +4,7 @@
 " Change <leader> to Spacebar
 map <Space> <leader>
 
+colorscheme slate
 set number
 set relativenumber
 syntax on
