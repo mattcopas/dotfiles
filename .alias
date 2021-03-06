@@ -27,15 +27,21 @@ alias gcm="git commit -m"
 alias gr="git rebase"
 alias gri="git rebase -i"
 alias gl="git log"
-alias glo"git log --oneline"
+alias glo="git log --oneline"
 
 # Curl
 alias curlg="curl -XGET"
 alias curlp="curl -XPOST"
-alias curlpj="curl -XPOST -H "Content-Type: application/json" "
+alias curlpj="curl -XPOST -H 'Content-Type: application/json' "
 
 # Maven
 alias mcp="mvn clean package"
+
+# Tmux
+if [ -x "$(command -v tmux)" ]; then
+  alias tmux="tmux -2"
+  alias ta="tmux attach"
+fi
 
 # Vim
 alias vi=vim
@@ -43,6 +49,12 @@ alias v="view"
 alias vv="vi ~/.vimrc"
 alias ":wq"="exit" # Just for fun
 
+# Neovim
+if [ -x "$(command -v nvim)" ]; then
+# If nvim installed, alias vim to nvim
+  alias vim='nvim'
+fi
+#
 # Ansible
 alias ap="ansible-playbook"
 alias av="ansible-vault"
