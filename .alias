@@ -67,3 +67,4 @@ if [ -f "$HOME/todo.txt" ];
 then
 alias todo="vi ~/todo.txt"
 fi
+alias todo="vi ~/.todo.md"
