@@ -38,7 +38,10 @@ alias curlpj="curl -XPOST -H 'Content-Type: application/json' "
 alias mcp="mvn clean package"
 
 # Tmux
-alias tmux="tmux -2"
+if [ -x "$(command -v tmux)" ]; then
+  alias tmux="tmux -2"
+  alias ta="tmux attach"
+fi
 
 # Vim
 alias vi=vim
