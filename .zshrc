@@ -1,7 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-source ~/.bash_profile
+if test -f ~/.bash_profile; then
+  source ~/.bash_profile
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -102,5 +104,7 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/git/dotfiles/.alias
 source ~/git/dotfiles/.functions
-source ~/.secret/.secrets
+if test -f ~/.secrets/.secrets; then
+  source ~/.secret/.secrets
+fi
 export PATH=$PATH:~/.local/lib/aws/bin/
