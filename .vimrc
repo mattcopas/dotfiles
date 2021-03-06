@@ -5,7 +5,7 @@ set nocompatible
 " Change <leader> to Spacebar
 map <Space> <leader>
 
-colorscheme slate
+colorscheme zellner
 set number
 set relativenumber
 syntax on
