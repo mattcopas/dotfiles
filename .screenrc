@@ -1,0 +1,13 @@
+autodetach on
+startup_message off
+hardstatus alwayslastline
+# Change prefix to Ctrl-Space 
+escape ^@a
+# save layout when detaching
+bind d eval "layout save default" "detach"
+bind | eval "split -v" "focus" "screen"
+bind - eval "split" "focus" "screen"
+bind k remove
+
+# hardstatus string '%{gk}[%{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= w}%?%+Lw%?%? %{g}][%{d}%l%{g}][ %{= w}%Y/%m/%d %0C:%s%a%{g} ]%{W}'
+hardstatus string '%{gk}[%{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= w}%?%+Lw%?%? %{g}][ %{= w}%d/%m/%Y %0C%{g} ]%{W}'
