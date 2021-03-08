@@ -61,4 +61,5 @@ nnoremap <leader>sc :setlocal spell spelllang=en<CR>:echo 'Run :set nospell remo
 colorscheme zellner
 " Override search highlight colours
 highlight Search ctermbg=LightYellow
-" highlight Search ctermbg=LightYellow
+" Override visual selection text color
+highlight Visual ctermfg=LightYellow
