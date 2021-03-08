@@ -12,4 +12,12 @@ function maven-project-version() {
 
 function process-on-port() {
   lsof -i tcp:$1
+
+function exec_devcontainer() {
+  if [[ -z $1 ]]; then
+    container_grep=vsc
+  else
+    container_grep=vsc-$1
+  fi
+  docker exec -it $(docker ps | grep $container_grep | awk '{ print $1 }') /bin/bash
 }
