@@ -9,3 +9,7 @@ function maven-project-version() {
     --non-recursive \
     exec:exec
 }
+
+function process-on-port() {
+  lsof -i tcp:$1
+}

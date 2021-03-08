@@ -28,3 +28,6 @@ set smartindent
 " Change colour of highlight when entering/leaving insert mode
 " autocmd InsertEnter * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkgreen
 " autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkblue
+
+" Exit insert mode after updatetime milliseconds (default 4000) - to see this value run :set updatetime?
+" au CursorHoldI * stopinsert
