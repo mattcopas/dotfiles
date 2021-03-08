@@ -72,6 +72,10 @@ alias sz="source ~/.zshrc"
 # TODO List
 if [ -f "$HOME/todo.txt" ]; 
 then
-alias todo="vi ~/todo.txt"
+  alias todo="vi ~/todo.txt"
 fi
 alias todo="vi ~/.todo.md"
+
+# Top with only a few columns
+alias topf="top -stats pid,command,cpu,mem"
+

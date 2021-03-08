@@ -5,7 +5,6 @@ set nocompatible
 " Change <leader> to Spacebar
 map <Space> <leader>
 
-colorscheme zellner
 set number
 set relativenumber
 syntax on
@@ -43,6 +42,9 @@ set background=dark
 " autocmd InsertEnter * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkgreen
 " autocmd InsertLeave * highlight CursorLine guifg=white guibg=darkblue ctermfg=white ctermbg=darkblue
 
+" Exit insert mode after updatetime milliseconds (default 4000) - to see this value run :set updatetime?
+" au CursorHoldI * stopinsert
+
 "Display error when using arrow keys in normal mode
 noremap <up>    :echoerr 'USE K TO GO UP'<CR>
 noremap <down>  :echoerr 'USE J TO GO DOWN'<CR>
@@ -55,3 +57,9 @@ inoremap <left>  <ESC>:echoerr 'USE H TO GO LEFT'<CR>
 
 " Spell check current file
 nnoremap <leader>sc :setlocal spell spelllang=en<CR>:echo 'Run :set nospell remove highlighting'<CR>
+
+colorscheme zellner
+" Override search highlight colours
+highlight Search ctermbg=LightYellow
+" Override visual selection text color
+highlight Visual ctermfg=LightYellow
