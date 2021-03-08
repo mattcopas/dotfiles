@@ -5,7 +5,6 @@ set nocompatible
 " Change <leader> to Spacebar
 map <Space> <leader>
 
-colorscheme zellner
 set number
 set relativenumber
 syntax on
@@ -58,3 +57,8 @@ inoremap <left>  <ESC>:echoerr 'USE H TO GO LEFT'<CR>
 
 " Spell check current file
 nnoremap <leader>sc :setlocal spell spelllang=en<CR>:echo 'Run :set nospell remove highlighting'<CR>
+
+colorscheme zellner
+" Override search highlight colours
+highlight Search ctermbg=LightYellow
+" highlight Search ctermbg=LightYellow
