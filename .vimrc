@@ -50,10 +50,6 @@ noremap <up>    :echoerr 'USE K TO GO UP'<CR>
 noremap <down>  :echoerr 'USE J TO GO DOWN'<CR>
 noremap <left>  :echoerr 'USE H TO GO LEFT'<CR>
 noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
-inoremap <up>    <ESC>:echoerr 'USE K TO GO UP'<CR>
-inoremap <down>  <ESC>:echoerr 'USE J TO GO DOWN'<CR>
-inoremap <right> <ESC>:echoerr 'USE L TO GO RIGHT'<CR>
-inoremap <left>  <ESC>:echoerr 'USE H TO GO LEFT'<CR>  
 
 " Spell check current file
 nnoremap <leader>sc :setlocal spell spelllang=en<CR>:echo 'Run :set nospell remove highlighting'<CR>
