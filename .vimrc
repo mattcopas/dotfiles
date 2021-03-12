@@ -11,11 +11,9 @@ syntax on
 
 set hlsearch " use :nohl to remove highlighting after search
 set incsearch
+set ignorecase smartcase " Ignore case in searches unless a capital is present
 
 set scrolloff=8 " start scrolling when cursor is 8 lines from the bottom
-
-
-set ignorecase smartcase " Ignore case in searches unless a capital is present
 
 set path+=**
 set wildmenu " Display matching files on tab completion
@@ -34,6 +32,7 @@ if $TERM == 'screen'
   set t_Co=256
 endif
 set background=dark
+
 " Current line highlighting
 " set cursorline 
 " Highlight current line
