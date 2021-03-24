@@ -12,6 +12,8 @@ syntax on
 set hlsearch " use :nohl to remove highlighting after search
 set incsearch
 set ignorecase smartcase " Ignore case in searches unless a capital is present
+" Remove highlighting
+nnoremap <Space><Space> :noh<CR>
 
 set scrolloff=8 " start scrolling when cursor is 8 lines from the bottom
 
@@ -58,3 +60,4 @@ colorscheme zellner
 highlight Search ctermbg=LightYellow
 " Override visual selection text color
 highlight Visual ctermfg=LightYellow
+
