@@ -51,10 +51,10 @@ set background=dark
 " au CursorHoldI * stopinsert
 
 "Display error when using arrow keys in normal mode
-noremap <up>    :echoerr 'USE K TO GO UP'<CR>
-noremap <down>  :echoerr 'USE J TO GO DOWN'<CR>
-noremap <left>  :echoerr 'USE H TO GO LEFT'<CR>
-noremap <right> :echoerr 'USE L TO GO RIGHT'<CR>
+noremap <up>    :echo 'USE K TO GO UP'<CR>
+noremap <down>  :echo 'USE J TO GO DOWN'<CR>
+noremap <left>  :echo 'USE H TO GO LEFT'<CR>
+noremap <right> :echo 'USE L TO GO RIGHT'<CR>
 
 " Spell check current file
 nnoremap <leader>sc :setlocal spell spelllang=en<CR>:echo 'Run :set nospell remove highlighting'<CR>
