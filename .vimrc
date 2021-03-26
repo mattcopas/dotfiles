@@ -29,6 +29,10 @@ set noerrorbells
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set smartindent
 
+" Edit vimrc
+nnoremap <Leader>vv :tab sp $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
 if $TERM == 'screen'
   " Workaround to get colors to work in tmux
   set t_Co=256
