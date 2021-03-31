@@ -22,5 +22,8 @@ cp $DOTFILES_DIRECTORY/init.vim ~/.config/nvim/init.vim
 # Install vim-plug
 # curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
 
+# Install vscode extensions
+code --install-extension kahole.magit
+
 # Example usage - add this to .devcontainer/Dockerfile
 # curl https://raw.githubusercontent.com/mattcopas/dotfiles/master/.devcontainer-extras.sh | bash -s
