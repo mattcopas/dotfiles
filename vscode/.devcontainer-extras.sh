@@ -26,4 +26,4 @@ cp $DOTFILES_DIRECTORY/init.vim ~/.config/nvim/init.vim
 code --install-extension kahole.magit
 
 # Example usage - add this to .devcontainer/Dockerfile
-# curl https://raw.githubusercontent.com/mattcopas/dotfiles/master/.devcontainer-extras.sh | bash -s
+# curl https://raw.githubusercontent.com/mattcopas/dotfiles/master/vscode/.devcontainer-extras.sh | bash -s
