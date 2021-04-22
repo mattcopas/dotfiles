@@ -23,7 +23,9 @@ cp $DOTFILES_DIRECTORY/init.vim ~/.config/nvim/init.vim
 # curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
 
 # Install vscode extensions
-code --install-extension kahole.magit
+# This doesnt seem to work in the Dockerfile, postCreateCommand, or postStartCommand
+# Unfortunately it seems these will have to be added under "extensions" in the .devcontainer.json file
+# code --install-extension kahole.magit
 
 # Example usage - add this to .devcontainer/Dockerfile
 # curl https://raw.githubusercontent.com/mattcopas/dotfiles/master/vscode/.devcontainer-extras.sh | bash -s
