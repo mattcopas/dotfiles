@@ -70,11 +70,12 @@ alias av="ansible-vault"
 alias sz="source ~/.zshrc"
 
 # TODO List
-if [ -f "$HOME/todo.txt" ]; 
+TODO_FILE=$HOME/.todo.org
+if [ ! -f "$TODO_FILE" ]; 
 then
-  alias todo="vi ~/todo.txt"
+  touch $TODO_FILE
 fi
-alias todo="vi ~/.todo.md"
+alias todo="docker run -it -v $TODO_FILE:/home/doom/.todo.org -v ~/git/dotfiles/doom/config.el:/home/doom/.doom.d/config.el --entrypoint emacs mattcopas/doom-docker /home/doom/.todo.org"
 
 # Top with only a few columns
 alias topf="top -stats pid,command,cpu,mem"
