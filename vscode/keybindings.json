@@ -1,0 +1,44 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.focus",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+shift+down",
+    "command": "workbench.action.increaseViewHeight",
+  },
+  {
+    "key": "cmd+shift+up",
+    "command": "workbench.action.decreaseViewHeight",
+  }
+  {
+    "key": "cmd+shift+left",
+    "command": "workbench.action.increaseViewWidth",
+  },
+  {
+    "key": "cmd+shift+right",
+    "command": "workbench.action.decreaseViewWidth",
+  },
+
+  // Magic keybindings
+  // from https://marketplace.visualstudio.com/items?itemName=kahole.magit
+  { "key": "tab", "command": "extension.vim_tab", "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert' && editorLangId != 'magit'" },
+  { "key": "tab", "command": "-extension.vim_tab", "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'" },
+  { "key": "x", "command": "magit.discard-at-point", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" },
+  { "key": "k", "command": "-magit.discard-at-point" },
+  { "key": "-", "command": "magit.reverse-at-point", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" }, 
+  { "key": "v", "command": "-magit.reverse-at-point" }, 
+  { "key": "shift+-", "command": "magit.reverting", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" }, 
+  { "key": "shift+v", "command": "-magit.reverting" }, 
+  // { "key": "shift+o", "command": "magit.resetting", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" }, 
+  // { "key": "shift+x", "command": "-magit.resetting" }, 
+  { "key": "x", "command": "-magit.reset-mixed" }, 
+  { "key": "ctrl+u x", "command": "-magit.reset-hard" }
+]
