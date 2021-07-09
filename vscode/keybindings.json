@@ -1,5 +1,6 @@
 // Place your key bindings in this file to override the defaults
 [
+  // Terminal focus
   {
     "key": "ctrl+`",
     "command": "workbench.action.terminal.focus",
@@ -10,35 +11,98 @@
     "command": "workbench.action.focusActiveEditorGroup",
     "when": "terminalFocus"
   },
+
+  // Increase buffer sizes (could be improved)
   {
     "key": "cmd+shift+down",
-    "command": "workbench.action.increaseViewHeight",
+    "command": "workbench.action.increaseViewHeight"
   },
   {
     "key": "cmd+shift+up",
-    "command": "workbench.action.decreaseViewHeight",
-  }
+    "command": "workbench.action.decreaseViewHeight"
+  },
   {
     "key": "cmd+shift+left",
-    "command": "workbench.action.increaseViewWidth",
+    "command": "workbench.action.increaseViewWidth"
   },
   {
     "key": "cmd+shift+right",
-    "command": "workbench.action.decreaseViewWidth",
+    "command": "workbench.action.decreaseViewWidth"
+  },
+
+  // Toggle entire activity bar
+  {
+    "key": "cmd+shift+b",
+    "command": "workbench.action.toggleActivityBarVisibility"
+  }
+
+  // Switch between terminal windows
+  {
+    "key": "cmd+]",
+    "command": "workbench.action.terminal.focusNextPane"
+  },
+  {
+    "key": "cmd+[",
+    "command": "workbench.action.terminal.focusPreviousPane"
+  },
+
+  // Split terminal horisontally
+  {
+    "key": "cmd+d",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus"
+  },
+
+  // File explorer keybindings
+  {
+    "key": "enter",
+    "command": "explorer.newFile",
+    "when": "filesExplorerFocus"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "explorer.newFolder",
+    "when": "filesExplorerFocus"
+  },
+  {
+    "key": "F2",
+    "command": "renameFile",
+    "when": "filesExplorerFocus"
   },
 
   // Magic keybindings
   // from https://marketplace.visualstudio.com/items?itemName=kahole.magit
-  { "key": "tab", "command": "extension.vim_tab", "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert' && editorLangId != 'magit'" },
-  { "key": "tab", "command": "-extension.vim_tab", "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'" },
-  { "key": "x", "command": "magit.discard-at-point", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" },
+  {
+    "key": "tab",
+    "command": "extension.vim_tab",
+    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert' && editorLangId != 'magit'"
+  },
+  {
+    "key": "tab",
+    "command": "-extension.vim_tab",
+    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert'"
+  },
+  {
+    "key": "x",
+    "command": "magit.discard-at-point",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
   { "key": "k", "command": "-magit.discard-at-point" },
-  { "key": "-", "command": "magit.reverse-at-point", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" }, 
-  { "key": "v", "command": "-magit.reverse-at-point" }, 
-  { "key": "shift+-", "command": "magit.reverting", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" }, 
-  { "key": "shift+v", "command": "-magit.reverting" }, 
-  // { "key": "shift+o", "command": "magit.resetting", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" }, 
-  // { "key": "shift+x", "command": "-magit.resetting" }, 
-  { "key": "x", "command": "-magit.reset-mixed" }, 
+  {
+    "key": "-",
+    "command": "magit.reverse-at-point",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  { "key": "v", "command": "-magit.reverse-at-point" },
+  {
+    "key": "shift+-",
+    "command": "magit.reverting",
+    "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/"
+  },
+  { "key": "shift+v", "command": "-magit.reverting" },
+  // { "key": "shift+o", "command": "magit.resetting", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" },
+  // { "key": "shift+x", "command": "-magit.resetting" },
+  { "key": "x", "command": "-magit.reset-mixed" },
   { "key": "ctrl+u x", "command": "-magit.reset-hard" }
 ]
+
