@@ -9,6 +9,7 @@ set number
 set relativenumber
 syntax on
 
+" Search
 set hlsearch " use :nohl to remove highlighting after search
 set incsearch
 set ignorecase smartcase " Ignore case in searches unless a capital is present
@@ -17,6 +18,7 @@ nnoremap <Space><Space> :noh<CR>
 
 set scrolloff=8 " start scrolling when cursor is 8 lines from the bottom
 
+" Improve file search autocompleting
 set path+=**
 set wildmenu " Display matching files on tab completion
 set wildignore=.swp
