@@ -103,6 +103,9 @@
   // { "key": "shift+o", "command": "magit.resetting", "when": "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/" },
   // { "key": "shift+x", "command": "-magit.resetting" },
   { "key": "x", "command": "-magit.reset-mixed" },
-  { "key": "ctrl+u x", "command": "-magit.reset-hard" }
+  { "key": "ctrl+u x", "command": "-magit.reset-hard" },
+
+  // use emacs-style C-g to exit insert mode when writing git commit messages
+  { "key": "ctrl+g", "command": "extension.vim_ctrl+c", "when": "editorTextFocus && editorLangId == 'git-commit'"}
 ]
 
