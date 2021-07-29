@@ -20,6 +20,14 @@
 			"})"
 		]
 	},
+	"it sync": {
+		"prefix": "its",
+		"body": [
+			"it('$1', () => {",
+			"	 $2",
+			"})"
+		]
+	},
 	"it async": {
 		"prefix": "itas",
 		"body": [
@@ -48,8 +56,9 @@
 		"prefix": "vlog",
 		"body": "console.log('$1', $1)"
 	},
-  "pretty json log": {
-  	"prefix": "jlog",
-  	"body": "console.log(JSON.stringify($1, null, '  '))"
+	"pretty json log": {
+		"prefix": "jlog",
+		"body": "console.log(JSON.stringify($1, null, '  '))"
 	}
 }
+
