@@ -2,6 +2,10 @@ set nocompatible
 " Uncommant to install plugins
 " source .vimrc-load-plugins
 
+
+" Get backspace to work in Powershell
+set backspace=indent,eol,start
+
 " Change <leader> to Spacebar
 map <Space> <leader>
 
