@@ -1,0 +1,6 @@
+elpa
+transient
+.cache
+**/*jar
+**/*.eld
+.lsp-session-v1
