@@ -1,6 +1,11 @@
 # Use emacs keybindings (equiv to set -o emacs in bash)
 Set-PSReadLineOption -EditMode Emacs
 
+if((Get-Module -ListAvailable "oh-my-posh")) {
+  Import-Module oh-my-posh
+  Set-PoshPrompt -Theme pure
+}
+
 # Make a function to exit
 # This is to get around not being able to use 'exit' as an alias value
 function Quit() {
