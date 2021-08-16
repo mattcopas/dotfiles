@@ -17,8 +17,20 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Theme
+;; Theme + UI stuff
+(setq inhibit-startup-message t)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(tooltip-mode -1)
+(set-fringe-mode 10)
 (load-theme 'tango-dark)
+
+;; Fonts
+(defun font-exists-p (font) "check if font exists" (if (null (x-list-fonts font)) nil t))
+(if (font-exists-p "MesloLGL NF") 
+  (add-to-list 'default-frame-alist '(font . "MesloLGL NF" ))
+  (set-face-attribute 'default t :font "MesloLGL NF" ))
 
 ;;;;;;;;;;;;
 ;; Packages
