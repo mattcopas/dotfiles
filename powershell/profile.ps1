@@ -4,6 +4,8 @@ Set-PSReadLineOption -EditMode Emacs
 if((Get-Module -ListAvailable "oh-my-posh")) {
   Import-Module oh-my-posh
   Set-PoshPrompt -Theme pure
+} else {
+  Write-Host "Consider adding module oh-my-posh"  
 }
 
 # Make a function to exit
@@ -26,6 +28,8 @@ Set-Alias -name ":wq" -value Quit
 Set-Alias -name vi -value vim
 Set-Alias -name v -value vim
 Set-Alias -name vv -value Edit-Vimrc
+Set-Alias -name ll -value Get-ChildItem
+Set-Alias -name l -value Get-ChildItem
 # FIXME - see above function
 Set-Alias -name sz -value Source-Profile
 
