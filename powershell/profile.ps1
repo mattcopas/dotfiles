@@ -35,11 +35,14 @@ Set-Alias -name sz -value Source-Profile
 
 # Git
 function GitStatus() { git status }
-
 function GitLog { git log }
 function GitLogOneline { git log --oneline }
+function GitDiff { git diff }
+function GitDiffStaged { git diff --staged }
 Set-Alias -name gs -value GitStatus
 # Delete the existing gl alias before overriding
 del alias:gl -Force
 Set-Alias -name gl -value GitLog -force
 Set-Alias -name glo -value GitLogOneline
+Set-Alias -name gd -value GitDiff
+Set-Alias -name gds -value GitDiffStaged
