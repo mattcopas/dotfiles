@@ -62,6 +62,9 @@ noremap <down>  :echo 'USE J TO GO DOWN'<CR>
 noremap <left>  :echo 'USE H TO GO LEFT'<CR>
 noremap <right> :echo 'USE L TO GO RIGHT'<CR>
 
+" Easier saving
+nnoremap <leader>w :w<CR>
+
 " Easier buffer/tab movement
 " C-hjkl to switch panes
 noremap <C-l> <C-w>l
@@ -71,9 +74,6 @@ noremap <C-k> <C-w>k
 " Shift h/l to switch tabs
 noremap <S-l> gt
 noremap <S-h> gT
-
-" Quit files with leader
-noremap <leader>q :q<cr>
 
 " Spell check current file
 nnoremap <leader>sc :setlocal spell spelllang=en<CR>:echo 'Run :set nospell remove highlighting'<CR>
