@@ -1,17 +1,29 @@
 # Use emacs keybindings (equiv to set -o emacs in bash)
 Set-PSReadLineOption -EditMode Emacs
 
-if((Get-Module -ListAvailable "oh-my-posh")) {
-  Import-Module oh-my-posh
-  Set-PoshPrompt -Theme pure
-} else {
-  Write-Host "Consider adding module oh-my-posh"  
+function ImportModuleIfExists() {
+  $module = $args[0]
+  $module_exists = Get-Module -ListAvailable $module
+  if($module_exists) {
+    Import-Module $module
+    return $true
+  } else {
+    Write-Host "Consider installing module $module"
+    return $false
+  }
 }
+
+if((ImportModuleIfExists "oh-my-posh")) {
+  Set-PoshPrompt -Theme pure
+}
+
+# Cast the function call to void to suppress output
+[void] (ImportModuleIfExists "posh-git")
 
 # Make a function to exit
 # This is to get around not being able to use 'exit' as an alias value
 function Quit() {
-  Invoke-Command -ScriptBlock { exit }
+   exit
 }
 
 function Source-Profile() {
