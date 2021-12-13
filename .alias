@@ -77,6 +77,16 @@ then
 fi
 alias todo="docker run -it -v $TODO_FILE:/home/doom/.todo.org -v ~/git/dotfiles/doom/config.el:/home/doom/.doom.d/config.el --entrypoint emacs mattcopas/doom-docker /home/doom/.todo.org"
 
+# Notes Org File
+PRIVATE_DIR=$HOME/git/private
+TECH_NOTES_FILE=tech-notes.org
+if [ ! -d "$PRIVATE_DIR" ];
+then
+  alias clone_private_repo="git clone git@github.com:mattcopas/private.git $PRIVATE_DIR"
+  echo "No notes notes file found - either run clone_private_repo or touch $PRIVATE_DIR/$TECH_NOTES_FILE"
+fi
+alias notes="docker run -it -v $PRIVATE_DIR/$TECH_NOTES_FILE:/home/doom/$TECH_NOTES_FILE -v ~/git/dotfiles/doom/config.el:/home/doom/.doom.d/config.el --entrypoint emacs mattcopas/doom-docker /home/doom/$TECH_NOTES_FILE"
+
 # Top with only a few columns
 alias topf="top -stats pid,command,cpu,mem"
 
