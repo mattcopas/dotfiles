@@ -192,6 +192,12 @@
   :ensure t
   :config (add-hook 'java-mode-hook 'lsp))
 
+;; Org Bullets
+(use-package org-bullets
+  :ensure t
+  :init
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
 ;;;;;;;;;;;;;;;;;;;
 ;; Editor settings
 ;;;;;;;;;;;;;;;;;;;
