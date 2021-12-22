@@ -1,6 +1,10 @@
 # Use emacs keybindings (equiv to set -o emacs in bash)
 Set-PSReadLineOption -EditMode Emacs
 
+# Render unicode characters properly
+$OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding =
+                    New-Object System.Text.UTF8Encoding
+
 function ImportModuleIfExists() {
   $module = $args[0]
   $module_exists = Get-Module -ListAvailable $module
@@ -58,3 +62,4 @@ Set-Alias -name gl -value GitLog -force
 Set-Alias -name glo -value GitLogOneline
 Set-Alias -name gd -value GitDiff
 Set-Alias -name gds -value GitDiffStaged
+
