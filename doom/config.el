@@ -57,6 +57,19 @@
 ;;;;;;;;;;;;;;;;;;
 ;; My custom stuff
 ;;;;;;;;;;;;;;;;;;
+;; Set fonts
+(when  (eq system-type 'windows-nt)
+        (setq font-to-use "Cascadia Code")
+        (setq doom-font (font-spec :family font-to-use)
+        doom-variable-pitch-font (font-spec :family font-to-use) ; inherits `doom-font''s :size
+                doom-unicode-font (font-spec :family font-to-use)
+                        doom-big-font (font-spec :family font-to-use))
+  )
+
+;; Set bullets for org-mode (requires unicode font, and (org +pretty) in .doom.d/init.el)
+(setq
+    org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
+
 (after! org
   (map! :map org-mode-map
     ;; Remap M-k/j to move items up/down
