@@ -22,11 +22,6 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-city-lights)
-
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
@@ -57,6 +52,7 @@
 ;;;;;;;;;;;;;;;;;;
 ;; My custom stuff
 ;;;;;;;;;;;;;;;;;;
+
 ;; Set fonts
 (when  (eq system-type 'windows-nt)
         (setq font-to-use "Cascadia Code")
