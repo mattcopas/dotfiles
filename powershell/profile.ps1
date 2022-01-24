@@ -1,5 +1,7 @@
 # Use emacs keybindings (equiv to set -o emacs in bash)
 Set-PSReadLineOption -EditMode Emacs
+# Turn off the stupid bell!
+Set-PSReadlineOption -BellStyle None
 
 # Render unicode characters properly
 $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding =
