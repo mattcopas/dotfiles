@@ -75,3 +75,7 @@
   ;; This fixes the leading stars being shown in org mode!
   ;; The second parameter (t) disables the prompt to load a theme
    (load-theme 'doom-one t))
+
+(when (window-system)
+  (load "~/git/dotfiles/doom/gui-config.el"))
+;;; config.el ends here
