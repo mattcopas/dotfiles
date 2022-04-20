@@ -66,6 +66,15 @@
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
 
+;; Fix meghanada (java) on Windows
+(cond
+   ((eq system-type 'windows-nt)
+       (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
+           (setq meghanada-maven-path "mvn.cmd"))
+      (t
+          (setq meghanada-java-path "java")
+              (setq meghanada-maven-path "mvn")))
+
 (after! org
   (map! :map org-mode-map
     ;; Remap M-k/j to move items up/down
