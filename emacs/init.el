@@ -29,7 +29,7 @@
 
 ;; Fonts
 (defun font-exists-p (font) "check if font exists" (if (null (x-list-fonts font)) nil t))
-(if (font-exists-p "MesloLGL NF") 
+(when (font-exists-p "MesloLGL NF") 
   (add-to-list 'default-frame-alist '(font . "MesloLGL NF" ))
   (set-face-attribute 'default t :font "MesloLGL NF" ))
 
@@ -191,6 +191,12 @@
 (use-package lsp-java 
   :ensure t
   :config (add-hook 'java-mode-hook 'lsp))
+
+;; Org Bullets
+(use-package org-bullets
+  :ensure t
+  :init
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Editor settings

@@ -22,11 +22,6 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-city-lights)
-
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
@@ -57,6 +52,29 @@
 ;;;;;;;;;;;;;;;;;;
 ;; My custom stuff
 ;;;;;;;;;;;;;;;;;;
+
+;; Set fonts
+(when  (eq system-type 'windows-nt)
+        (setq font-to-use "Cascadia Code")
+        (setq doom-font (font-spec :family font-to-use)
+        doom-variable-pitch-font (font-spec :family font-to-use) ; inherits `doom-font''s :size
+                doom-unicode-font (font-spec :family font-to-use)
+                        doom-big-font (font-spec :family font-to-use))
+  )
+
+;; Set bullets for org-mode (requires unicode font, and (org +pretty) in .doom.d/init.el)
+(setq
+    org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
+
+;; Fix meghanada (java) on Windows
+(cond
+   ((eq system-type 'windows-nt)
+       (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
+           (setq meghanada-maven-path "mvn.cmd"))
+      (t
+          (setq meghanada-java-path "java")
+              (setq meghanada-maven-path "mvn")))
+
 (after! org
   (map! :map org-mode-map
     ;; Remap M-k/j to move items up/down
@@ -66,3 +84,7 @@
   ;; This fixes the leading stars being shown in org mode!
   ;; The second parameter (t) disables the prompt to load a theme
    (load-theme 'doom-one t))
+
+(when (window-system)
+  (load "~/git/dotfiles/doom/gui-config.el"))
+;;; config.el ends here
