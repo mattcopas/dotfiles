@@ -52,6 +52,8 @@ nnoremap <C-g> <Esc>
 vnoremap <C-g> <Esc>
 inoremap <C-g> <Esc>
 
+nnoremap <leader>fr :action RecentFiles<CR>
+
 
 " Find more examples here: https://jb.gg/share-ideavimrc
 
