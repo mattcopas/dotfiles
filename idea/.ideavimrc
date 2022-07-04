@@ -40,6 +40,13 @@ nnoremap <Leader>f :action FileStructurePopup<CR>
 "" Go to Select In menu (select terminal, file tree etc)
 nnoremap <leader>ss :action SelectIn<CR>
 
+"" Toggle breakpoint
+nnoremap <leader>b :action ToggleLineBreakpoint<CR>
+
+"" Close everything but editor - note that for this to work you need to close all Tool Windows and
+"" (from Run Anything) run 'Store Current Layout as Default'
+nnoremap <C-w>o :action RestoreDefaultLayout<CR>
+
 
 " Find more examples here: https://jb.gg/share-ideavimrc
 
