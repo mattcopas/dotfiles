@@ -34,6 +34,12 @@ nnoremap gr :action RefactoringMenu<CR>
 nnoremap <leader>r :action RunMenu<CR>
 nnoremap <leader>R :action RunAnything<CR>
 
+"" Show file structure (methods etc)
+nnoremap <Leader>f :action FileStructurePopup<CR>
+
+"" Go to Select In menu (select terminal, file tree etc)
+nnoremap <leader>ss :action SelectIn<CR>
+
 
 " Find more examples here: https://jb.gg/share-ideavimrc
 
