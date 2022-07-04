@@ -47,6 +47,11 @@ nnoremap <leader>b :action ToggleLineBreakpoint<CR>
 "" (from Run Anything) run 'Store Current Layout as Default'
 nnoremap <C-w>o :action RestoreDefaultLayout<CR>
 
+"" Use <C-g> as <Esc>, similar to Emacs
+nnoremap <C-g> <Esc>
+vnoremap <C-g> <Esc>
+inoremap <C-g> <Esc>
+
 
 " Find more examples here: https://jb.gg/share-ideavimrc
 
