@@ -21,14 +21,18 @@ set scrolloff=3
 "map \b <Action>(ToggleLineBreakpoint)
 
 "" Map <leader>e and <leader>E to go to next/previous error
-map <leader>e <Action>(GotoNextError)
-map <leader>E <Action>(GotoPreviousError)
+nnoremap <leader>e :action GotoNextError<CR>
+nnoremap <leader>E :action GotoPreviousError<CR>
 
 "" Show error on hover
-map gh <Action>(ShowErrorDescription)
+nnoremap gh :action ShowErrorDescription<CR>
 
 "" Refactoring
-map gr <Action>(RefactoringMenu)
+nnoremap gr :action RefactoringMenu<CR>
+
+"" Running stuff
+nnoremap <leader>r :action RunMenu<CR>
+nnoremap <leader>R :action RunAnything<CR>
 
 
 " Find more examples here: https://jb.gg/share-ideavimrc
