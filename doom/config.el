@@ -91,4 +91,8 @@
 (setq
  projectile-project-search-path '("~/git")
 )
+
+; Add .ideavimrc to vimrc mode list
+(after! vimrc-mode
+        (add-to-list 'auto-mode-alist '(".ideavimrc" . vimrc-mode)))
 ;;; config.el ends here
