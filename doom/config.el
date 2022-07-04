@@ -86,4 +86,9 @@
 
 (when (window-system)
   (load "~/git/dotfiles/doom/gui-config.el"))
+
+;; projectile
+(setq
+ projectile-project-search-path '("~/git")
+)
 ;;; config.el ends here
