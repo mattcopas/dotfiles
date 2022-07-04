@@ -5,7 +5,6 @@ set mapleader = " "
 "" -- Suggested options --
 " Show a few lines of context around the cursor. Note that this makes the
 " text scroll if you mouse-click near the start or end of the window.
-
 set scrolloff=3
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -27,6 +26,9 @@ map <leader>E <Action>(GotoPreviousError)
 
 "" Show error on hover
 map gh <Action>(ShowErrorDescription)
+
+"" Refactoring
+map gr <Action>(RefactoringMenu)
 
 
 " Find more examples here: https://jb.gg/share-ideavimrc
