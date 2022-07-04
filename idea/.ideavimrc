@@ -9,7 +9,10 @@ set mapleader = " "
 " Do incremental searching.
 " set incsearch
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+" "For a list of action ids, run :actionlist {pattern?}
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Map \r to the Reformat Code action
 "map \r <Action>(ReformatCode)
 
@@ -22,6 +25,9 @@ set mapleader = " "
 "" Map <leader>e and <leader>E to go to next/previous error
 map <leader>e <Action>(GotoNextError)
 map <leader>E <Action>(GotoPreviousError)
+
+"" Show error on hover
+map gh <Action>(ShowErrorDescription)
 
 
 " Find more examples here: https://jb.gg/share-ideavimrc
