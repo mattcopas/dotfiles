@@ -29,6 +29,13 @@ nnoremap gh :action ShowErrorDescription<CR>
 
 "" Refactoring
 nnoremap gr :action RefactoringMenu<CR>
+nnoremap <leader>em :action ExtractMethod<CR>
+nnoremap <leader>ev :action IntroduceVariable<CR>
+nnoremap <leader>ec :action IntroduceConstant<CR>
+
+" Code inspection
+nnoremap <leader>vi :action GotoImplementation<CR>
+nnoremap <leader>vu :action FindUsages<CR>
 
 "" Running stuff
 nnoremap <leader>r :action RunMenu<CR>
