@@ -41,6 +41,9 @@ nnoremap <leader>vu :action FindUsages<CR>
 nnoremap <leader>r :action RunMenu<CR>
 nnoremap <leader>R :action RunAnything<CR>
 
+"" Terminal
+map <M-x> :action ActivateTerminalToolWindow<CR>
+
 "" Show file structure (methods etc)
 nnoremap <Leader>f :action FileStructurePopup<CR>
 
