@@ -28,18 +28,18 @@ nnoremap <leader>E :action GotoPreviousError<CR>
 nnoremap gh :action ShowErrorDescription<CR>
 
 "" Refactoring
-nnoremap gr :action RefactoringMenu<CR>
-nnoremap <leader>em :action ExtractMethod<CR>
-nnoremap <leader>ev :action IntroduceVariable<CR>
-nnoremap <leader>ec :action IntroduceConstant<CR>
+nnoremap <leader>rr :action RefactoringMenu<CR>
+vnoremap <leader>rm :action ExtractMethod<CR>
+nnoremap <leader>rv :action IntroduceVariable<CR>
+nnoremap <leader>rc :action IntroduceConstant<CR>
 
 " Code inspection
 nnoremap <leader>vi :action GotoImplementation<CR>
 nnoremap <leader>vu :action FindUsages<CR>
 
 "" Running stuff
-nnoremap <leader>r :action RunMenu<CR>
-nnoremap <leader>R :action RunAnything<CR>
+nnoremap gr :action RunMenu<CR>
+nnoremap gR :action RunAnything<CR>
 
 "" Terminal
 map <M-x> :action ActivateTerminalToolWindow<CR>
