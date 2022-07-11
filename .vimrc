@@ -39,6 +39,10 @@ set smartindent
 nnoremap <Leader>vv :tab sp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" Use C-g to cancel like in Emacs
+inoremap <C-g> <Esc>
+vnoremap <C-g> <Esc>
+
 if $TERM == 'screen'
   " Workaround to get colors to work in tmux
   set t_Co=256
