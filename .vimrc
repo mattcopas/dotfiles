@@ -82,7 +82,7 @@ noremap <S-h> gT
 " Spell check current file
 nnoremap <leader>sc :setlocal spell spelllang=en<CR>:echo 'Run :set nospell remove highlighting'<CR>
 
-colorscheme zellner
+colorscheme slate
 " Override search highlight colours
 highlight Search ctermbg=LightYellow
 " Override visual selection text color
