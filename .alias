@@ -68,6 +68,7 @@ alias av="ansible-vault"
 
 # Zsh stuff
 alias sz="source ~/.zshrc"
+alias vz="vim ~/.zshrc"
 
 # TODO List
 TODO_FILE=$HOME/.todo.org
