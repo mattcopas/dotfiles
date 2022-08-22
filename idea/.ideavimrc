@@ -45,7 +45,7 @@ nnoremap gR :action RunAnything<CR>
 map <M-x> :action ActivateTerminalToolWindow<CR>
 
 "" Show file structure (methods etc)
-nnoremap <Leader>f :action FileStructurePopup<CR>
+nnoremap <Leader>F :action FileStructurePopup<CR>
 
 "" Go to Select In menu (select terminal, file tree etc)
 nnoremap <leader>ss :action SelectIn<CR>
