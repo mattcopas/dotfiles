@@ -95,4 +95,8 @@
 ; Add .ideavimrc to vimrc mode list
 (after! vimrc-mode
         (add-to-list 'auto-mode-alist '(".ideavimrc" . vimrc-mode)))
+
+; When selecting, deleting etc, don't copy to clipboard
+; Use "+y to copy to clpboard
+(setq x-select-enable-clipboard nil)
 ;;; config.el ends here
