@@ -99,4 +99,10 @@
 ; When selecting, deleting etc, don't copy to clipboard
 ; Use "+y to copy to clpboard
 (setq x-select-enable-clipboard nil)
+
+;; map Leader-w to save
+(map!
+ :desc "Save file"
+ :leader
+ :n "w" #'evil-write)
 ;;; config.el ends here
