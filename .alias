@@ -54,7 +54,13 @@ fi
 alias vi=vim
 alias v="view"
 alias vv="vi ~/.vimrc"
-alias ":wq"="exit" # Just for fun
+# Vim style exit from terminal
+alias ":wq"="exit" 
+alias ":q"="exit" 
+alias ":q!"="exit"
+alias "wq"="exit" 
+alias "q"="exit" 
+alias "q!"="exit"
 
 # Neovim
 if [ -x "$(command -v nvim)" ]; then
