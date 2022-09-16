@@ -74,6 +74,25 @@
   :config
   (evil-collection-init))
 
+;;;;;;;;;;;;;
+;; help stuff
+;;;;;;;;;;;;;
+
+;; Show a grid of key suggestions, eg after pressing C-c
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.3))
+
+;; Better help for things like funcitons, variables
+(use-package helpful
+  :init
+  (global-set-key (kbd "C-h f") #'helpful-callable)
+  (global-set-key (kbd "C-h v") #'helpful-variable)
+  (global-set-key (kbd "C-h k") #'helpful-key)
+  (global-set-key (kbd "C-h C-d") #'helpful-at-point))
+
 ;;;;;;;;;;
 ;; magit
 ;;;;;;;;;;
@@ -106,6 +125,20 @@
 ;;;;;;;;;;;;;;;;;;;
 ;; Editor settings
 ;;;;;;;;;;;;;;;;;;;
+
+;; line numbers
+(column-number-mode)
+(global-display-line-numbers-mode t)
+
+;; Rainbow delimiters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Automatically add ending brackets and braces
 (electric-pair-mode 1)
