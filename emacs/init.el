@@ -45,7 +45,10 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-;;
+;; Modeline from doom
+(use-package doom-modeline
+  :init (doom-modeline-mode 1))
+
 ;; Recent files
 (require 'recentf)
 (recentf-mode t)
