@@ -1,32 +1,26 @@
 {
   "vim.handleKeys": {
-    "<C-d>": true,
-    "<C-^>": true
-  },
+      "<C-d>": true,
+      "<C-^>": true
+    },
   "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["Down"],
-      "after": [""]
-    },
-    {
-      "before": ["Up"],
-      "after": [""]
-    },
-    {
-      "before": ["Left"],
-      "after": [""]
-    },
-    {
-      "before": ["Right"],
-      "after": [""]
-    },
     {
       "before": ["<leader>", "<leader>"],
       "commands": [":nohl"]
+    },
+    {
+      "before": ["<leader>", "g", "g"],
+      "commands": [
+        "magit.status"
+      ]
+    },
+    {
+      "before": ["<leader>", "w"],
+      "commands": [":w"]
     }
   ],
   "vim.hlsearch": true,
   "vim.incsearch": true,
   "vim.smartcase": true,
-  "vim.leader": "<space>",
+  "vim.leader": "<space>"
 }
