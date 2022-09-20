@@ -24,6 +24,9 @@
 
 
 ;; All the icons (required for doom themes)
+;; NOTE Run M-x all-the-icons-install-fonts RET
+;; This will install some font files in the specified folder
+;; Click on each of these in turn and select Install
 (use-package all-the-icons
   :ensure t)
 ;; doom-themes
