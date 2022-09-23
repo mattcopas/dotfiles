@@ -1,6 +1,10 @@
 // Place your key bindings in this file to override the defaults
 [
-  // Terminal focus
+  {
+    "key": "ctrl+g",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "!editorFocus"
+  },  // Terminal focus
   {
     "key": "ctrl+`",
     "command": "workbench.action.terminal.focus",
