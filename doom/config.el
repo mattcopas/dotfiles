@@ -105,4 +105,9 @@
  :desc "Save file"
  :leader
  :n "w" #'evil-write)
+
+; Display time and battery in modeline
+(display-time-mode 1)
+(setq display-time-24hr-format 1)
+(display-battery-mode 1)
 ;;; config.el ends here
