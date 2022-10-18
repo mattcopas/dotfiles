@@ -82,7 +82,13 @@
   )
   ;; This fixes the leading stars being shown in org mode!
   ;; The second parameter (t) disables the prompt to load a theme
-   (load-theme 'doom-one t))
+  (load-theme 'doom-one t)
+
+  ; Org task statuses
+  (setq org-todo-keywords
+       '((sequence "TODO(t)" "IN PROGRESS(p)" "LOOP(r)" "STRT(s)" "WAIT(w)" "HOLD(h)" "IDEA(i)" "|" "DONE(d)" "KILL(k)")
+         (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")
+         (sequence "|" "OKAY(o)" "YES(y)" "NO(n)"))))
 
 (when (window-system)
   (load "~/git/dotfiles/doom/gui-config.el"))
@@ -110,4 +116,5 @@
 (display-time-mode 1)
 (setq display-time-24hr-format 1)
 (display-battery-mode 1)
+
 ;;; config.el ends here
