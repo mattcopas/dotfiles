@@ -125,14 +125,10 @@
   (interactive)
   (let ((cwd default-directory))
 
-    ;; Could prompt user for y/n ? See http://xahlee.info/emacs/emacs/elisp_idioms_prompting_input.html
-    (message "Not implemented yet! cwd: %s" cwd)
     (if (y-or-n-p (format "Backup directory %s to git?" cwd))
         (progn
-          (message "not implemented yet")
-        )
+          (shell-command "git commit -am 'backup' && git push origin")
+          (message "Committed and pushed to origin!"))
         (progn
-          (message "Ok - aborting")
-        )
-      )))
+          (message "Ok - aborting")))))
 ;;; config.el ends here
