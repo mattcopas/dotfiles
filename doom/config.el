@@ -121,7 +121,18 @@
   "Commit everything in the current repository in a commit called 'backup'."
   ;; We need to make this interactive to appear as part of M-x (evaluate-extended-command)
   ;; Otherwise it would only appear under M-: (eval-expression)
-  ;; See https://stackoverflow.com/questions/29199807/why-are-some-emacs-functions-not-available-via-m-x for more details
+  ;; See https://stackoverflow.com/questions/29199807/why-are-some-emacs-functions-not-available-via-m-x for more detail
   (interactive)
-  (message "Not implemented yet!"))
+  (let ((cwd default-directory))
+
+    ;; Could prompt user for y/n ? See http://xahlee.info/emacs/emacs/elisp_idioms_prompting_input.html
+    (message "Not implemented yet! cwd: %s" cwd)
+    (if (y-or-n-p (format "Backup directory %s to git?" cwd))
+        (progn
+          (message "not implemented yet")
+        )
+        (progn
+          (message "Ok - aborting")
+        )
+      )))
 ;;; config.el ends here
