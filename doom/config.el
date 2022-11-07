@@ -123,12 +123,10 @@
   ;; Otherwise it would only appear under M-: (eval-expression)
   ;; See https://stackoverflow.com/questions/29199807/why-are-some-emacs-functions-not-available-via-m-x for more detail
   (interactive)
-  (let ((cwd default-directory))
-
-    (if (y-or-n-p (format "Backup directory %s to git?" cwd))
-        (progn
-          (shell-command "git commit -am 'backup' && git push origin")
-          (message "Committed and pushed to origin!"))
-        (progn
-          (message "Ok - aborting")))))
+  (if (y-or-n-p (format "Backup directory %s to git?" default-directory))
+  (progn
+    (shell-command "git commit -am 'backup' && git push origin")
+    (message "Committed and pushed to origin!"))
+  (progn
+    (message "Ok - aborted"))))
 ;;; config.el ends here
