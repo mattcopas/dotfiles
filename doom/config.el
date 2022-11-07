@@ -119,6 +119,7 @@
 
 (defun me/backup-commit ()
   "Commit everything in the current repository in a commit called 'backup'."
+
   ;; We need to make this interactive to appear as part of M-x (evaluate-extended-command)
   ;; Otherwise it would only appear under M-: (eval-expression)
   ;; See https://stackoverflow.com/questions/29199807/why-are-some-emacs-functions-not-available-via-m-x for more detail
