@@ -130,4 +130,12 @@
     (message "Committed and pushed to origin!"))
   (progn
     (message "Ok - aborted"))))
+
+(defun me/org-create-demoted ()
+  "Create an item that is indented, relative to the current item."
+  (interactive)
+  (+org/insert-item-below 1)
+  (evil-force-normal-state)
+  (org-metaright)
+  (evil-append-line 1))
 ;;; config.el ends here
