@@ -89,3 +89,5 @@ highlight Search ctermbg=LightYellow
 " Override visual selection text color
 highlight Visual ctermfg=LightYellow
 
+" When using git commit, start in insert mode - just like emacs
+autocmd FileType gitcommit exec 'autocmd VimEnter * startinsert'
