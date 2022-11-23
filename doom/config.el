@@ -162,4 +162,20 @@
                 (me/insert-block "emacs-lisp")))
       (message "Not in org mode")))
 
+(defun me/lemme-google-that ()
+  "Google for a user-input query.
+
+   This uses the function add-to-history.
+   If the variable history-delete-duplicates is nil, duplicates will NOT be deleted.
+   The max history length is set by the variable history-length"
+  (interactive)
+  (defvar me/lemme-google-that-history '())
+  (let ((input-query (completing-read "Search Google for: " me/lemme-google-that-history)))
+    (add-to-history 'me/lemme-google-that-history input-query)
+    (browse-url (format "https://google.com/search?q=%s" input-query))))
+
+(map! :leader
+      (:prefix "h"
+        :desc "Google something" "g" #'me/lemme-google-that))
+
 ;;; config.el ends here
