@@ -162,6 +162,7 @@
                 (me/insert-block "emacs-lisp")))
       (message "Not in org mode")))
 
+; Modifications of this could be written for project specific stuff -eg search Jira, search gitlab etc
 (defun me/lemme-google-that ()
   "Google for a user-input query.
 
