@@ -140,4 +140,26 @@
   (evil-force-normal-state)
   (org-metaright)
   (evil-append-line 1))
+
+(defun me/evil-insert-block (lang)
+  (evil-open-below 1)
+  (evil--self-insert-string (format"\#+BEGIN_SRC %s\n\#+END_SRC" lang))
+  (evil-open-above 1))
+
+(defun me/insert-block (lang)
+    (insert (format "
+        \#+BEGIN_SRC %s
+
+        \#+END_SRC" lang)))
+
+(defun me/insert-elisp-block ()
+    "This function inserts a src block in org mode, in the language emacs lisp."
+    (interactive)
+    (if (eq major-mode 'org-mode)
+        (with-current-buffer (current-buffer)
+            (if (bound-and-true-p evil-org-mode) ;; bound-and-true-p is a macro - returns its value if set, or nil (which is sufficient for a conditional)
+                (me/evil-insert-block "emacs-lisp")
+                (me/insert-block "emacs-lisp")))
+      (message "Not in org mode")))
+
 ;;; config.el ends here
