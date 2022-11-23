@@ -177,6 +177,6 @@
 
 (map! :leader
       (:prefix "h"
-        :desc "Google something" "g" #'me/lemme-google-that))
+       :desc "Google something" "g" #'me/lemme-google-that))
 
 ;;; config.el ends here
