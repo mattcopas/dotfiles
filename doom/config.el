@@ -117,6 +117,8 @@
 (setq display-time-24hr-format 1)
 (display-battery-mode 1)
 
+(setq-default tab-width 2)
+
 (defun me/backup-commit ()
   "Commit everything in the current repository in a commit called 'backup'."
 
