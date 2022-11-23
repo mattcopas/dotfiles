@@ -126,7 +126,7 @@
   (interactive)
   (if (y-or-n-p (format "Backup directory %s to git?" default-directory))
   (progn
-    (shell-command "git commit -am 'backup' && git push origin")
+    (shell-command "git add . && git commit -am 'backup' && git push origin")
     (message "Committed and pushed to origin!"))
   (progn
     (message "Ok - aborted"))))
