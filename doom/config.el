@@ -179,4 +179,20 @@
       (:prefix "h"
        :desc "Google something" "g" #'me/lemme-google-that))
 
+(defun me/evil-normalize-all-buffers ()
+  "Force a drop to normal state.
+Taken from https://emacs.stackexchange.com/questions/24563/evil-mode-switch-back-to-normal-mode-automatically-after-inaction"
+
+  (unless (eq evil-state 'normal)
+    (dolist (buffer (buffer-list))
+      (set-buffer buffer)
+      (unless (or (minibufferp)
+                  (eq evil-state 'emacs))
+        (evil-force-normal-state)))
+    (message "Dropped back to normal state in all buffers")))
+
+(defvar me/evil-normal-timer
+  (run-with-idle-timer 10 t #'me/evil-normalize-all-buffers)
+  "Drop back to normal state after idle for 10 seconds.")
+
 ;;; config.el ends here
