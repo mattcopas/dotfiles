@@ -52,6 +52,7 @@ nnoremap <leader>ss :action SelectIn<CR>
 
 "" Toggle breakpoint
 nnoremap <leader>b :action ToggleLineBreakpoint<CR>
+nnoremap <leader>B :action ViewBreakpoints<CR>
 
 "" Close everything but editor - note that for this to work you need to close all Tool Windows and
 "" (from Run Anything) run 'Store Current Layout as Default'
