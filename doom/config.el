@@ -196,6 +196,8 @@ Taken from https://emacs.stackexchange.com/questions/24563/evil-mode-switch-back
   "Drop back to normal state after idle for 10 seconds.")
 
 (defun me/wsl-copy (start end)
+  "Copy region to windows clipboard.
+   Originally comes from an SO post - https://emacs.stackexchange.com/questions/39210/copy-paste-from-windows-clipboard-in-wsl-terminal/59607#59607"
   (interactive "r")
   (shell-command-on-region start end "clip.exe"))
 ;;; config.el ends here
