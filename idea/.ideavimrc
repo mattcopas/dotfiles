@@ -1,5 +1,8 @@
 source ~/.vimrc
 
+"" Turn off the error bell
+set visualbell
+set noerrorbells
 set mapleader = " "
 
 "" -- Suggested options --
@@ -64,6 +67,8 @@ vnoremap <C-g> <Esc>
 inoremap <C-g> <Esc>
 
 nnoremap <leader>fr :action RecentFiles<CR>
+nnoremap <C-p> :action GotoClass<CR>
+nnoremap <C-S-p> :action GotoFile<CR>
 
 
 " Find more examples here: https://jb.gg/share-ideavimrc
