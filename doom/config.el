@@ -195,4 +195,7 @@ Taken from https://emacs.stackexchange.com/questions/24563/evil-mode-switch-back
   (run-with-idle-timer 10 t #'me/evil-normalize-all-buffers)
   "Drop back to normal state after idle for 10 seconds.")
 
+(defun me/wsl-copy (start end)
+  (interactive "r")
+  (shell-command-on-region start end "clip.exe"))
 ;;; config.el ends here
