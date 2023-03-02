@@ -66,6 +66,7 @@ nnoremap <C-g> <Esc>
 vnoremap <C-g> <Esc>
 inoremap <C-g> <Esc>
 
+"" File searching
 nnoremap <leader>fr :action RecentFiles<CR>
 nnoremap <C-p> :action GotoClass<CR>
 nnoremap <C-S-p> :action GotoFile<CR>
