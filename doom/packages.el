@@ -50,3 +50,4 @@
 ;(unpin! t)
 
 (package! vimrc-mode)
+(package! feature-mode) ;; Cucumber support - see install-feature-mode-dependencies.sh for required gems
