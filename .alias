@@ -38,10 +38,9 @@ alias curlpj="curl -XPOST -H 'Content-Type: application/json' "
 alias mcp="mvn clean package"
 
 # Tmux
-if [ -x "$(command -v tmux)" ]; then
-  alias tmux="tmux -2"
-  alias ta="tmux attach"
-fi
+alias tmux="tmux -2"
+alias ta="tmux attach"
+alias tl="tmux ls"
 
 # GNU Screen
 if [ -x "$(command -v screen)" ]; then
