@@ -61,6 +61,8 @@
                         doom-big-font (font-spec :family font-to-use))
   )
 
+(setq doom-font (font-spec :size 18))
+
 ;; Set bullets for org-mode (requires unicode font, and (org +pretty) in .doom.d/init.el)
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
