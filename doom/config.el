@@ -202,4 +202,8 @@ Taken from https://emacs.stackexchange.com/questions/24563/evil-mode-switch-back
    Originally comes from an SO post - https://emacs.stackexchange.com/questions/39210/copy-paste-from-windows-clipboard-in-wsl-terminal/59607#59607"
   (interactive "r")
   (shell-command-on-region start end "clip.exe"))
+;;
+;; Load machine specific stuff, if present. Specify a non nil second arg to prevent an error if not found
+(load "~/tools/emacs-local.el" t)
+;;
 ;;; config.el ends here
