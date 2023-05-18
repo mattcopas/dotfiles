@@ -202,6 +202,18 @@ Taken from https://emacs.stackexchange.com/questions/24563/evil-mode-switch-back
    Originally comes from an SO post - https://emacs.stackexchange.com/questions/39210/copy-paste-from-windows-clipboard-in-wsl-terminal/59607#59607"
   (interactive "r")
   (shell-command-on-region start end "clip.exe"))
+
+;; Warn when using Esc instead of C-g
+(defun me/warn-esc ()
+  (interactive)
+  "Warn me when I use Esc instead of C-g"
+
+  (evil-force-normal-state)
+  (message "Could you have used C-g ?"))
+
+(map!
+ :desc "Warn when using Esc instead of C-g"
+ :i (kbd "<escape>") #'me/warn-esc)
 ;;
 ;; Load machine specific stuff, if present. Specify a non nil second arg to prevent an error if not found
 (load "~/tools/emacs-local.el" t)
