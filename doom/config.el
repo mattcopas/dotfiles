@@ -53,7 +53,7 @@
 ;;;;;;;;;;;;;;;;;;
 
 ;; Set fonts
-(when  (eq system-type 'windows-nt)
+(when (eq system-type 'windows-nt)
         (setq font-to-use "Cascadia Code")
         (setq doom-font (font-spec :family font-to-use)
         doom-variable-pitch-font (font-spec :family font-to-use) ; inherits `doom-font''s :size
@@ -61,7 +61,8 @@
                         doom-big-font (font-spec :family font-to-use))
   )
 
-(setq doom-font (font-spec :size 18))
+(unless (eq system-type 'windows-nt)
+  (setq doom-font (font-spec :size 18)))
 
 ;; Set bullets for org-mode (requires unicode font, and (org +pretty) in .doom.d/init.el)
 (setq
