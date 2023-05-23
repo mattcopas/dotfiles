@@ -101,15 +101,6 @@
  projectile-project-search-path '("~/git")
 )
 
-(setq ivy-re-builders-alist
-        '((counsel-rg . ivy--regex-fuzzy)
-        (counsel-recentf . ivy--regex-fuzzy)
-        (+ivy/projectile-find-file . ivy--regex-fuzzy)
-        (+default/search-project . ivy--regex-fuzzy)
-        (swiper . ivy--regex-fuzzy)
-        (swiper-isearch . ivy--regex-fuzzy)
-        (t . ivy--regex-ignore-order)))
-
 ; Add .ideavimrc to vimrc mode list
 (after! vimrc-mode
         (add-to-list 'auto-mode-alist '(".ideavimrc" . vimrc-mode)))
