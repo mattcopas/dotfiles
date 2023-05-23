@@ -101,6 +101,13 @@
  projectile-project-search-path '("~/git")
 )
 
+;; Keybinds to make emacs feel a bit more like intellij
+(after! lsp-mode
+  (map! :map lsp-mode-map
+    :n "M-RET" #'lsp-execute-code-action
+    :leader :n "E" #'flycheck-previous-error
+    :leader :n "e" #'flycheck-next-error))
+
 ; Add .ideavimrc to vimrc mode list
 (after! vimrc-mode
         (add-to-list 'auto-mode-alist '(".ideavimrc" . vimrc-mode)))
