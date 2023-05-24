@@ -109,9 +109,7 @@
                         "E" 'flycheck-previous-error
                         "e" 'flycheck-next-error
                         "B" 'dap-breakpoint-toggle
-                        ; dap-java-run-test-method falls back to running the test class
-                        ; if the cursor isn't in a test method, as desired
-                        "r" #'dap-java-run-test-method
+                        "F" 'consult-imenu
                         (:prefix "v"
                                 :desc "Goto definition" "i" '+lookup/implementations
                                 :desc "Find usages" "u" 'lsp-find-references))
