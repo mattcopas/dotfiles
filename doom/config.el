@@ -103,10 +103,24 @@
 
 ;; Keybinds to make emacs feel a bit more like intellij
 (after! lsp-mode
-  (map! :map lsp-mode-map
-    :n "M-RET" #'lsp-execute-code-action
-    :leader :n "E" #'flycheck-previous-error
-    :leader :n "e" #'flycheck-next-error))
+        (map! :map lsp-mode-map
+                :n "M-RET" #'lsp-execute-code-action
+                :leader :n "E" #'flycheck-previous-error
+                :leader :n "e" #'flycheck-next-error)
+        (setq me/lombok-jar-path
+                (substitute-env-vars "$HOME/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.20/18bcea7d5df4d49227b4a0743a536208ce4825bb/lombok-1.18.20.jar"))
+        (setq lsp-java-vmargs `(
+                "-noverify"
+                "-XX:+UseParallelGC"
+                "-XX:GCTimeRatio=4"
+                "-XX:AdaptiveSizePolicyWeight=90"
+                "-Dsun.zip.disableMemoryMapping=true"
+                "-Xmx1G"
+                "-Xms100m"
+                "--add-opens" "java.base/java.lang=ALL-UNNAMED"
+                ,(concat "-Xbootclasspath/a:" me/lombok-jar-path)
+                ,(concat "-javaagent:" me/lombok-jar-path)
+                )))
 
 ; Add .ideavimrc to vimrc mode list
 (after! vimrc-mode
