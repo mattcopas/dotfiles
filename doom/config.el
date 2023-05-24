@@ -111,7 +111,10 @@
                         "B" 'dap-breakpoint-toggle
                         ; dap-java-run-test-method falls back to running the test class
                         ; if the cursor isn't in a test method, as desired
-                        "r" #'dap-java-run-test-method)
+                        "r" #'dap-java-run-test-method
+                        (:prefix "v"
+                                :desc "Goto definition" "i" '+lookup/implementations
+                                :desc "Find usages" "u" 'lsp-find-references))
 
         (setq me/lombok-jar-path
                 (substitute-env-vars "$HOME/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.20/18bcea7d5df4d49227b4a0743a536208ce4825bb/lombok-1.18.20.jar"))
