@@ -58,8 +58,7 @@
         (setq doom-font (font-spec :family font-to-use)
         doom-variable-pitch-font (font-spec :family font-to-use) ; inherits `doom-font''s :size
                 doom-unicode-font (font-spec :family font-to-use)
-                        doom-big-font (font-spec :family font-to-use))
-  )
+                        doom-big-font (font-spec :family font-to-use)))
 
 (unless (eq system-type 'windows-nt)
   (setq doom-font (font-spec :size 18)))
@@ -68,21 +67,12 @@
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
 
-;; Fix meghanada (java) on Windows
-(cond
-   ((eq system-type 'windows-nt)
-       (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
-           (setq meghanada-maven-path "mvn.cmd"))
-      (t
-          (setq meghanada-java-path "java")
-              (setq meghanada-maven-path "mvn")))
-
 (after! org
   (map! :map org-mode-map
     ;; Remap M-k/j to move items up/down
     :n "M-j" #'org-metadown
-    :n "M-k" #'org-metaup
-  )
+    :n "M-k" #'org-metaup)
+
   ;; This fixes the leading stars being shown in org mode!
   ;; The second parameter (t) disables the prompt to load a theme
   (load-theme 'doom-one t)
@@ -108,19 +98,18 @@
   (load "~/git/dotfiles/doom/gui-config.el"))
 
 ;; projectile
-(setq
- projectile-project-search-path '("~/git")
-)
+(after! projectile
+  (setq projectile-project-search-path '("~/git")))
 
 ;; Keybinds to make emacs feel a bit more like intellij
 (after! lsp-mode
-        (map! :map lsp-mode-map
-                :n "M-RET" 'lsp-execute-code-action
-                :leader :n
-                        "E" 'flycheck-previous-error
-                        "e" 'flycheck-next-error
-                        "B" 'dap-breakpoint-toggle
-                        "F" 'consult-imenu
+  (map! :map lsp-mode-map
+        :n "M-RET" 'lsp-execute-code-action
+        :leader :n
+                "E" 'flycheck-previous-error
+                "e" 'flycheck-next-error
+                "B" 'dap-breakpoint-toggle
+                "F" 'consult-imenu
                         (:prefix "v"
                                 :desc "Goto definition" "i" '+lookup/implementations
                                 :desc "Find usages" "u" 'lsp-find-references))
