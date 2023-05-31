@@ -95,15 +95,14 @@
 
 (after! vertico
   ; For some reason +vertico/project-search doesn't work, so make sure consult-grep (installed with vertico) is used instead
+  (let (me/search-function)
+    (if (executable-find "rg")
+        (setq me/search-function #'consult-ripgrep)
+      (setq me/search-function #'consult-grep))
 
-  (if (executable-find "rg")
-                (map! :leader :n
-                        "/" 'consult-ripgrep
-                        "s p" 'consult-ripgrep)
-        (map! :leader :n
-                "/" 'consult-grep
-                "s p" 'consult-grep)))
-
+    (map! :leader :n
+          "/" me/search-function
+          "s p" me/search-function)))
 
 (when (window-system)
   (load "~/git/dotfiles/doom/gui-config.el"))
