@@ -93,6 +93,18 @@
          (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")
          (sequence "|" "OKAY(o)" "YES(y)" "NO(n)"))))
 
+(after! vertico
+  ; For some reason +vertico/project-search doesn't work, so make sure consult-grep (installed with vertico) is used instead
+
+  (if (executable-find "rg")
+                (map! :leader :n
+                        "/" 'consult-ripgrep
+                        "s p" 'consult-ripgrep)
+        (map! :leader :n
+                "/" 'consult-grep
+                "s p" 'consult-grep)))
+
+
 (when (window-system)
   (load "~/git/dotfiles/doom/gui-config.el"))
 
