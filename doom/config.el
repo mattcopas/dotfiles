@@ -67,6 +67,11 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/git/")
+(setq org-journal-dir "~/git/journal/")
+; See https://www.gnu.org/software/emacs/manual/html_node/elisp/Time-Parsing.html for docs on date formats
+(setq org-journal-file-format "%b-%Y.org")
+(setq org-journal-file-type 'monthly)
+(setq org-journal-date-format "%a %e %b %Y") ; Mon 1 Jan 2023
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
 
