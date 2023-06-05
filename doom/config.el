@@ -22,10 +22,6 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
@@ -67,6 +63,13 @@
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
 
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/git/")
+; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
+(load "~/tools/org-overrides.el" t)
+
 (after! org
   (map! :map org-mode-map
     ;; Remap M-k/j to move items up/down
@@ -76,6 +79,7 @@
   ;; This fixes the leading stars being shown in org mode!
   ;; The second parameter (t) disables the prompt to load a theme
   (load-theme 'doom-one t)
+
 
   ; Org task statuses
   (setq org-todo-keywords
