@@ -150,6 +150,11 @@
  :leader
  :n "w" #'evil-write)
 
+; Keybinds for commenting
+(map! :desc "Comment region based on mode"
+      :n "C-/" #'comment-line
+      :v "C-/" #'comment-region)
+
 ; Display time and battery in modeline
 (display-time-mode 1)
 (setq display-time-24hr-format 1)
