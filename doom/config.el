@@ -80,6 +80,9 @@
   ;; The second parameter (t) disables the prompt to load a theme
   (load-theme 'doom-one t)
 
+  ; To see the original value of this (to see examples) comment this out and describe the variable
+  (setq org-capture-templates '(("t" "Todo" entry (file+headline +org-capture-todo-file "Todo list")
+                                "* TODO %?")))
 
   ; Org task statuses
   (setq org-todo-keywords
