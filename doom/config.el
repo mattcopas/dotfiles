@@ -160,8 +160,8 @@
 
 ; Keybinds for commenting
 (map! :desc "Comment region based on mode"
-      :n "C-/" #'comment-line
-      :v "C-/" #'comment-region)
+      :n "C-/" #'comment-or-uncomment-region
+      :v "C-/" #'comment-or-uncomment-region)
 
 ; Display time and battery in modeline
 (display-time-mode 1)
