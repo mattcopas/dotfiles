@@ -80,6 +80,9 @@
   ;; The second parameter (t) disables the prompt to load a theme
   (load-theme 'doom-one t)
 
+  ; Add all subdirectories in org-directory to org-agenda-files
+  (setq org-agenda-files (f-directories org-directory nil t))
+
   ; To see the original value of this (to see examples) comment this out and describe the variable
   (setq org-capture-templates '(("t" "Todo" entry (file+headline +org-capture-todo-file "Todo list")
                                 "* TODO %?")))
