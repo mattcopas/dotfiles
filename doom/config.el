@@ -72,6 +72,11 @@
 (setq org-journal-file-format "%b-%Y.org")
 (setq org-journal-file-type 'monthly)
 (setq org-journal-date-format "%a %e %b %Y") ; Mon 1 Jan 2023
+; I used to add all subdirectories in org-directory to org-agenda-files
+; But it made org agenda painfully slow.
+; The best way to append to this for machine/project specific stuff is orobably in
+; org overrides below
+(setq org-agenda-files '("~/git/private"))
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
 
@@ -86,8 +91,6 @@
   (load-theme 'doom-one t)
 
   ;; Org agenda stuff
-  ; Add all subdirectories in org-directory to org-agenda-files
-  (setq org-agenda-files (f-directories org-directory nil t))
 
   ;; This and the below custom commands come from Aaron Beiber's blog post -
   ;; https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
