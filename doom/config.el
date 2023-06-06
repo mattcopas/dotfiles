@@ -94,6 +94,7 @@
 
   ;; This and the below custom commands come from Aaron Beiber's blog post -
   ;; https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
+  ;; TODO is it worth replacing this with the package 'org-super-agenda'?
   (defun air-org-skip-subtree-if-priority (priority)
   "Skip an agenda subtree if it has a priority of PRIORITY.
 
