@@ -1,0 +1,8 @@
+.DS_Store
+.idea
+*.log
+tmp/
+
+
+# This is the file output by org-babel
+configuration.el
