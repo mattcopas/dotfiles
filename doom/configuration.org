@@ -1,5 +1,4 @@
 #+title: Doom Config
-
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
@@ -46,12 +45,14 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+#+end_src
 
-;;;;;;;;;;;;;;;;;;
-;; My custom stuff
-;;;;;;;;;;;;;;;;;;
+** My custom stuff
+#+begin_src emacs-lisp
 
-;; Set fonts
+#+end_src
+*** Fonts
+#+begin_src emacs-lisp
 (when (eq system-type 'windows-nt)
         (setq font-to-use "Cascadia Code")
         (setq doom-font (font-spec :family font-to-use)
@@ -66,7 +67,10 @@
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
 
+#+end_src
 
+*** Org Mode
+#+begin_src emacs-lisp
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/git/")
@@ -132,6 +136,11 @@
          (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")
          (sequence "|" "OKAY(o)" "YES(y)" "NO(n)"))))
 
+#+end_src
+
+*** Vertico
+#+begin_src emacs-lisp
+
 (after! vertico
   ; For some reason +vertico/project-search doesn't work, so make sure consult-grep (installed with vertico) is used instead
   (let (me/search-function)
@@ -143,13 +152,23 @@
           "/" me/search-function
           "s p" me/search-function)))
 
+#+end_src
+
+*** GUI specific stuff
+#+begin_src emacs-lisp
 (when (window-system)
   (load "~/git/dotfiles/doom/gui-config.el"))
 
-;; projectile
+#+end_src
+
+*** Projectile
+#+begin_src emacs-lisp
 (after! projectile
   (setq projectile-project-search-path '("~/git")))
 
+#+end_src
+*** Projectile
+#+begin_src emacs-lisp
 ;; Keybinds to make emacs feel a bit more like intellij
 (after! lsp-mode
   (map! :map lsp-mode-map
@@ -178,6 +197,12 @@
                 ,(concat "-javaagent:" me/lombok-jar-path)
                 )))
 
+#+end_src
+
+*** Little quality of life changes
+
+#+begin_src emacs-lisp
+
 ; Add .ideavimrc to vimrc mode list
 (after! vimrc-mode
         (add-to-list 'auto-mode-alist '(".ideavimrc" . vimrc-mode)))
@@ -204,6 +229,13 @@
 
 (setq-default tab-width 2)
 
+#+end_src
+
+*** Custom functions of mine
+**** TODO Replace me/evil-insert-block with a structured template
+See https://orgmode.org/manual/Structure-Templates.html
+
+#+begin_src emacs-lisp
 (defun me/backup-commit ()
   "Commit everything in the current repository in a commit called 'backup'."
 
@@ -297,7 +329,11 @@ Taken from https://emacs.stackexchange.com/questions/24563/evil-mode-switch-back
 (map!
  :desc "Warn when using Esc instead of C-g"
  :i (kbd "<escape>") #'me/warn-esc)
-;;
+
+#+end_src
+
+*** Load machine specific stuff - should be run at the end of the file
+#+begin_src emacs-lisp
 ;; Load machine specific stuff, if present. Specify a non nil second arg to prevent an error if not found
 (load "~/tools/emacs-local.el" t)
 ;;
