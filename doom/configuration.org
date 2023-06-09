@@ -1,4 +1,6 @@
 #+title: Doom Config
+
+* Stuff that Doom ships with
 #+begin_src emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
@@ -47,11 +49,8 @@
 
 #+end_src
 
-** My custom stuff
-#+begin_src emacs-lisp
-
-#+end_src
-*** Fonts
+* My custom stuff
+** Fonts
 #+begin_src emacs-lisp
 (when (eq system-type 'windows-nt)
         (setq font-to-use "Cascadia Code")
@@ -138,7 +137,7 @@
 
 #+end_src
 
-*** Vertico
+** Vertico
 #+begin_src emacs-lisp
 
 (after! vertico
@@ -154,20 +153,20 @@
 
 #+end_src
 
-*** GUI specific stuff
+** GUI specific stuff
 #+begin_src emacs-lisp
 (when (window-system)
   (load "~/git/dotfiles/doom/gui-config.el"))
 
 #+end_src
 
-*** Projectile
+** Projectile
 #+begin_src emacs-lisp
 (after! projectile
   (setq projectile-project-search-path '("~/git")))
 
 #+end_src
-*** Projectile
+** LSP Mode
 #+begin_src emacs-lisp
 ;; Keybinds to make emacs feel a bit more like intellij
 (after! lsp-mode
@@ -199,7 +198,7 @@
 
 #+end_src
 
-*** Little quality of life changes
+** Little quality of life changes
 
 #+begin_src emacs-lisp
 
