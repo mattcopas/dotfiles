@@ -156,7 +156,7 @@
 ** GUI specific stuff
 #+begin_src emacs-lisp
 (when (window-system)
-  (load "~/git/dotfiles/doom/gui-config.el"))
+  (load (concat dotfiles-doom-directory "gui-config.el")))
 
 #+end_src
 
