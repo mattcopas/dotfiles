@@ -165,3 +165,10 @@ Shows a grid of key suggestions, eg after pressing C-c
 (setq-default tab-width 4)
 
 #+END_SRC
+* Restart emacs more easily
+Note that this will restart emacs, using the default emacs command.
+
+It will not reload vanilla-emacs.sh, unless this config si installed as default (not Doom)
+#+BEGIN_SRC emacs-lisp
+(use-package restart-emacs :ensure t)
+#+END_SRC
