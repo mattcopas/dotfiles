@@ -91,6 +91,12 @@
   :config
   (evil-collection-init))
 #+END_SRC
+* Org Mode
+Hide leading stars
+#+BEGIN_SRC emacs-lisp
+(setq org-hide-leading-stars t)
+#+END_SRC
+
 
 * Helpful (and similar) stuff
 ** Which Key
