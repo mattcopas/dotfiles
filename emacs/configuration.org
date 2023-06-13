@@ -179,8 +179,12 @@ It will not reload vanilla-emacs.sh, unless this config si installed as default 
 #+END_SRC
 * Global key binds#+BEGIN_SRC emacs-lisp
 #+BEGIN_SRC emacs-lisp
-(defun me-add-global-keybindi ()
-"Define a keybind globally - in any (emacs) mode and Evil's normal state"
-                )
-(evil-define-key 'normal 'global (kbd "<leader>ff") #'find-file)
+(defun me-add-global-keybind (chord func)
+"Define a keybind globally - in any (emacs) mode and Evil's normal state
+
+                CHORD is the key sequence to use - eg \"<leader>ff\"
+FUNC is the function to call"
+(evil-define-key 'normal 'global (kbd chord) func))
+
+(me-add-global-keybind "<leader>ff" #'find-file)
 #+END_SRC
