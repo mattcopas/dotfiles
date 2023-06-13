@@ -82,7 +82,9 @@
 ; But it made org agenda painfully slow.
 ; The best way to append to this for machine/project specific stuff is orobably in
 ; org overrides below
+;; TODO make this directory a const
 (setq org-agenda-files '("~/git/private"))
+(setq org-capture-todo-file "~/git/private/.todo.org")
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
 
