@@ -88,11 +88,21 @@
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
 
+(defun me/org-create-demoted ()
+  "Create an item that is indented, relative to the current item."
+  (interactive)
+  (+org/insert-item-below 1)
+  (evil-force-normal-state)
+  (org-metaright)
+  (evil-append-line 1))
+
+
 (after! org
   (map! :map org-mode-map
     ;; Remap M-k/j to move items up/down
     :n "M-j" #'org-metadown
-    :n "M-k" #'org-metaup)
+    :n "M-k" #'org-metaup
+    :ni "M-RET" #'me/org-create-demoted)
 
   ;; This fixes the leading stars being shown in org mode!
   ;; The second parameter (t) disables the prompt to load a theme
@@ -232,7 +242,7 @@
 
 #+end_src
 
-*** Custom functions of mine
+*** Random custom functions of mine
 **** TODO Replace me/evil-insert-block with a structured template
 See https://orgmode.org/manual/Structure-Templates.html
 
@@ -250,14 +260,6 @@ See https://orgmode.org/manual/Structure-Templates.html
     (message "Committed and pushed to origin!"))
   (progn
     (message "Ok - aborted"))))
-
-(defun me/org-create-demoted ()
-  "Create an item that is indented, relative to the current item."
-  (interactive)
-  (+org/insert-item-below 1)
-  (evil-force-normal-state)
-  (org-metaright)
-  (evil-append-line 1))
 
 (defun me/evil-insert-block (lang)
   (evil-open-below 1)
