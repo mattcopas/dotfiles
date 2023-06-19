@@ -102,6 +102,7 @@
     ;; Remap M-k/j to move items up/down
     :n "M-j" #'org-metadown
     :n "M-k" #'org-metaup
+    :ni "C-RET" #'+org/insert-item-below
     :ni "M-RET" #'me/org-create-demoted)
 
   ;; This fixes the leading stars being shown in org mode!
