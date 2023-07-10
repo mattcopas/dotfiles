@@ -4,8 +4,8 @@ rc_file="$HOME/.zshrc"
 
 echo "Sourcing dotfiles from $shell_directory to $rc_file"
 
-function source_dotfile () {
-  file=$1
+source_dotfile () {
+  local file=$1
   echo "Adding $file to $rc_file"
   echo "source $shell_directory/$file" >> $rc_file
 }
