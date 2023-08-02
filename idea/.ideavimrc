@@ -31,7 +31,8 @@ nnoremap <leader>E :action GotoPreviousError<CR>
 nnoremap gh :action ShowErrorDescription<CR>
 
 "" Refactoring
-nnoremap <leader>rr :action RefactoringMenu<CR>
+nnoremap <leader>rR :action RefactoringMenu<CR>
+nnoremap <leader>rr :action RenameElement<CR>
 vnoremap <leader>rm :action ExtractMethod<CR>
 nnoremap <leader>rv :action IntroduceVariable<CR>
 nnoremap <leader>rc :action IntroduceConstant<CR>
