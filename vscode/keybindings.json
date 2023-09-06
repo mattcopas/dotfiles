@@ -2,7 +2,7 @@
 [
   // cmd+k opens emacs magit - similar to intellij's version via External Tools
   {
-    "key": "cmd+k",
+    "key": "space g g",
     "command": "runCommands",
     "args": {
       "commands": [
