@@ -1,5 +1,24 @@
 // Place your key bindings in this file to override the defaults
 [
+  // cmd+k opens emacs magit - similar to intellij's version via External Tools
+  {
+    "key": "cmd+k",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        {
+          "command": "workbench.action.terminal.new"
+        },
+        {
+          "command": "workbench.action.terminal.sendSequence",
+          "args": {
+            // # included after exit because vscode appends a source command for some reason. This ensures it is ignored
+            "text": "emacsclient -n -e \"(progn (x-focus-frame nil) (magit-status))\" && exit #"
+          }
+        },
+      ]
+    }
+  },
   {
     "key": "ctrl+g",
     "command": "workbench.action.focusActiveEditorGroup",
