@@ -1,8 +1,10 @@
 // Place your key bindings in this file to override the defaults
 [
   // cmd+k opens emacs magit - similar to intellij's version via External Tools
+  // TODO Move this to settings.json as a vim normal mode command
+  // Mapping this to space g g overrides space...
   {
-    "key": "space g g",
+    "key": "cmd+k",
     "command": "runCommands",
     "args": {
       "commands": [
