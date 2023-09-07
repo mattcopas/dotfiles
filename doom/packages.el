@@ -50,4 +50,11 @@
 ;(unpin! t)
 
 (package! vimrc-mode)
+;; This is a pain to set up, but can be done:
+;; Install ruby (version 2.7.6)
+;; Install (gem) cucumber (4.1.0)
+;; Install (gem) cucumber-gherkin (14.0.1)
+;; Install (gem) ruby_parser (3.14.2)
+;; Set the (emacs) variable feature-step-search-path to something appropriate
+;;      eg features/steps/**/*.rb or even **/*.rb
 (package! feature-mode) ;; Cucumber support - see install-feature-mode-dependencies.sh for required gems
