@@ -176,7 +176,8 @@
 ** Projectile
 #+begin_src emacs-lisp
 (after! projectile
-  (setq projectile-project-search-path '("~/git")))
+  (setq projectile-project-search-path '("~/git"))
+  (setq projectile-enable-caching nil))
 
 #+end_src
 ** LSP Mode
