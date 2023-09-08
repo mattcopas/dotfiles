@@ -219,6 +219,14 @@
        (:n "gd" #'feature-goto-step-definition))
   (setq feature-step-search-path "**/*.rb"))
 #+END_SRC
+** Magit
+
+#+BEGIN_SRC emacs-lisp
+(map!
+ :desc "Magit log"
+ :leader
+ :n "gl" #'magit-log)
+#+END_SRC
 ** Little quality of life changes
 
 #+begin_src emacs-lisp
