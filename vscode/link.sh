@@ -5,6 +5,7 @@ absolute_script_directory="$(realpath $relative_script_directory)"
 unameOS="$(uname -s)"
 case "$unameOS" in 
   Darwin*) os=Mac;;
+  Linux*) os=Linux;;
   *)
     echo "Unknown uname operating system: $unameOS"
     exit 1
@@ -16,6 +17,7 @@ function link_keybindings() {
   echo "Linking vscode keybindings for operating system $os"
   case "$os" in
     Mac*) vscode_keybindings_path="$HOME/Library/Application Support/Code/User/keybindings.json";;
+    Linux*) vscode_keybindings_path="$HOME/.config/Code - OSS/User/keybindings.json";;
     *)
       echo "Unknown operating system $os"
       exit 1
