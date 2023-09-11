@@ -70,7 +70,7 @@ zstyle ':omz:update' frequency 14
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git aws)
+plugins=(git aws virtualenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,3 +112,9 @@ export SHELL_DOTFILES_DIRECTORY="$HOME/git/dotfiles/shell"
 source $SHELL_DOTFILES_DIRECTORY/alias
 source $SHELL_DOTFILES_DIRECTORY/functions
 source $SHELL_DOTFILES_DIRECTORY/env
+
+if test "$HOME/.env_specific_zshrc"; then
+  source $HOME/.env_specific_zshrc
+else
+  echo "No env specific zshrc found"
+fi
