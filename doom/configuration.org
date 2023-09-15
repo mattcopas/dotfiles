@@ -234,6 +234,12 @@
  :leader
  :n "gl" #'magit-log)
 #+END_SRC
+** VTerm
+
+Speed up vterm
+#+BEGIN_SRC emacs-lisp
+(setq vterm-timer-delay 0.01)
+#+END_SRC
 ** Little quality of life changes
 
 #+begin_src emacs-lisp
