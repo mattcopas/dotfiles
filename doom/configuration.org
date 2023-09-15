@@ -213,6 +213,11 @@
                 )))
 
 #+end_src
+** Code formatting
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list '+format-on-save-disabled-modes 'mhtml-mode  t)
+#+END_SRC
 ** Feature Mode
 
 #+BEGIN_SRC emacs-lisp
