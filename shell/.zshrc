@@ -107,6 +107,21 @@ if which nvim > /dev/null; then
   alias vim=nvim
 fi
 
+# Ensure we're in a tmux session if in an interactive shell
+# See arch docs for details - https://wiki.archlinux.org/title/Tmux#Start_tmux_on_every_shell_login
+#
+# NOTE - this is done BEFORE aliasing - as otherwise command -v tmux will return the alias, not the executable
+#
+# If on a mac, ignore the DISPLAY check as it's not set (unless X is installed)
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    if [ -x "$(command -v tmux)" ] && [ -z "${TMUX}" ]; then
+        exec tmux new-session -A -s ${USER} >/dev/null 2>%1
+    fi
+
+elif [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
+    exec tmux new-session -A -s ${USER} >/dev/null 2>&1
+fi
+
 export PATH=$PATH:~/.emacs.d/bin
 export SHELL_DOTFILES_DIRECTORY="$HOME/git/dotfiles/shell"
 source $SHELL_DOTFILES_DIRECTORY/alias
@@ -118,3 +133,5 @@ if test "$HOME/.env_specific_zshrc"; then
 else
   echo "No env specific zshrc found"
 fi
+
+
