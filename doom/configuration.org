@@ -216,11 +216,10 @@
 ** Code formatting
 
 #+BEGIN_SRC emacs-lisp
-;; This is a huge hack
-;; Because my windows and other versions of emacs are different versions (28 and 29, respectively) there are different variables use for
-;; format on save. Currently this is fine as the windows machine is only really used for note taking
-(unless (eq system-type 'windows-nt)
-    (add-to-list '+format-on-save-disabled-modes 'mhtml-mode  t))
+;; Note this requires the most recent doom modules version (as of 17/9/23)
+;; TODO Can probably remove this check in the near future
+(unless (string< doom-modules-version "23.0.9-pre")
+  (add-to-list '+format-on-save-disabled-modes 'mhtml-mode  t))
 #+END_SRC
 ** Feature Mode
 
