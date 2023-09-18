@@ -54,7 +54,7 @@
 #+begin_src emacs-lisp
 (when (eq system-type 'windows-nt)
         (setq font-to-use "Cascadia Code")
-        (setq doom-font (font-spec :family font-to-use :size 32)
+        (setq doom-font (font-spec :family font-to-use :size 48)
         doom-variable-pitch-font (font-spec :family font-to-use) ; inherits `doom-font''s :size
                 doom-unicode-font (font-spec :family font-to-use)
                         doom-big-font (font-spec :family font-to-use)))
