@@ -375,3 +375,15 @@ Taken from https://emacs.stackexchange.com/questions/24563/evil-mode-switch-back
 ;;
 ;;; config.el ends here
 #+end_src
+** RSS Feeds
+
+Consider adding +org to the doom init module for this.
+
+#+BEGIN_SRC emacs-lisp
+(after! elfeed
+  (setq elfeed-search-filter "@6-months-ago +unread"))
+(setq elfeed-feeds '(
+                     "https://blog.aaronbieber.com/posts/index.xml"))
+
+(add-hook! 'elfeed-search-mode-hook #'elfeed-update)
+#+END_SRC
