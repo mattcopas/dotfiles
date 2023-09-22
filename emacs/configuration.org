@@ -126,9 +126,13 @@ Shows a grid of key suggestions, eg after pressing C-c
 (use-package helpful
   :init
   (global-set-key (kbd "C-h f") #'helpful-callable)
+  (me-add-global-keybind "<leader>hf" #'helpful-callable)
   (global-set-key (kbd "C-h v") #'helpful-variable)
+  (me-add-global-keybind "<leader>hv" #'helpful-variable)
   (global-set-key (kbd "C-h k") #'helpful-key)
+  (me-add-global-keybind "<leader>hk" #'helpful-key)
   (global-set-key (kbd "C-h C-d") #'helpful-at-point))
+  (me-add-global-keybind "<leader>h C-d" #'helpful-at-point)
 #+END_SRC
 
 * Magit
