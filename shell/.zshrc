@@ -112,14 +112,18 @@ fi
 #
 # NOTE - this is done BEFORE aliasing - as otherwise command -v tmux will return the alias, not the executable
 #
-# If on a mac, ignore the DISPLAY check as it's not set (unless X is installed)
-if [[ "$(uname -s)" == "Darwin" ]]; then
-    if [ -x "$(command -v tmux)" ] && [ -z "${TMUX}" ]; then
-        exec tmux new-session -A -s ${USER} >/dev/null 2>%1
-    fi
+# Only do this if we're not in an Emacs terminal - things get weird otherwise
+#
+if [[ -z "$INSIDE_EMACS" ]]; then
+  # If on a mac, ignore the DISPLAY check as it's not set (unless X is installed)
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+      if [ -x "$(command -v tmux)" ] && [ -z "${TMUX}" ]; then
+          exec tmux new-session -A -s ${USER} >/dev/null 2>%1
+      fi
 
-elif [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
-    exec tmux new-session -A -s ${USER} >/dev/null 2>&1
+  elif [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
+      exec tmux new-session -A -s ${USER} >/dev/null 2>&1
+  fi
 fi
 
 export PATH=$PATH:~/.emacs.d/bin
