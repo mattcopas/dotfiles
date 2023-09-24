@@ -101,6 +101,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH=$PATH:~/tools/bin
 
+# Treat these characters as words, so C-w will work as pected on things like
+# kubectl exec -it -- echo("hello") | grep "h"
+export WORDCHARS="|~-"
+
 # Use neovim
 if which nvim > /dev/null; then
   alias vi=nvim
@@ -137,5 +141,3 @@ if test "$HOME/.env_specific_zshrc"; then
 else
   echo "No env specific zshrc found"
 fi
-
-
