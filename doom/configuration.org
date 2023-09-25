@@ -50,6 +50,15 @@
 #+end_src
 
 * My custom stuff
+** Helpful
+
+#+BEGIN_SRC emacs-lisp
+(map!
+ :desc "Get Helpful docs for thing at point"
+ :map evil-normal-state-map
+ :leader
+ :n "h h" #'helpful-at-point)
+#+END_SRC
 ** Fonts
 #+begin_src emacs-lisp
 (when (eq system-type 'windows-nt)
