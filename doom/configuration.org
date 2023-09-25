@@ -377,11 +377,6 @@ Taken from https://emacs.stackexchange.com/questions/24563/evil-mode-switch-back
 
 #+end_src
 
-*** Load machine specific stuff - should be run at or near the end of the file
-#+begin_src emacs-lisp
-;; Load machine specific stuff, if present. Specify a non nil second arg to prevent an error if not found
-(load "~/tools/emacs-local.el" t)
-#+end_src
 ** RSS Feeds
 
 Consider adding +org to the doom init module for this.
@@ -404,3 +399,10 @@ Consider adding +org to the doom init module for this.
  :i "D" #'eval-last-sexp
  :n "D" #'eval-defun)
 #+END_SRC
+** Environment or machine specific stuff (keep at end of config)
+
+*** Load machine specific stuff - should be run at or near the end of the file
+#+begin_src emacs-lisp
+;; Load machine specific stuff, if present. Specify a non nil second arg to prevent an error if not found
+(load "~/tools/emacs-local.el" t)
+#+end_src
