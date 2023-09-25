@@ -396,3 +396,13 @@ Consider adding +org to the doom init module for this.
 
 (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
 #+END_SRC
+** Emacs lisp
+
+
+#+BEGIN_SRC emacs-lisp
+(map! :map evil-normal-state-map "D" nil)
+(map!
+ :desc "Eval last S-expression in insert mode and eval-defun in normal mode"
+ :i "D" #'eval-last-sexp
+ :n "D" #'eval-defun)
+#+END_SRC
