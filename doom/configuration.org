@@ -396,8 +396,9 @@ Consider adding +org to the doom init module for this.
 (map! :map evil-normal-state-map "D" nil)
 (map!
  :desc "Eval last S-expression in insert mode and eval-defun in normal mode"
- :i "D" #'eval-last-sexp
- :n "D" #'eval-defun)
+ ;; Note this is Super (windows key) (s) not Shift (S)
+ :i "s-d" #'eval-last-sexp
+ :n "s-d" #'eval-defun)
 #+END_SRC
 ** Environment or machine specific stuff (keep at end of config)
 
