@@ -72,6 +72,9 @@ nnoremap <leader>fr :action RecentFiles<CR>
 nnoremap <C-p> :action GotoClass<CR>
 nnoremap <C-S-p> :action GotoFile<CR>
 
+"" <leader>gg maps to Magit like in emacs
+"" NOTE Magit needs to be setup as a custom external command (named Magit)!
+nnoremap <leader>gg :action Tool_External Tools_Magit<CR>
 
 " Find more examples here: https://jb.gg/share-ideavimrc
 
