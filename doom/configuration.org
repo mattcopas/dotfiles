@@ -92,12 +92,18 @@
 ; The best way to append to this for machine/project specific stuff is orobably in
 ; org overrides below
 ;; TODO make this directory a const
-(setq org-agenda-files '("~/git/private"))
-(setq me-org-capture-todo-file "~/git/private/.todo.org")
-(setq me-org-capture-personal-todo-file "~/git/private-personal/todo.org")
-(setq me-org-capture-work-todo-file "~/git/private-personal/todo.org")
+(setq me-private-directory "~/git/private-personal")
+(setq me-private-personal-directory "~/git/private-personal")
+(setq me-private-work-directory "~/git/private-work")
+(setq me-org-capture-todo-file (concat me-private-directory "/" ".todo.org"))
+(setq me-org-capture-personal-todo-file (concat me-private-personal-directory "/" "todo.org"))
+(setq me-org-capture-work-todo-file (concat me-private-work-directory "/" "todo.org"))
+(setq org-agenda-files '(me-private-direcory
+                         me-private-personal-directory
+                         me-private-work-directory))
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
+
 
 (defun me/org-create-demoted ()
   "Create an item that is indented, relative to the current item."
