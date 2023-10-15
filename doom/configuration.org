@@ -93,7 +93,9 @@
 ; org overrides below
 ;; TODO make this directory a const
 (setq org-agenda-files '("~/git/private"))
-(setq org-capture-todo-file "~/git/private/.todo.org")
+(setq me-org-capture-todo-file "~/git/private/.todo.org")
+(setq me-org-capture-personal-todo-file "~/git/private-personal/todo.org")
+(setq me-org-capture-work-todo-file "~/git/private-personal/todo.org")
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
 
@@ -116,46 +118,51 @@
 
   ;; This fixes the leading stars being shown in org mode!
   ;; The second parameter (t) disables the prompt to load a theme
-  (load-theme 'doom-one t)
+  (load-theme 'doom-one t))
 
-  ;; Org agenda stuff
+;; Org agenda stuff
 
-  ;; This and the below custom commands come from Aaron Beiber's blog post -
-  ;; https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
-  ;; TODO is it worth replacing this with the package 'org-super-agenda'?
-  (defun air-org-skip-subtree-if-priority (priority)
-  "Skip an agenda subtree if it has a priority of PRIORITY.
+;; This and the below custom commands come from Aaron Beiber's blog post -
+;; https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
+;; TODO is it worth replacing this with the package 'org-super-agenda'?
+(defun air-org-skip-subtree-if-priority (priority)
+"Skip an agenda subtree if it has a priority of PRIORITY.
 
-  PRIORITY may be one of the characters ?A, ?B, or ?C."
-    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
-        (pri-value (* 1000 (- org-lowest-priority priority)))
-        (pri-current (org-get-priority (thing-at-point 'line t))))
-    (if (= pri-value pri-current)
-        subtree-end
-      nil)))
+PRIORITY may be one of the characters ?A, ?B, or ?C."
+  (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+      (pri-value (* 1000 (- org-lowest-priority priority)))
+      (pri-current (org-get-priority (thing-at-point 'line t))))
+  (if (= pri-value pri-current)
+      subtree-end
+    nil)))
 
-  (setq org-agenda-custom-commands
-        '(("c" "Simple agenda view"
-           ((tags "PRIORITY=\"A\""
-                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                   (org-agenda-overriding-header "High priority unfinished tasks")))
-            (agenda "")
-            (alltodo ""
-                     ((org-agenda-skip-function
-                       '(or (air-org-skip-subtree-if-priority ?A)
-                            ; is the nil condition needed here?
-                            (org-agenda-skip-if nil '(scheduled deadline))))))))))
+(setq org-agenda-custom-commands
+      '(("c" "Simple agenda view"
+          ((tags "PRIORITY=\"A\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                  (org-agenda-overriding-header "High priority unfinished tasks")))
+          (agenda "")
+          (alltodo ""
+                    ((org-agenda-skip-function
+                      '(or (air-org-skip-subtree-if-priority ?A)
+                          ; is the nil condition needed here?
+                          (org-agenda-skip-if nil '(scheduled deadline))))))))))
 
-  ;; Org capture stuff
-  ; To see the original value of this (to see examples) comment this out and describe the variable
-  (setq org-capture-templates '(("t" "Todo" entry (file+headline +org-capture-todo-file "Todo list")
-                                "* TODO %?")))
+;; Org capture stuff
+; To see the original value of this (to see examples) comment this out and describe the variable
+(defun me-basic-todo-format ()
+  "Function returning a basic todo format. Note that the docs for org-capture-templates requirse the template parameter to be literal or a function returning a template"
+  "* TODO %?")
 
-  ; Org task statuses
-  (setq org-todo-keywords
-       '((sequence "TODO(t)" "IN PROGRESS(p)" "IN REVIEW(r)" "LOOP" "STRT(s)" "WAIT(w)" "HOLD(h)" "IDEA(i)" "|" "DONE(d)" "KILL(k)")
-         (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")
-         (sequence "|" "OKAY(o)" "YES(y)" "NO(n)"))))
+(setq org-capture-templates '(("t" "Todo" entry (file+headline me-org-capture-todo-file "Todo list") (function me-basic-todo-format))
+                              ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format))
+                              ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format))))
+
+; Org task statuses
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "IN PROGRESS(p)" "IN REVIEW(r)" "LOOP" "STRT(s)" "WAIT(w)" "HOLD(h)" "IDEA(i)" "|" "DONE(d)" "KILL(k)")
+        (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")
+        (sequence "|" "OKAY(o)" "YES(y)" "NO(n)")))
 
 #+end_src
 
