@@ -67,6 +67,9 @@ nnoremap <C-g> <Esc>
 vnoremap <C-g> <Esc>
 inoremap <C-g> <Esc>
 
+" General Searching
+map <leader>sp <Action>(FindInPath)
+
 "" File searching
 nnoremap <leader>fr :action RecentFiles<CR>
 nnoremap <C-p> :action GotoClass<CR>
