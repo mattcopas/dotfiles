@@ -98,9 +98,11 @@
 (setq me-org-capture-todo-file (concat me-private-directory "/" ".todo.org"))
 (setq me-org-capture-personal-todo-file (concat me-private-personal-directory "/" "todo.org"))
 (setq me-org-capture-work-todo-file (concat me-private-work-directory "/" "todo.org"))
-(setq org-agenda-files '(me-private-direcory
-                         me-private-personal-directory
-                         me-private-work-directory))
+;; Note we have to use backquote instead of quote here so that we can evaluate the variables before adding them to the list.
+;; See docs for function backquote
+(setq org-agenda-files `(,me-private-directory
+                         ,me-private-personal-directory
+                         ,me-private-work-directory))
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
 
