@@ -24,65 +24,62 @@ set scrolloff=3
 "map \b <Action>(ToggleLineBreakpoint)
 
 "" Map <leader>e and <leader>E to go to next/previous error
-nnoremap <leader>e :action GotoNextError<CR>
-nnoremap <leader>E :action GotoPreviousError<CR>
+map <leader>e <Action>(GotoNextError)
+map <leader>E <Action>(GotoPreviousError)
 
 "" Show error on hover
-nnoremap gh :action ShowErrorDescription<CR>
+map gh <Action>(ShowErrorDescription)
 
 "" Refactoring
-nnoremap <leader>rR :action RefactoringMenu<CR>
-nnoremap <leader>rr :action RenameElement<CR>
-vnoremap <leader>rm :action ExtractMethod<CR>
-nnoremap <leader>rv :action IntroduceVariable<CR>
-nnoremap <leader>rc :action IntroduceConstant<CR>
+map <leader>rR <Action>(RefactoringMenu)
+map <leader>rr <Action>(RenameElement)
+map <leader>rm <Action>(ExtractMethod)
+map <leader>rv <Action>(IntroduceVariable)
+map <leader>rc <Action>(IntroduceConstant)
 
 " Code inspection
-nnoremap <leader>vi :action GotoImplementation<CR>
-nnoremap <leader>vu :action FindUsages<CR>
+map <leader>vi <Action>(GotoImplementation)
+map <leader>vu <Action>(FindUsages)
 
 "" Running stuff
-nnoremap gr :action RunMenu<CR>
-nnoremap gR :action RunAnything<CR>
+map gr <Action>(RunMenu)
+map gR <Action>(RunAnything)
 
 "" Terminal
-map <M-x> :action ActivateTerminalToolWindow<CR>
+map <M-x> <Action>(ActivateTerminalToolWindow)
 
 "" Show file structure (methods etc)
-nnoremap <Leader>F :action FileStructurePopup<CR>
+map <Leader>F <Action>(FileStructurePopup)
 
 "" Go to Select In menu (select terminal, file tree etc)
-nnoremap <leader>ss :action SelectIn<CR>
+map <leader>ss <Action>(SelectIn)
 
 "" Toggle breakpoint
-nnoremap <leader>b :action ToggleLineBreakpoint<CR>
-nnoremap <leader>B :action ViewBreakpoints<CR>
+map <leader>b <Action>(ToggleLineBreakpoint)
+map <leader>B <Action>(ViewBreakpoints)
 
 "" Close everything but editor - note that for this to work you need to close all Tool Windows and
 "" (from Run Anything) run 'Store Current Layout as Default'
-nnoremap <C-w>o :action RestoreDefaultLayout<CR>
+map <C-w>o <Action>(RestoreDefaultLayout)
 
 "" Use <C-g> as <Esc>, similar to Emacs
-nnoremap <C-g> <Esc>
-vnoremap <C-g> <Esc>
-inoremap <C-g> <Esc>
+map <C-g> <Esc>
 
 " General Searching
 map <leader>sp <Action>(FindInPath)
 
 "" File searching
-nnoremap <leader>fr :action RecentFiles<CR>
-nnoremap <C-p> :action GotoClass<CR>
-nnoremap <C-S-p> :action GotoFile<CR>
+map <leader>fr <Action>(RecentFiles)
+map <C-p> <Action>(GotoClass)
 " For some reason this doesn't work with <leader><leader> or <leader><space>
-nnoremap <space><space> :action GotoFile<CR>
+map <space><space> <Action>(GotoFile)
 
 "" <leader>gg maps to Magit like in emacs
 "" NOTE Magit needs to be setup as a custom external command (named Magit)!
-nnoremap <leader>gg :action Tool_External Tools_Magit<CR>
+map <leader>gg <Action>(Tool_External Tools_Magit)
 
 "" Do something similar to describe-function in emacs
-nnoremap <leader>hf :actionlist<space>
+map <leader>hf :actionlist<space>
 
 " Find more examples here: https://jb.gg/share-ideavimrc
 
