@@ -71,6 +71,8 @@ inoremap <C-g> <Esc>
 nnoremap <leader>fr :action RecentFiles<CR>
 nnoremap <C-p> :action GotoClass<CR>
 nnoremap <C-S-p> :action GotoFile<CR>
+" For some reason this doesn't work with <leader><leader> or <leader><space>
+nnoremap <space><space> :action GotoFile<CR>
 
 "" <leader>gg maps to Magit like in emacs
 "" NOTE Magit needs to be setup as a custom external command (named Magit)!
