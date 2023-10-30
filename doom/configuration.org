@@ -154,7 +154,18 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                     ((org-agenda-skip-function
                       '(or (air-org-skip-subtree-if-priority ?A)
                           ; is the nil condition needed here?
-                          (org-agenda-skip-if nil '(scheduled deadline))))))))))
+                          (org-agenda-skip-if nil '(scheduled deadline))))))))
+        ("w" "Work agenda view"
+                  ((tags "+work+PRIORITY=\"A\""
+                        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                          (org-agenda-overriding-header "High priority unfinished tasks")))
+                  (agenda "")
+                  (tags "+work"
+                            ((org-agenda-skip-function
+                              '(or (air-org-skip-subtree-if-priority ?A)
+                                   (org-agenda-skip-entry-if 'todo 'done)
+                                  ; is the nil condition needed here?
+                                  (org-agenda-skip-if nil '(scheduled deadline))))))))))
 
 ;; Org capture stuff
 ; To see the original value of this (to see examples) comment this out and describe the variable
@@ -164,7 +175,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 (setq org-capture-templates '(("t" "Todo" entry (file+headline me-org-capture-todo-file "Todo list") (function me-basic-todo-format))
                               ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format))
-                              ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format))))
+                              ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t     )))
 
 ; Org task statuses
 (setq org-todo-keywords
