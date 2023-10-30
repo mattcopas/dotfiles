@@ -155,12 +155,25 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                       '(or (air-org-skip-subtree-if-priority ?A)
                           ; is the nil condition needed here?
                           (org-agenda-skip-if nil '(scheduled deadline))))))))
+
         ("w" "Work agenda view"
                   ((tags "+work+PRIORITY=\"A\""
                         ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                           (org-agenda-overriding-header "High priority unfinished tasks")))
                   (agenda "")
                   (tags-todo "+work"
+                            ((org-agenda-skip-function
+                              '(or (air-org-skip-subtree-if-priority ?A)
+                                   (org-agenda-skip-entry-if 'todo 'done)
+                                  ; is the nil condition needed here?
+                                  (org-agenda-skip-if nil '(scheduled deadline))))))))
+
+        ("p" "Personal agenda view"
+                  ((tags "+personal+PRIORITY=\"A\""
+                        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                          (org-agenda-overriding-header "High priority unfinished tasks")))
+                  (agenda "")
+                  (tags-todo "+personal"
                             ((org-agenda-skip-function
                               '(or (air-org-skip-subtree-if-priority ?A)
                                    (org-agenda-skip-entry-if 'todo 'done)
