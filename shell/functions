@@ -22,3 +22,11 @@ function exec_devcontainer() {
   fi
   docker exec -it $(docker ps | grep $container_grep | awk '{ print $1 }') /bin/bash
 }
+
+function update() {
+  if [[ -f "/etc/arch-release" ]]; then
+     sudo informant check && sudo pacman -Syu
+  else
+    echo "Not an Arch Linux distro!"
+  fi
+}
