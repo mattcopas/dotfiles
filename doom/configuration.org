@@ -439,6 +439,17 @@ Consider adding +org to the doom init module for this.
  :i "s-d" #'eval-last-sexp
  :n "s-d" #'eval-defun)
 #+END_SRC
+
+
+*** Unit testing help
+
+#+BEGIN_SRC emacs-lisp
+(defun me/run-elisp-tests-in-buffer ()
+  "Evaluate the current buffer then run all unit tests in it."
+  (interactive)
+  (+eval/buffer-or-region)
+  (ert t))
+#+END_SRC
 ** Environment or machine specific stuff (keep at end of config)
 
 *** Load machine specific stuff - should be run at or near the end of the file
