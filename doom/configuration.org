@@ -451,6 +451,7 @@ Consider adding +org to the doom init module for this.
 (defun me/run-elisp-tests-in-buffer ()
   "Evaluate the current buffer then run all unit tests in it."
   (interactive)
+  (ert-delete-all-tests)
   (+eval/buffer-or-region)
   (ert t))
 #+END_SRC
