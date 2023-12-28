@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Latex displaymath
+# key: ldm
+# --
+\begin{displaymath}
+$0
+\end{displaymath}

@@ -103,6 +103,10 @@
 (setq org-agenda-files `(,me-private-directory
                          ,me-private-personal-directory
                          ,me-private-work-directory))
+
+;; Auto enable org-fragtog-mode
+(add-hook 'org-mode-hook 'org-fragtog-mode)
+
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
 

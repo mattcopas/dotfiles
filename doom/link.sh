@@ -10,6 +10,7 @@ echo "Creating symlinks from $doom_dir to $directory"
 ln -s -f $directory/config.el $doom_dir/config.el
 ln -s -f $directory/packages.el $doom_dir/packages.el
 ln -s -f $directory/init.el $doom_dir/init.el
+ln -s -f $directory/snippets $doom_dir/snippets
 
 echo "Linking personal spelling file to emacs ispell config"
 mkdir -p $ispell_config_dir

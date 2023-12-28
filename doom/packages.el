@@ -57,3 +57,5 @@
 ;;      eg features/steps/**/*.rb or even **/*.rb
 (package! feature-mode
   :recipe (:host github :repo "mattcopas/cucumber.el" :branch "update-versions")) ;; Cucumber support - see install-feature-mode-dependencies.sh for required gems
+
+(package! org-fragtog) ;; Auto show/edit latex (and other) fragments
