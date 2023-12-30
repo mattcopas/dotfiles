@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: linearly independent
+# key: LI
+# --
+linearly independent $0

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: linealy dependent
+# key: LD
+# --
+linearly dependent $0

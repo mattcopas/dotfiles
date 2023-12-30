@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: linear combination
+# key: LC
+# --
+linear combination $0
