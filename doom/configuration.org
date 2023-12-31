@@ -472,3 +472,9 @@ Consider adding +org to the doom init module for this.
 ;; Load machine specific stuff, if present. Specify a non nil second arg to prevent an error if not found
 (load "~/tools/emacs-local.el" t)
 #+end_src
+** Minor mode(s) to use as yasnippet conditions
+*** Linear Algebra
+
+#+BEGIN_SRC emacs-lisp
+(define-minor-mode me-linear-algebra-mode "A minor mode to use as a condition for certain yasnippet snippets")
+#+END_SRC
