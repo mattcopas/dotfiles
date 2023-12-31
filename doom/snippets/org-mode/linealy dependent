@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: linealy dependent
 # key: LD
+# condition: (bound-and-true-p me-linear-algebra-mode)
 # --
 linearly dependent $0

@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: linear combination
 # key: LC
+# condition: (bound-and-true-p me-linear-algebra-mode)
 # --
 linear combination $0

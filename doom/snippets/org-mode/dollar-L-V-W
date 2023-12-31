@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: $L(V, W)
 # key: $LVW
+# condition: (bound-and-true-p me-linear-algebra-mode)
 # --
 $\mathbb{L}(V, W)$

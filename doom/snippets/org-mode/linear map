@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: linear map
 # key: LM
+# condition: (bound-and-true-p me-linear-algebra-mode)
 # --
 linear map $0
