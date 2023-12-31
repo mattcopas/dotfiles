@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: L(V, W)
+# key: LVW
+# --
+\mathbb{L}(V, W)$0

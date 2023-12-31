@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: linear map
+# key: LM
+# --
+linear map $0
