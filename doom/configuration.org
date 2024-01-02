@@ -87,6 +87,9 @@
 (setq org-journal-file-format "%b-%Y.org")
 (setq org-journal-file-type 'monthly)
 (setq org-journal-date-format "%a %e %b %Y") ; Mon 1 Jan 2023
+; Don't make tasks with subtasks a different colour in org agenda
+; Is there a nicer way to mark tasks with subtasks in org agenda?
+(setq org-agenda-dim-blocked-tasks nil)
 ; I used to add all subdirectories in org-directory to org-agenda-files
 ; But it made org agenda painfully slow.
 ; The best way to append to this for machine/project specific stuff is orobably in
