@@ -243,10 +243,11 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
   (defun me/projectile-discover-with-subprojects ()
     "Discover projects in PROJECTILE-PROJECT-SEARCH-PATH at a depthg of 2.
-This is to allow for things like sub repositories and in particular git worktrees to be discovered."
+This is to allow for things like sub repositories and in particular git worktrees to be discovered.
+Note this could also be added to the projectile-project-search-path by setting a value (\"path/to/folder\" . 1)"
     (interactive)
     (dolist (search-path projectile-project-search-path)
-      (projectile-discover-projects-in-directory search-path 2))))
+      (projectile-discover-projects-in-directory search-path 1))))
 
 #+end_src
 ** LSP Mode
