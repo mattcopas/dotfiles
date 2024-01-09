@@ -446,6 +446,7 @@ Consider adding +org to the doom init module for this.
 (after! elfeed
   (setq elfeed-search-filter "@6-months-ago +unread"))
 (setq elfeed-feeds '(
+                     "https://api.quantamagazine.org/feed/"
                      "https://blog.aaronbieber.com/posts/index.xml"))
 
 (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
