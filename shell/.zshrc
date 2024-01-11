@@ -136,8 +136,11 @@ source $SHELL_DOTFILES_DIRECTORY/alias
 source $SHELL_DOTFILES_DIRECTORY/functions
 source $SHELL_DOTFILES_DIRECTORY/env
 
-if test "$HOME/.env_specific_zshrc"; then
-  source $HOME/.env_specific_zshrc
+ENV_SPECIFIC_DOTFILES_DIR="$HOME/git/env-specific-dotfiles"
+ENV_SPECIFIC_ZSHRC="$ENV_SPECIFIC_DOTFILES_DIR/.env_specific_zshrc"
+
+if test "$ENV_SPECIFIC_ZSHRC"; then
+  source $ENV_SPECIFIC_ZSHRC
 else
   echo "No env specific zshrc found"
 fi
