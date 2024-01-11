@@ -201,8 +201,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   "* TODO %?")
 
 (setq org-capture-templates '(("t" "Todo" entry (file+headline me-org-capture-todo-file "Todo list") (function me-basic-todo-format))
-                              ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format))
-                              ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t     )))
+                              ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
+                              ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t)))
 
 ; Org task statuses
 (setq org-todo-keywords
