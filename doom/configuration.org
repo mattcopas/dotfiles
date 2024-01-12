@@ -455,9 +455,21 @@ Consider adding +org to the doom init module for this.
 #+BEGIN_SRC emacs-lisp
 (after! elfeed
   (setq elfeed-search-filter "@6-months-ago +unread"))
+;; Each item is a list of the form ("url" tag1 tag2)
+;; A nice place to find more rss feeds is https://rss.feedspot.com/math_rss_feeds/
 (setq elfeed-feeds '(
-                     "https://api.quantamagazine.org/feed/"
-                     "https://blog.aaronbieber.com/posts/index.xml"))
+                     ("https://api.quantamagazine.org/feed/" quanta academic)
+                     ("terrytao.wordpress.com/feed" maths puremath terrytao academic)
+                     ("https://www.cambridgemaths.org/blogs/all-blogs/?utm_source=feedspot" maths academic)
+                     ("thatsmaths.com/feed" maths academic)
+                     ;; abstractalgebra tag added here is for some reason the filtering in elfeed filters on
+                     ;; the url only, not the name of the feed (Abstract Algebra)...
+                     ("ysharifi.wordpress.com/feed" maths academic puremath abstractalgebra)
+                     ;; Blog of the awesome youtube channel Aleph0
+                     ;; However this is explicitly not a maths blog...
+                     ("blog.jpolak.org/feed/?feed=rss2" tech work)
+                     ("http://feeds.hbr.org/harvardbusiness" hbr work)
+                     ("https://blog.aaronbieber.com/posts/index.xml" chronicle tech work)))
 
 (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
 #+END_SRC
