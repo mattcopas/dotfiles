@@ -182,13 +182,18 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
         ("w" "Work agenda view"
                   ((tags "+work+PRIORITY=\"A\""
-                        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                        ((org-agenda-skip-function '(org-agenda-skip-entry-if
+                                                     'todo '("WAIT" "KILL" "DONE")))
                           (org-agenda-overriding-header "High priority unfinished tasks")))
+                  (tags-todo  "+work"
+                        ((org-agenda-skip-function '(org-agenda-skip-entry-if
+                                                     'todo '("TODO" "IN PROGRESS" "KILL" "DONE")))
+                          (org-agenda-overriding-header "Blocked tasks")))
                   (agenda "")
                   (tags-todo "+work"
                             ((org-agenda-skip-function
                               '(or (air-org-skip-subtree-if-priority ?A)
-                                   (org-agenda-skip-entry-if 'todo 'done)
+                                   (org-agenda-skip-entry-if 'nottodo '("TODO" "IN PROGRESS"))
                                   ; is the nil condition needed here?
                                   (org-agenda-skip-if nil '(scheduled deadline))))))))
 
