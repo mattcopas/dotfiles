@@ -168,6 +168,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
       subtree-end
     nil)))
 
+;; In org agenda, dont show subtasks by default. This can  be overridden for individual agenda views/sections -
+;; see the 'settings' section of the docs for org-agenda-custom-commands for details on overriding variables
+(setq org-tags-match-list-sublevels nil)
+
 (setq org-agenda-custom-commands
       '(("c" "Simple agenda view"
           ((tags "PRIORITY=\"A\""
