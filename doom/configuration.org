@@ -120,9 +120,10 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
 (setq me-org-capture-work-todo-file (concat me-private-work-directory "/" "todo.org"))
 ;; Note we have to use backquote instead of quote here so that we can evaluate the variables before adding them to the list.
 ;; See docs for function backquote
-(setq org-agenda-files `(,me-private-directory
-                         ,me-private-personal-directory
-                         ,me-private-work-directory))
+;; Remove duplicates from the list - otherwise org agenda lists some tasks multiple times
+(setq org-agenda-files (cl-remove-duplicates (list me-private-directory
+                         me-private-personal-directory
+                         me-private-work-directory) :test #'string-equal))
 
 ;; Auto enable org-fragtog-mode
 (add-hook 'org-mode-hook 'org-fragtog-mode)
