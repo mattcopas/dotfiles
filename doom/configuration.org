@@ -474,6 +474,7 @@ Consider adding +org to the doom init module for this.
                      ;; However this is explicitly not a maths blog...
                      ("blog.jpolak.org/feed/?feed=rss2" tech work)
                      ("http://feeds.hbr.org/harvardbusiness" hbr work)
+                     ("https://anchor.fm/s/db87c75c/podcast/rss" curiousleader aaronbieber work leadership audio)
                      ("https://blog.aaronbieber.com/posts/index.xml" chronicle tech work)))
 
 (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
