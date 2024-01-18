@@ -192,7 +192,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                           (org-agenda-overriding-header "High priority unfinished tasks")))
                   (tags-todo  "+work"
                         ((org-agenda-skip-function '(org-agenda-skip-entry-if
-                                                     'todo '("TODO" "IN PROGRESS" "KILL" "DONE")))
+                                                     'todo '("TODO" "IN PROGRESS" "IN REVIEW" "KILL" "DONE")))
                           (org-agenda-overriding-header "Blocked tasks")))
                   (agenda "")
                   (tags-todo "+work"
