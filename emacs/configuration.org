@@ -1,4 +1,7 @@
 #+TITLE: Vanilla Emacs Configuration
+* TODO split this out into files
+** TODO What structure to take? appearance.el, editor.el? evil.el? Doom style modules?
+** TODO To keep this literate (in org) we could perhaps make a load-module function that takes a name or path, then calls org babel to load the relavent org file(s) as emacs lisp
 * Basic stuff I don't want
 #+BEGIN_SRC emacs-lisp
 (setq inhibit-startup-message t)
