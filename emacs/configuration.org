@@ -157,6 +157,7 @@ Shows a grid of key suggestions, eg after pressing C-c
 * Vertico
 #+BEGIN_SRC emacs-lisp
 (use-package vertico
+  :ensure t
   :custom
   (vertico-resize nil)
   (vertico-cycle t)
@@ -164,6 +165,15 @@ Shows a grid of key suggestions, eg after pressing C-c
          ("C-w" . backward-kill-word))
   :init
   (vertico-mode))
+#+END_SRC
+** Orderless
+This is to allow showing completing read results based on the components being found in any order
+
+#+BEGIN_SRC emacs-lisp
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 #+END_SRC
 
 * General Editor Settings
