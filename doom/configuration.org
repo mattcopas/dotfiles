@@ -175,6 +175,16 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
       subtree-end
     nil)))
 
+(defun me/schedule-task-for-today ()
+  "Schedule the task at point for today."
+  (interactive)
+  (org-schedule nil "+0d"))
+
+(defun me/schedule-task-for-tomorrow ()
+  "Schedule the task at point for tomorrow."
+  (interactive)
+  (org-schedule nil "+1d"))
+
 ;; In org agenda, dont show subtasks by default. This can  be overridden for individual agenda views/sections -
 ;; see the 'settings' section of the docs for org-agenda-custom-commands for details on overriding variables
 (setq org-tags-match-list-sublevels nil)
