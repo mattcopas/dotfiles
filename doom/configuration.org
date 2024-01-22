@@ -210,7 +210,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                         ((org-agenda-skip-function '(org-agenda-skip-entry-if
                                                      'todo '("TODO" "IN PROGRESS" "IN REVIEW" "KILL" "DONE")))
                           (org-agenda-overriding-header "Blocked tasks")))
-                  (agenda "")
+                  (tags "+SCHEDULED=\"<today>\""
+                        ((org-agenda-overriding-header "Today's tasks")))
+                  (tags "+SCHEDULED=\"<tomorrow>\""
+                        ((org-agenda-overriding-header "Tomorrow's tasks")))
                   (tags-todo "+work"
                             ((org-agenda-skip-function
                               '(or (air-org-skip-subtree-if-priority ?A)
