@@ -175,15 +175,24 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
       subtree-end
     nil)))
 
+(defun me/schedule-task-for (delta)
+  "Schedule a task for a given DELTA, for example \"+1d\" or \"-2d\"."
+  (cond ((equal major-mode 'org-mode) (org-schedule nil delta))
+        ((equal major-mode 'org-agenda-mode)
+         (org-agenda-schedule nil delta)
+         (org-agenda-redo))
+        ;; This is essentially the final else statement in an if/else-if block
+        (t (message (format "Invalid major-mode %s" major-mode)))))
+
 (defun me/schedule-task-for-today ()
   "Schedule the task at point for today."
   (interactive)
-  (org-schedule nil "+0d"))
+  (me/schedule-task-for "+0d"))
 
 (defun me/schedule-task-for-tomorrow ()
   "Schedule the task at point for tomorrow."
   (interactive)
-  (org-schedule nil "+1d"))
+  (me/schedule-task-for "+1d"))
 
 ;; In org agenda, dont show subtasks by default. This can  be overridden for individual agenda views/sections -
 ;; see the 'settings' section of the docs for org-agenda-custom-commands for details on overriding variables
