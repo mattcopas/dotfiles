@@ -104,9 +104,6 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
 (setq org-journal-file-format "%b-%Y.org")
 (setq org-journal-file-type 'monthly)
 (setq org-journal-date-format "%a %e %b %Y") ; Mon 1 Jan 2023
-; Don't make tasks with subtasks a different colour in org agenda
-; Is there a nicer way to mark tasks with subtasks in org agenda?
-(setq org-agenda-dim-blocked-tasks nil)
 ; I used to add all subdirectories in org-directory to org-agenda-files
 ; But it made org agenda painfully slow.
 ; The best way to append to this for machine/project specific stuff is orobably in
@@ -118,27 +115,12 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
 (setq me-org-capture-todo-file (concat me-private-directory "/" ".todo.org"))
 (setq me-org-capture-personal-todo-file (concat me-private-personal-directory "/" "todo.org"))
 (setq me-org-capture-work-todo-file (concat me-private-work-directory "/" "todo.org"))
-;; Note we have to use backquote instead of quote here so that we can evaluate the variables before adding them to the list.
-;; See docs for function backquote
-;; Remove duplicates from the list - otherwise org agenda lists some tasks multiple times
-(setq org-agenda-files (cl-remove-duplicates (list me-private-directory
-                         me-private-personal-directory
-                         me-private-work-directory) :test #'string-equal))
 
 ;; Auto enable org-fragtog-mode
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
-
-
-(defun me/org-create-demoted ()
-  "Create an item that is indented, relative to the current item."
-  (interactive)
-  (+org/insert-item-below 1)
-  (evil-force-normal-state)
-  (org-metaright)
-  (evil-append-line 1))
 
 
 (after! org
@@ -153,7 +135,31 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
   ;; The second parameter (t) disables the prompt to load a theme
   (load-theme 'doom-one t))
 
+(defun me/org-create-demoted ()
+  "Create an item that is indented, relative to the current item."
+  (interactive)
+  (+org/insert-item-below 1)
+  (evil-force-normal-state)
+  (org-metaright)
+  (evil-append-line 1))
+#+end_src
+
+*** Org agenda
+
+#+BEGIN_SRC emacs-lisp
+
 ;; Org agenda stuff
+
+;; Note we have to use backquote instead of quote here so that we can evaluate the variables before adding them to the list.
+;; See docs for function backquote
+;; Remove duplicates from the list - otherwise org agenda lists some tasks multiple times
+(setq org-agenda-files (cl-remove-duplicates (list me-private-directory
+                         me-private-personal-directory
+                         me-private-work-directory) :test #'string-equal))
+
+; Don't make tasks with subtasks a different colour in org agenda
+; Is there a nicer way to mark tasks with subtasks in org agenda?
+(setq org-agenda-dim-blocked-tasks nil)
 
 ;; This and the below custom commands come from Aaron Beiber's blog post -
 ;; https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
