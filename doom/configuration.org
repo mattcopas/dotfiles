@@ -217,9 +217,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                   (tags-todo "+work"
                             ((org-agenda-skip-function
                               '(or (air-org-skip-subtree-if-priority ?A)
-                                   (org-agenda-skip-entry-if 'nottodo '("TODO" "IN PROGRESS"))
-                                  ; is the nil condition needed here?
-                                  (org-agenda-skip-if nil '(scheduled deadline))))))))
+                                   (org-agenda-skip-entry-if 'nottodo '("TODO" "IN PROGRESS"))))))))
 
         ("p" "Personal agenda view"
                   ((tags "+personal+PRIORITY=\"A\""
@@ -229,9 +227,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                   (tags-todo "+personal"
                             ((org-agenda-skip-function
                               '(or (air-org-skip-subtree-if-priority ?A)
-                                   (org-agenda-skip-entry-if 'todo 'done)
-                                  ; is the nil condition needed here?
-                                  (org-agenda-skip-if nil '(scheduled deadline))))))))))
+                                   (org-agenda-skip-entry-if 'todo 'done)))))))))
 
 ;; Org capture stuff
 ; To see the original value of this (to see examples) comment this out and describe the variable
