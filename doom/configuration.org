@@ -161,6 +161,9 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
 ; Is there a nicer way to mark tasks with subtasks in org agenda?
 (setq org-agenda-dim-blocked-tasks nil)
 
+;; Set this to t to get rid of the section lines
+(setq org-agenda-compact-blocks nil)
+
 ;; This and the below custom commands come from Aaron Beiber's blog post -
 ;; https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
 ;; TODO is it worth replacing this with the package 'org-super-agenda'?
