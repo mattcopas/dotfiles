@@ -201,6 +201,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ;; see the 'settings' section of the docs for org-agenda-custom-commands for details on overriding variables
 (setq org-tags-match-list-sublevels nil)
 
+(setq org-refile-use-outline-path 'full-file-path)
+
 (setq org-agenda-custom-commands
       '(("c" "Simple agenda view"
           ((tags "PRIORITY=\"A\""
