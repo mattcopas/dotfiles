@@ -282,16 +282,9 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 ** Projectile
 #+begin_src emacs-lisp
 (after! projectile
-  (setq projectile-project-search-path '("~/git"))
-  (setq projectile-enable-caching nil)
-
-  (defun me/projectile-discover-with-subprojects ()
-    "Discover projects in PROJECTILE-PROJECT-SEARCH-PATH at a depthg of 2.
-This is to allow for things like sub repositories and in particular git worktrees to be discovered.
-Note this could also be added to the projectile-project-search-path by setting a value (\"path/to/folder\" . 1)"
-    (interactive)
-    (dolist (search-path projectile-project-search-path)
-      (projectile-discover-projects-in-directory search-path 1))))
+  ;; Set the DEPTH when searching the git folder to 2 to ensure subprojects (eg worktrees) are discovered
+  (setq projectile-project-search-path '(("~/git" . 2)))
+  (setq projectile-enable-caching nil))
 
 #+end_src
 ** LSP Mode
