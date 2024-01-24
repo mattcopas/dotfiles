@@ -237,7 +237,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                   ((tags "+personal+PRIORITY=\"A\""
                         ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
                           (org-agenda-overriding-header "High priority unfinished tasks")))
-                  (agenda "")
                   (tags-todo "+personal"
                             ((org-agenda-skip-function
                               '(or (air-org-skip-subtree-if-priority ?A)
