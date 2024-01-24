@@ -95,6 +95,7 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
 #+end_src
 
 ** Org Mode
+*** General Org Settings - agenda files etc
 #+begin_src emacs-lisp
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -115,9 +116,6 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
 (setq me-org-capture-todo-file (concat me-private-directory "/" ".todo.org"))
 (setq me-org-capture-personal-todo-file (concat me-private-personal-directory "/" "todo.org"))
 (setq me-org-capture-work-todo-file (concat me-private-work-directory "/" "todo.org"))
-
-;; Auto enable org-fragtog-mode
-(add-hook 'org-mode-hook 'org-fragtog-mode)
 
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
@@ -144,6 +142,19 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
   (evil-append-line 1))
 #+end_src
 
+*** Fix evil-search bug in org mode
+Using evil-search (ie /search-term) when Org has hidden/folded headers doesn't show results.
+For tracking this bug, see https://github.com/doomemacs/doomemacs/issues/6478
+
+#+BEGIN_SRC emacs-lisp
+;; Note this must be set BEFORE org mode loads
+(setq org-fold-core-style 'overlays)
+#+END_SRC
+*** LaTeX in Org Mode
+Auto enable org-fragtog-mode
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-mode-hook 'org-fragtog-mode)
+#+END_SRC
 *** Org agenda
 
 #+BEGIN_SRC emacs-lisp
