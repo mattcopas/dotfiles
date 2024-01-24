@@ -243,6 +243,22 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                               '(or (air-org-skip-subtree-if-priority ?A)
                                    (org-agenda-skip-entry-if 'todo 'done)))))))))
 
+
+#+END_SRC
+
+**** Org Agenda Keybindings
+
+#+BEGIN_SRC emacs-lisp
+(after! org-agenda
+  ;; map Leader-w to save
+  (map!
+  :desc "Save file"
+  :leader
+  :n "w" #'org-save-all-org-buffers))
+#+END_SRC
+
+*** Org Capture stuff
+#+BEGIN_SRC emacs-lisp
 ;; Org capture stuff
 ; To see the original value of this (to see examples) comment this out and describe the variable
 (defun me-basic-todo-format ()
@@ -253,6 +269,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                               ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
                               ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t)))
 
+#+END_SRC
+
+*** Org Todo Keywords
+#+BEGIN_SRC emacs-lisp
 ; Org task statuses
 (setq org-todo-keywords
       '((sequence "TODO(t)" "IN PROGRESS(p)" "IN REVIEW(r)" "LOOP" "STRT(s)" "WAIT(w)" "HOLD(h)" "IDEA(i)" "|" "DONE(d)" "KILL(k)")
