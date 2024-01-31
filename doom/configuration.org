@@ -161,6 +161,12 @@ Auto enable org-fragtog-mode
 
 ;; Org agenda stuff
 
+;; Enable Habits - see https://orgmode.org/manual/Tracking-your-habits.html
+(add-to-list 'org-modules 'habit)
+;; Don't log when habits are completed by default
+;; This can be changed for a specific todo item by setting the PROPERTY LOGGING -- see docs for org-log-repeat
+(setq org-log-repeat nil)
+
 ;; Note we have to use backquote instead of quote here so that we can evaluate the variables before adding them to the list.
 ;; See docs for function backquote
 ;; Remove duplicates from the list - otherwise org agenda lists some tasks multiple times
@@ -259,12 +265,16 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 **** Org Agenda Keybindings
 
 #+BEGIN_SRC emacs-lisp
-(after! org-agenda
-  ;; map Leader-w to save
-  (map!
-  :desc "Save file"
-  :leader
-  :n "w" #'org-save-all-org-buffers))
+;; FIXME - this overrides the other SPC-w (evil save file) binding
+;; even in other modes once org agenda has been loaded
+;; (after! org-agenda
+;;   ;; map Leader-w to save
+;;   (map!
+;;     :desc "Save org files when in org agenda mode"
+;;     :mode org-agenda-mode
+;;     :map org-agenda-mode-map
+;;     :leader
+;;     :n "w" #'org-save-all-org-buffers))
 #+END_SRC
 
 *** Org Capture stuff
