@@ -118,11 +118,19 @@ fi
 #
 # Only do this if we're not in an Emacs terminal - things get weird otherwise
 #
+TMUX_TPM_DIRECTORY="$HOME/.tmux/plugins/tpm"
 if [[ -z "$INSIDE_EMACS" ]]; then
   # If on a mac, ignore the DISPLAY check as it's not set (unless X is installed)
   if [[ "$(uname -s)" == "Darwin" ]]; then
-      if [ -x "$(command -v tmux)" ] && [ -z "${TMUX}" ]; then
-          exec tmux new-session -A -s ${USER} >/dev/null 2>%1
+      if [ -x "$(command -v tmux)" ]; then
+          if [ -d "$TMUX_TPM_DIRECTORY" ]; then
+              echo "Tmux plugin directory $TMUX_TPM_DIRECTORY found"
+          else
+              echo "TPM plugin not found - clone it in to $TMUX_TPM_DIRECTORY"
+          fi
+          if [ -z "${TMUX}" ]; then
+             exec tmux new-session -A -s ${USER} >/dev/null 2>%1
+          fi
       fi
 
   elif [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
