@@ -285,9 +285,15 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   "Function returning a basic todo format. Note that the docs for org-capture-templates requirse the template parameter to be literal or a function returning a template"
   "* TODO %?")
 
+(defun me-scheduled-todo-format-today ()
+  "Function returning a scheduled todo format (scheduled for today). Note that the docs for org-capture-templates requirse the template parameter to be literal or a function returning a template"
+  "* TODO %? \n SCHEDULED: %(org-insert-time-stamp (org-read-date nil t))")
+
 (setq org-capture-templates '(("t" "Todo" entry (file+headline me-org-capture-todo-file "Todo list") (function me-basic-todo-format))
                               ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
-                              ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t)))
+                              ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
+                              ("W" "Work Todo - today" entry (file+headline me-org-capture-work-todo-file "Todo list")
+                               (function me-scheduled-todo-format-today) :prepend t)))
 
 #+END_SRC
 
