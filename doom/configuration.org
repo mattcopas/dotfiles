@@ -129,6 +129,10 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
     :ni "C-RET" #'+org/insert-item-below
     :ni "M-RET" #'me/org-create-demoted)
 
+  (map! :map org-agenda-map
+        :leader
+        :n "m s t" #'me/schedule-task-for-today
+        :n "m s T" #'me/schedule-task-for-tomorrow)
   ;; This fixes the leading stars being shown in org mode!
   ;; The second parameter (t) disables the prompt to load a theme
   (load-theme 'doom-one t))
