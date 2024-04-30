@@ -116,10 +116,10 @@ fi
 #
 # NOTE - this is done BEFORE aliasing - as otherwise command -v tmux will return the alias, not the executable
 #
-# Only do this if we're not in an Emacs terminal - things get weird otherwise
+# Only do this if we're not in an Emacs (or IntelliJ) terminal - things get weird otherwise
 #
 TMUX_TPM_DIRECTORY="$HOME/.tmux/plugins/tpm"
-if [[ -z "$INSIDE_EMACS" ]]; then
+if [[ -z "$INSIDE_EMACS" ]] && [[  "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
   # If on a mac, ignore the DISPLAY check as it's not set (unless X is installed)
   if [[ "$(uname -s)" == "Darwin" ]]; then
       if [ -x "$(command -v tmux)" ]; then
