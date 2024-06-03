@@ -152,3 +152,11 @@ if test "$ENV_SPECIFIC_ZSHRC"; then
 else
   echo "No env specific zshrc found"
 fi
+
+# Enable bash completion for AWS
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+if command -v aws &> /dev/null
+then
+  complete -C '/usr/local/bin/aws_completer' aws
+fi
