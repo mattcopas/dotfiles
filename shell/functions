@@ -25,8 +25,12 @@ function exec_devcontainer() {
 
 function update() {
   if [[ -f "/etc/arch-release" ]]; then
+     echo "Performing update for Arch Linux..."
      sudo informant check && sudo pacman -Syu
+  elif [[ "$(uname)" == "Darwin" ]]; then
+    echo "Performing upgrade for MacOS..."
+    brew update && brew upgrade
   else
-    echo "Not an Arch Linux distro!"
+    echo "Unknown or unimplemented distro - not upgrading!"
   fi
 }
