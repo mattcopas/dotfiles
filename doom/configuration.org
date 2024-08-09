@@ -338,10 +338,25 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 #+begin_src emacs-lisp
 (after! projectile
   ;; Set the DEPTH when searching the git folder to 2 to ensure subprojects (eg worktrees) are discovered
-  (setq projectile-project-search-path '(("~/git" . 2)))
+  (setq projectile-project-search-path '(("~/git" . 3)))
   (setq projectile-enable-caching nil))
 
 #+end_src
+#+begin_src emacs-lisp
+(setq projectile-project-root-files-bottom-up
+      (list
+        ".projectile"
+        ".project"
+        ".git"
+        "build.gradle"
+        "Gemfile"
+        "pom.xml"
+        "package.json"))
+
+#+end_src
+
+Projectile  seems to have issues with subprojects - this aims to fix that.
+See https://github.com/bbatsov/projectile/issues/1130#issuecomment-1123237339
 ** LSP Mode
 #+begin_src emacs-lisp
 ;; Keybinds to make emacs feel a bit more like intellij
