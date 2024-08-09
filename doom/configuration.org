@@ -133,6 +133,7 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
         :leader
         :n "m s t" #'me/schedule-task-for-today
         :n "m s T" #'me/schedule-task-for-tomorrow)
+
   ;; This fixes the leading stars being shown in org mode!
   ;; The second parameter (t) disables the prompt to load a theme
   (load-theme 'doom-one t))
@@ -451,6 +452,8 @@ Speed up vterm
 (display-time-mode 1)
 (setq display-time-24hr-format 1)
 (display-battery-mode 1)
+
+(setq doom-modeline-buffer-file-name-style 'truncate-with-project)
 
 (setq-default tab-width 2)
 
