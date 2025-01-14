@@ -409,12 +409,19 @@ See https://github.com/bbatsov/projectile/issues/1130#issuecomment-1123237339
 #+END_SRC
 ** Magit
 
+*** Keybind for magit log
 #+BEGIN_SRC emacs-lisp
 (map!
  :desc "Magit log"
  :leader
  :n "gl" #'magit-log)
 #+END_SRC
+
+*** Remove commit message length warning
+#+BEGIN_SRC emacs-lisp
+(after! magit
+        (setq git-commit-style-convention-checks '(non-empty-second-line)))
+#+End_SRC
 ** VTerm
 
 Speed up vterm
