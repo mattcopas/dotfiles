@@ -106,7 +106,7 @@ export PATH=$PATH:~/tools/bin
 export WORDCHARS="|~-"
 
 # Use neovim
-if which nvim > /dev/null; then
+if [ -x "$(command -v nvim)" ]; then
   alias vi=nvim
   alias vim=nvim
 fi
