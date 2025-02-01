@@ -23,10 +23,25 @@ function exec_devcontainer() {
   docker exec -it $(docker ps | grep $container_grep | awk '{ print $1 }') /bin/bash
 }
 
+function __update_arch() {
+  if ! command -v paru; then
+    echo "Paru not found - updating arch with pacman"
+    pacman -Syu
+  else
+    echo "Updating arch with paru"
+    paru
+  fi
+}
+
 function update() {
   if [[ -f "/etc/arch-release" ]]; then
      echo "Performing update for Arch Linux..."
-     sudo informant check && sudo pacman -Syu
+     if ! command -v informant > /dev/null; then
+       echo "Informant not installed - installing without checking for news!"
+       __update_arch
+     else
+       sudo informant check && __update_arch
+    fi
   elif [[ "$(uname)" == "Darwin" ]]; then
     echo "Performing upgrade for MacOS..."
     brew update && brew upgrade
