@@ -409,6 +409,13 @@ See https://github.com/bbatsov/projectile/issues/1130#issuecomment-1123237339
 #+END_SRC
 ** Magit
 
+*** Better keybind for magit stash
+#+BEGIN_SRC emacs-lisp
+(map!
+ :desc "Magit stash"
+ :mode magit-status-mode
+ :n "z" #'magit-stash)
+#+END_SRC
 *** Keybind for magit log
 #+BEGIN_SRC emacs-lisp
 (map!
