@@ -33,18 +33,32 @@ function __update_arch() {
   fi
 }
 
+function __update_macos() {
+
+  echo "Performing upgrade for MacOS..."
+
+  brew outdated -q
+
+  # Bash equivelant
+  # read -p "Proceed with update? Y/n " -n 1 -r confirm
+  # Zsh equivalent
+  read "confirm?Proceed with update? Y/n "
+  if [[ $confirm =~ ^[Yy]$ ]] || [[ $confirm == "" ]]; then
+    brew update && brew upgrade
+  fi
+}
+
 function update() {
   if [[ -f "/etc/arch-release" ]]; then
-     echo "Performing update for Arch Linux..."
-     if ! command -v informant > /dev/null; then
-       echo "Informant not installed - installing without checking for news!"
-       __update_arch
-     else
-       sudo informant check && __update_arch
+    echo "Performing update for Arch Linux..."
+    if ! command -v informant >/dev/null; then
+      echo "Informant not installed - installing without checking for news!"
+      __update_arch
+    else
+      sudo informant check && __update_arch
     fi
   elif [[ "$(uname)" == "Darwin" ]]; then
-    echo "Performing upgrade for MacOS..."
-    brew update && brew upgrade
+    __update_macos
   else
     echo "Unknown or unimplemented distro - not upgrading!"
   fi
