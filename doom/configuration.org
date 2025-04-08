@@ -88,9 +88,6 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
 (unless (eq system-type 'windows-nt)
   (setq doom-font (font-spec :size 18)))
 
-;; Set bullets for org-mode (requires unicode font, and (org +pretty) in .doom.d/init.el)
-(setq
-    org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
 
 #+end_src
 
