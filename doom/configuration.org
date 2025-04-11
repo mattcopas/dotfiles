@@ -338,6 +338,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   ;; Set the DEPTH when searching the git folder to 2 to ensure subprojects (eg worktrees) are discovered
   (setq projectile-project-search-path '(("~/git" . 3)))
   (setq projectile-enable-caching nil))
+  ;; Don't discover projects on every project switch, as this is annoyingly slow
+  (setq projectile-auto-discover nil)
 
 #+end_src
 #+begin_src emacs-lisp
