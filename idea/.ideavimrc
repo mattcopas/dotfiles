@@ -78,6 +78,9 @@ map <space><space> <Action>(GotoFile)
 "" NOTE Magit needs to be setup as a custom external command (named Magit)!
 map <leader>gg <Action>(Tool_External Tools_Magit)
 
+"" Annotate with Git Blame
+map <leader>gb <Action>(Annotate)
+
 "" Do something similar to describe-function in emacs
 map <leader>hf :actionlist<space>
 
