@@ -261,6 +261,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                               '(or (air-org-skip-subtree-if-priority ?A)
                                    (org-agenda-skip-entry-if 'todo 'done)))))))))
 
+; FIXME work agenda (SPC oAw) don't render DONE items properly - however doing more simple agendas works fine (eg SPC oAa and SPC oAc)
+
 
 #+END_SRC
 
