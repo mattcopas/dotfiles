@@ -544,7 +544,7 @@ Taken from https://emacs.stackexchange.com/questions/24563/evil-mode-switch-back
     (message "Dropped back to normal state in all buffers")))
 
 (defvar me/evil-normal-timer
-  (run-with-idle-timer 10 t #'me/evil-normalize-all-buffers)
+  (run-with-idle-timer 60 t #'me/evil-normalize-all-buffers)
   "Drop back to normal state after idle for 10 seconds.")
 
 (defun me/wsl-copy (start end)
