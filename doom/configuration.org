@@ -262,6 +262,7 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                                    (org-agenda-skip-entry-if 'todo 'done)))))))))
 
 ; FIXME work agenda (SPC oAw) don't render DONE items properly - however doing more simple agendas works fine (eg SPC oAa and SPC oAc)
+; Another approach to this would be to just remove Done items from the list.
 
 
 #+END_SRC
