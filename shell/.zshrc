@@ -119,22 +119,22 @@ fi
 # Only do this if we're not in an Emacs (or IntelliJ) terminal - things get weird otherwise
 #
 TMUX_TPM_DIRECTORY="$HOME/.tmux/plugins/tpm"
-if [[ -z "$INSIDE_EMACS" ]] && [[  "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
+if [[ -z "$INSIDE_EMACS" ]] && [[ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
   # If on a mac, ignore the DISPLAY check as it's not set (unless X is installed)
   if [[ "$(uname -s)" == "Darwin" ]]; then
-      if [ -x "$(command -v tmux)" ]; then
-          if [ -d "$TMUX_TPM_DIRECTORY" ]; then
-              echo "Tmux plugin directory $TMUX_TPM_DIRECTORY found"
-          else
-              echo "TPM plugin not found - clone it in to $TMUX_TPM_DIRECTORY"
-          fi
-          if [ -z "${TMUX}" ]; then
-             exec tmux new-session -A -s ${USER} >/dev/null 2>%1
-          fi
+    if [ -x "$(command -v tmux)" ]; then
+      if [ -d "$TMUX_TPM_DIRECTORY" ]; then
+        echo "Tmux plugin directory $TMUX_TPM_DIRECTORY found"
+      else
+        echo "TPM plugin not found - clone it in to $TMUX_TPM_DIRECTORY"
       fi
+      if [ -z "${TMUX}" ]; then
+        exec tmux new-session -A -s ${USER} >/dev/null 2>%1
+      fi
+    fi
 
   elif [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
-      exec tmux new-session -A -s ${USER} >/dev/null 2>&1
+    exec tmux new-session -A -s ${USER} >/dev/null 2>&1
   fi
 fi
 
@@ -156,8 +156,7 @@ fi
 # Enable bash completion for AWS
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
-if command -v aws &> /dev/null
-then
+if command -v aws &>/dev/null; then
   complete -C '/usr/local/bin/aws_completer' aws
 fi
 
