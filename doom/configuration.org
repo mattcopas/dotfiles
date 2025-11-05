@@ -244,7 +244,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                                                      'todo '("TODO" "IN PROGRESS" "IN REVIEW" "KILL" "DONE")))
                           (org-agenda-overriding-header "Blocked tasks")))
                   (tags "+SCHEDULED=\"<today>\""
-                        ((org-agenda-overriding-header "Today's tasks")))
+                        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "KILL")))
+                         (org-agenda-overriding-header "Today's tasks")))
                   (tags "+SCHEDULED=\"<tomorrow>\""
                         ((org-agenda-overriding-header "Tomorrow's tasks")))
                   (tags-todo "+work"
