@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 relative_script_directory="$(dirname "$0")"
 absolute_script_directory="$(realpath $relative_script_directory)"
 

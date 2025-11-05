@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 relative_directory=$(dirname "$0")
 script_directory=$(realpath $relative_directory)
