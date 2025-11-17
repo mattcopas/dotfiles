@@ -153,11 +153,18 @@ else
   echo "No env specific zshrc found"
 fi
 
-# Enable bash completion for AWS
+# Enable completions
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
+
+# Enable bash completion for AWS
 if command -v aws &>/dev/null; then
   complete -C '/usr/local/bin/aws_completer' aws
+fi
+
+# And for Kubernetes
+if command -v kubectl; then
+  source <(kubectl completion zsh)
 fi
 
 if command -v starship; then
