@@ -1,5 +1,6 @@
 adapter
 additivity
+alacritty
 alertcondition
 analyse
 analysing
@@ -13,9 +14,11 @@ codomains
 colour
 coloured
 compressions
+config
 crypto
 daytrading
 deserialisation
+dest
 doji
 dojis
 durations
@@ -56,6 +59,7 @@ oneoption
 oneoption's
 optionstalker
 organise
+pacman
 pinescript
 prev
 realdaytrading
@@ -68,6 +72,7 @@ retracements
 roadmap
 signalling
 smas
+src
 surjective
 technicals
 there'd
@@ -75,6 +80,7 @@ there'll
 timeframe
 timeframes
 todo
+toml
 tradeable
 trendline
 trendlines
