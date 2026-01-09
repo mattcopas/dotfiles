@@ -76,6 +76,14 @@ map <space><space> <Action>(GotoFile)
 
 "" <leader>gg maps to Magit like in emacs
 "" NOTE Magit needs to be setup as a custom external command (named Magit)!
+"" See this page for the original idea https://pudar.net/integrate-magit-with-jetbrains/
+"" Steps:
+"" Create a new External Tool (go to IntelliJ settings, search for External Tools)
+"" Call it magit
+"" Program: Needs to be the absolute path of emacsclient - find this with 'which emacsclient'
+"" Arguments (include the quote): -n -e "(progn (x-focus-frame nil) (magit-status))"
+"" Working Directory: $FileDir$
+"" Advanced Options: Keep 'Synchronise files after execution' checked, uncheck 'Open console for tool output' (although checking this might be useful for debugging)   
 map <leader>gg <Action>(Tool_External Tools_Magit)
 
 "" Annotate with Git Blame
