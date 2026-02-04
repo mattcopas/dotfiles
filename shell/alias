@@ -36,9 +36,6 @@ alias curlg="curl -XGET"
 alias curlp="curl -XPOST"
 alias curlpj="curl -XPOST -H 'Content-Type: application/json' "
 
-# Maven
-alias mcp="mvn clean package"
-
 # Tmux
 alias tmux="tmux -2"
 alias ta="tmux attach"

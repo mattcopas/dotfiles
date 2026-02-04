@@ -2,6 +2,36 @@ function klogs() {
   kubectl -n $1 get po | grep ^$2 | awk '{ print $1 }' | xargs kubectl -n $1 logs $3
 }
 
+function mcc() {
+  java --version
+  if [[ -x mvnw ]]; then
+    echo "Using maven compile"
+    ./mvnw clean package
+  else
+    mvn clean compile
+  fi
+}
+
+function mcp() {
+  java --version
+  if [[ -x mvnw ]]; then
+    echo "Using maven wrapper"
+    ./mvnw clean package
+  else
+    mvn clean package
+  fi
+}
+
+function mcv() {
+  java --version
+  if [[ -x mvnw ]]; then
+    echo "Using maven wrapper"
+    ./mvnw clean verify
+  else
+    mvn clean verify
+  fi
+}
+
 function maven-project-version() {
   mvn -q \
     -Dexec.executable=echo \
