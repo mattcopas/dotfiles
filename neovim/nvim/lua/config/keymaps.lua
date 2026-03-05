@@ -6,3 +6,7 @@
 vim.keymap.set("n", "<leader><leader>", function()
   LazyVim.pick("files")()
 end, { desc = "Find Files (Root Aware)" })
+
+-- Write files with <leader>w - update is used instead of write because update only saves
+-- if the file has actually been changed (so no pointless timestamp updates etc)
+vim.keymap.set("n", "<leader>w", "<cmd>update<cr>", { desc = "Save file if there are changes" })
