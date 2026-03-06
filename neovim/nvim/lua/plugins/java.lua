@@ -6,6 +6,7 @@ return {
 
     local home = vim.fn.expand("~")
     local java_21_path = home .. "/.sdkman/candidates/java/21.0.10-amzn/bin/java"
+    local lombok_jar = vim.fn.expand("$MASON/share/jdtls/lombok.jar")
     local config = {
       cmd = {
         -- Your explicit Java 21 path
@@ -14,6 +15,7 @@ return {
         "-Dosgi.bundles.defaultStartLevel=4",
         "-Declipse.product=org.eclipse.jdt.ls.core.product",
         "-Djvm.arg=-Xmx1G",
+        "-javaagent:" .. lombok_jar,
         "-jar",
         vim.fn.glob(mason_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
         "-configuration",
