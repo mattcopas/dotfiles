@@ -1,6 +1,5 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.lang.java",
     "lazyvim.plugins.extras.test.core"
   ],
   "install_version": 8,
