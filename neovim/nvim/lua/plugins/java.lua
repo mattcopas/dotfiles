@@ -4,7 +4,8 @@ return {
   config = function()
     local mason_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
 
-    local java_21_path = "/Users/mattcopas/.sdkman/candidates/java/21.0.10-amzn/bin/java"
+    local home = vim.fn.expand("~")
+    local java_21_path = home .. "/.sdkman/candidates/java/21.0.10-amzn/bin/java"
     local config = {
       cmd = {
         -- Your explicit Java 21 path
