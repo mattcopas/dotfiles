@@ -25,8 +25,6 @@ local function ensure_junit_jar()
   end
 end
 
-local junit_jar_path = ensure_junit_jar()
-
 return {
   "nvim-neotest/neotest",
   dependencies = {
