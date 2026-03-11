@@ -4,7 +4,8 @@ local function setup_java_boilerplate()
     pattern = "*.java",
     callback = function()
       local path = vim.fn.expand("%:p:h")
-      local file_not_empty = vim.fn.getfsize(path) > 0
+      local file_path = vim.fn.expand("%:p")
+      local file_not_empty = vim.fn.getfsize(file_path) > 0
 
       if file_not_empty then
         return
