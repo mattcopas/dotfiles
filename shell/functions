@@ -32,6 +32,16 @@ function mcv() {
   fi
 }
 
+function mfmt() {
+  java --version
+  if [[ -x mvnw ]]; then
+    echo "Using maven wrapper"
+    ./mvnw clean spotless:apply
+  else
+    mvn clean spotless:apply
+  fi
+}
+
 function maven-project-version() {
   mvn -q \
     -Dexec.executable=echo \
