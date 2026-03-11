@@ -1,7 +1,39 @@
+local function setup_java_boilerplate()
+  -- Use BufReadPre too to have this work when creating a java file through neo-tree
+  vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPre" }, {
+    pattern = "*.java",
+    callback = function()
+      local path = vim.fn.expand("%:p:h")
+      local file_not_empty = vim.fn.getfsize(path) > 0
+
+      if file_not_empty then
+        return
+      end
+
+      local base_path = path:match(".*src/[^/]+/java/")
+
+      if base_path then
+        local package_path = path:sub(#base_path + 1):gsub("/", ".")
+        local class_name = vim.fn.expand("%:t:r")
+
+        local lines = {
+          "package " .. package_path .. ";",
+          "",
+          "public class " .. class_name .. " {",
+          "}",
+        }
+        vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+        vim.api.nvim_win_set_cursor(0, { 4, 4 })
+      end
+    end,
+  })
+end
+
 return {
   "mfussenegger/nvim-jdtls",
   ft = { "java" },
   config = function()
+    setup_java_boilerplate()
     local mason_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
 
     local home = vim.fn.expand("~")
