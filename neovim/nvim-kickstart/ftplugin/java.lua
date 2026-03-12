@@ -19,6 +19,7 @@ local jdtls_path = home .. '/.local/share/nvim/mason/packages/jdtls'
 local path_to_launcher = vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
 local path_to_config = jdtls_path .. '/config_' .. os_name
 local workspace_dir = home .. '/.cache/jdtls/workspace/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+local lombok_jar = vim.fn.expand '$MASON/share/jdtls/lombok.jar'
 
 local config = {
   cmd = {
@@ -29,6 +30,7 @@ local config = {
     '-Dlog.protocol=true',
     '-Dlog.level=ALL',
     '-Xmx1g',
+    '-javaagent:' .. lombok_jar,
     '--add-modules=ALL-SYSTEM',
     '--add-opens',
     'java.base/java.util=ALL-UNNAMED',
