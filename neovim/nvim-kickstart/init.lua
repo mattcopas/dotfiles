@@ -269,6 +269,12 @@ require('lazy').setup({
     config = function() vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<CR>', { desc = 'Git Status' }) end,
   },
 
+  -- Java
+  {
+    'mfussenegger/nvim-jdtls',
+    dependencies = { 'mfussenegger/nvim-dap' }, -- For debugging
+  },
+
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
   --    {
@@ -669,8 +675,11 @@ require('lazy').setup({
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       for name, server in pairs(servers) do
-        vim.lsp.config(name, server)
-        vim.lsp.enable(name)
+        -- Skip jdtls - that's handled in ftplugin/java.lua
+        if name ~= 'jdtls' then
+          vim.lsp.config(name, server)
+          vim.lsp.enable(name)
+        end
       end
     end,
   },
