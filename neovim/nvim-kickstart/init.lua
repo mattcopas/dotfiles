@@ -352,6 +352,17 @@ require('lazy').setup({
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
+  {
+    'ahmedkhalf/project.nvim',
+    config = function()
+      require('project_nvim').setup {
+        -- Use LSP and patterns to detect project roots
+        detection_methods = { 'lsp', 'pattern' },
+        patterns = { '.git', 'pom.xml', 'build.gradle', 'mvnw', 'package.json' },
+      }
+    end,
+  },
+
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     -- By default, Telescope is included and acts as your picker for everything.
@@ -423,9 +434,11 @@ require('lazy').setup({
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'projects')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+      vim.keymap.set('n', '<leader>pp', function() require('telescope').extensions.projects.projects {} end, { desc = '[P]roject [P]icker' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[S]earch [F]iles' })
