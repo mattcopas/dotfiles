@@ -110,6 +110,13 @@ vim.o.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
 
+-- Make default spacing/indent stuff sensible
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+-- Spaces over tabs any day!
+vim.opt.expandtab = true
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -192,6 +199,8 @@ vim.diagnostic.config {
 }
 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.goto_next, { desc = 'Go to next [E]rror' })
+vim.keymap.set('n', '<leader>E', vim.diagnostic.goto_prev, { desc = 'Go to previous [E]rror' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -353,6 +362,26 @@ require('lazy').setup({
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
   {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'rcasia/neotest-java', -- The Java Adapter
+    },
+    config = function()
+      require('neotest').setup {
+        adapters = {
+          require 'neotest-java' {
+            -- You can specify junit-platform-console-standalone.jar path if needed
+          },
+        },
+      }
+    end,
+  },
+
+  {
     'ahmedkhalf/project.nvim',
     config = function()
       require('project_nvim').setup {
@@ -473,7 +502,7 @@ require('lazy').setup({
 
           -- Fuzzy find all the symbols in your current document.
           -- Symbols are things like variables, functions, types, etc.
-          vim.keymap.set('n', 'gO', builtin.lsp_document_symbols, { buffer = buf, desc = 'Open Document Symbols' })
+          vim.keymap.set('n', '<leader>F', builtin.lsp_document_symbols, { buffer = buf, desc = 'Open Document Symbols' })
 
           -- Fuzzy find all the symbols in your current workspace.
           -- Similar to document symbols, except searches over your entire project.
@@ -581,7 +610,7 @@ require('lazy').setup({
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>rr', vim.lsp.buf.rename, '[R]e[n]ame')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
@@ -590,6 +619,10 @@ require('lazy').setup({
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          -- Run java tests
+          map('<leader>tr', require('jdtls').test_nearest_method, '[Test] Nea[r]est Method')
+          map('<leader>tc', require('jdtls').test_class, '[Test] [C]lass')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -843,6 +876,7 @@ require('lazy').setup({
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
+    enabled = false,
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup {
@@ -855,6 +889,43 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+    end,
+  },
+
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    enabled = true,
+    priority = 1000,
+    config = function()
+      require('catppuccin').setup {
+        flavour = 'macchiato',
+        integrations = {
+          telescope = { enabled = true },
+          mason = true,
+          neotree = true,
+          which_key = true,
+          native_lsp = {
+            enabled = true,
+            underlines = {
+              errors = { 'undercurl' },
+              hints = { 'undercurl' },
+              warnings = { 'undercurl' },
+              information = { 'undercurl' },
+            },
+          },
+        },
+        custom_highlights = function(colors)
+          return {
+            -- Make comments a bit brighter and more distinct
+            Comment = { fg = colors.overlay2 },
+            -- Make your Java Doc tags (@param, @return) stand out
+            ['@tag.java'] = { fg = colors.pink, style = { 'bold' } },
+          }
+        end,
+      }
+
+      vim.cmd.colorscheme 'catppuccin-macchiato'
     end,
   },
 
@@ -912,6 +983,16 @@ require('lazy').setup({
     branch = 'main',
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
     config = function()
+      require('nvim-treesitter').setup {
+        ensure_installed = { 'java', 'lua', 'vimdoc', 'vim', 'bash' },
+        auto_install = true,
+        highlight = { enable = true },
+
+        indent = {
+          enable = true,
+          disable = { 'java' }, -- Treesitter and java method chaining indentation sucks - so disable it
+        },
+      }
       local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
       require('nvim-treesitter').install(parsers)
       vim.api.nvim_create_autocmd('FileType', {
