@@ -202,6 +202,15 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.goto_next, { desc = 'Go to next [E]rror' })
 vim.keymap.set('n', '<leader>E', vim.diagnostic.goto_prev, { desc = 'Go to previous [E]rror' })
 
+-- Force folded lines to have no background color
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  callback = function() vim.api.nvim_set_hl(0, 'Folded', { bg = 'none', ctermbg = 'none', force = true }) end,
+})
+
+-- Trigger it for the current session immediately
+vim.cmd 'hi Folded guibg=none ctermbg=none'
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -475,11 +484,12 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sp', builtin.live_grep, { desc = '[S]earch in [P]roject (same as Search by Grep)' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
-      vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = '[Browse] [B]uffers' })
 
       -- This runs on LSP attach per buffer (see main LSP attach function in 'neovim/nvim-lspconfig' config for more info,
       -- it is better explained there). This allows easily switching between pickers if you prefer using something else!
@@ -867,6 +877,23 @@ require('lazy').setup({
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
     },
+  },
+
+  -- Org Mode for Neovim
+  {
+    'nvim-orgmode/orgmode',
+    event = 'VeryLazy',
+    ft = { 'org' },
+    config = function()
+      -- Setup orgmode
+      require('orgmode').setup {
+        org_agenda_files = '~/orgfiles/**/*',
+        org_default_notes_file = '~/orgfiles/refile.org',
+      }
+
+      -- Experimental LSP support
+      vim.lsp.enable 'org'
+    end,
   },
 
   { -- You can easily change to a different colorscheme.
