@@ -199,8 +199,8 @@ vim.diagnostic.config {
 }
 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.goto_next, { desc = 'Go to next [E]rror' })
-vim.keymap.set('n', '<leader>E', vim.diagnostic.goto_prev, { desc = 'Go to previous [E]rror' })
+vim.keymap.set('n', '<leader>e', function() vim.diagnostic.jump { count = 1, float = true } end, { desc = 'Go to next [E]rror' })
+vim.keymap.set('n', '<leader>E', function() vim.diagnostic.jump { count = -1, float = true } end, { desc = 'Go to previous [E]rror' })
 
 -- Force folded lines to have no background color
 vim.api.nvim_create_autocmd('ColorScheme', {
