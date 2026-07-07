@@ -176,6 +176,7 @@ Auto enable org-fragtog-mode
 ;; Remove duplicates from the list - otherwise org agenda lists some tasks multiple times
 (setq org-agenda-files (cl-remove-duplicates (list me-private-directory
                          me-private-personal-directory
+                         me-private-client-directory
                          me-private-work-directory) :test #'string-equal))
 
 ; Don't make tasks with subtasks a different colour in org agenda
