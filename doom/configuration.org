@@ -110,9 +110,11 @@ Based on [[https://www.reddit.com/r/emacs/comments/sn8pma/how_to_pasteyank_into_
 (setq me-private-directory "~/git/private-personal")
 (setq me-private-personal-directory "~/git/private-personal")
 (setq me-private-work-directory "~/git/private-work")
+(setq me-private-client-directory "~/git/private-client")
 (setq me-org-capture-todo-file (concat me-private-directory "/" ".todo.org"))
 (setq me-org-capture-personal-todo-file (concat me-private-personal-directory "/" "todo.org"))
 (setq me-org-capture-work-todo-file (concat me-private-work-directory "/" "todo.org"))
+(setq me-org-capture-client-todo-file (concat me-private-client-directory "/" "notes.org"))
 
 ; Use this to override org stuff (Eg org-capture-todo-file) (eg for specific projects)
 (load "~/tools/org-overrides.el" t)
@@ -302,7 +304,8 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
                               ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
                               ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
                               ("W" "Work Todo - today" entry (file+headline me-org-capture-work-todo-file "Todo list")
-                               (function me-scheduled-todo-format-today) :prepend t)))
+                               (function me-scheduled-todo-format-today) :prepend t)
+                              ("c" "Client Todo" entry (file+headline me-org-capture-client-todo-file "Stuff to do") (function me-basic-todo-format) :prepend t)))
 
 #+END_SRC
 
