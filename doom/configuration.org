@@ -461,11 +461,13 @@ Speed up vterm
 ; Use "+y to copy to clpboard
 (setq x-select-enable-clipboard nil)
 
-;; map Leader-w to save
+;; FIXME - this doesn't get run
+;; Leader w gets set in +evil-bindings.el but no matter what override I use (add-hook, after! etc) this doesn't load
+;; Currently I run it manually. Yeah. It's the bad.
 (map!
  :desc "Save file"
  :leader
- :n "w" #'evil-write)
+ :g "w" #'evil-write)
 
 ; Keybinds for commenting
 (map! :desc "Comment region based on mode"
