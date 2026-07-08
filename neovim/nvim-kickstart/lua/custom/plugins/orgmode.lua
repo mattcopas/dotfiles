@@ -53,6 +53,57 @@ return {
             properties = { prepend = true },
           },
         },
+
+        org_agenda_custom_commands = {
+          w = {
+            description = 'Work agenda view',
+            types = {
+              -- 1. High priority unfinished work tasks
+              -- Syntax: +work+PRIORITY="A" selects the items, then "/-WAIT-KILL-DONE" filters out those specific TODO states
+              {
+                type = 'tags',
+                match = '+work+PRIORITY="A"/-WAIT-KILL-DONE',
+                org_agenda_overriding_header = 'High priority unfinished tasks',
+              },
+
+              -- 2. Blocked tasks
+              -- Grabs work tasks that are NOT in active states (i.e. everything except TODO, PROGRESS, REVIEW, KILL, DONE)
+              {
+                type = 'tags_todo',
+                match = '+work/-TODO-IN PROGRESS-IN REVIEW-KILL-DONE',
+                org_agenda_overriding_header = 'Blocked tasks',
+              },
+
+              -- 3. Today's unfinished tasks
+              {
+                type = 'tags',
+                match = 'SCHEDULED="<today>"/-DONE-KILL',
+                org_agenda_overriding_header = "Today's tasks",
+              },
+
+              -- 4. Today's completed tasks (Only show DONE states)
+              {
+                type = 'tags',
+                match = 'SCHEDULED="<today>"/DONE',
+                org_agenda_overriding_header = "Today's completed tasks",
+              },
+
+              -- 5. Tomorrow's tasks
+              {
+                type = 'tags',
+                match = 'SCHEDULED="<tomorrow>"',
+                org_agenda_overriding_header = "Tomorrow's tasks",
+              },
+
+              -- 6. Work Remaining (Non-Priority A, Active items)
+              {
+                type = 'tags_todo',
+                match = '+work-PRIORITY="A"/TODO|IN PROGRESS',
+                org_agenda_overriding_header = 'Work Remaining',
+              },
+            },
+          },
+        },
       }
 
       -- Experimental LSP support
