@@ -2,8 +2,8 @@
  
 relative_directory=$(dirname "$0")
 directory=$(realpath $relative_directory)
-doom_dir=$(realpath ~/.doom.d)
-emacs_dir=$(realpath ~/.emacs.d)
+doom_dir=$(realpath ~/.config/doom)
+emacs_dir=$(realpath ~/.config/emacs)
 ispell_config_dir=$(realpath $emacs_dir/.local/etc/ispell)
 echo "Creating symlinks from $doom_dir to $directory"
 # ln -s <real_file> <link>
