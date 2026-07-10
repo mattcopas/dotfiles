@@ -60,12 +60,6 @@ set background=dark
 " Exit insert mode after updatetime milliseconds (default 4000) - to see this value run :set updatetime?
 " au CursorHoldI * stopinsert
 
-"Display error when using arrow keys in normal mode
-noremap <up>    :echo 'USE K TO GO UP'<CR>
-noremap <down>  :echo 'USE J TO GO DOWN'<CR>
-noremap <left>  :echo 'USE H TO GO LEFT'<CR>
-noremap <right> :echo 'USE L TO GO RIGHT'<CR>
-
 " Easier saving
 nnoremap <leader>w :w<CR>
 
