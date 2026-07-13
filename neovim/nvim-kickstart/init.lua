@@ -951,6 +951,15 @@ require('lazy').setup({
     opts = { signs = false },
   },
 
+  -- Render markdown
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' }, -- if you use the mini.nvim suite
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
+
   { -- Collection of various small independent plugins/modules
     'nvim-mini/mini.nvim',
     config = function()
