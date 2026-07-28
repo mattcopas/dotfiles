@@ -67,6 +67,13 @@ return {
             headline = 'Stuff to do',
             properties = { prepend = true },
           },
+          C = {
+            description = 'Client Todo - today',
+            template = '* TODO %?\n SCHEDULED: %t',
+            target = client_todo_file,
+            headline = 'Stuff to do',
+            properties = { prepend = true },
+          },
         },
 
         org_agenda_custom_commands = {
