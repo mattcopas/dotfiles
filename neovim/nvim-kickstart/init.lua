@@ -1019,6 +1019,10 @@ require('lazy').setup({
         callback = function(args)
           local buf, filetype = args.buf, args.match
 
+          -- Treesitter was overriding the org virtual indentation stuff (ie breaking org_startup_indented = true), so prevent
+          -- this autocmd running for org files
+          if filetype == 'org' then return end
+
           local language = vim.treesitter.language.get_lang(filetype)
           if not language then return end
 

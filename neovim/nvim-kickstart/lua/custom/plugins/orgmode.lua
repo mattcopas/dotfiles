@@ -16,9 +16,7 @@ return {
       local personal_todo_file = '~/git/private-personal/todo.org'
       -- Setup orgmode
       require('orgmode').setup {
-        -- Unfortunately this calls some deprecated code, so this causes a crash atm - hopefully this will get fixed in a later version!
-        -- org_startup_indented = true
-        --
+        org_startup_indented = true,
         -- TODO - update to what it was in emacs. CAn this be an array?
         org_agenda_files = {
           work_todo_file,
@@ -139,10 +137,6 @@ return {
         pattern = 'org',
         group = org_keys,
         callback = function()
-          -- Force visual indentation mode on for this specific file buffer safely
-          -- Automatically turn on indentation, without org_startup_indented (see above re why that doesn't work)
-          vim.b.org_indent_mode = true
-
           -- Org specific keybinds
           vim.keymap.set('n', '<leader>mtd', '<cmd>OrgTodo DONE<cr>', { buffer = true, desc = 'Org: Mark DONE' })
           vim.keymap.set('n', '<leader>mtt', '<cmd>OrgTodo TODO<cr>', { buffer = true, desc = 'Org: Mark TODO' })
