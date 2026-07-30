@@ -912,7 +912,7 @@ require('lazy').setup({
       require('catppuccin').setup {
         flavour = 'macchiato',
         integrations = {
-          telescope = { enabled = true },
+          telescope = true,
           mason = true,
           neotree = true,
           which_key = true,
