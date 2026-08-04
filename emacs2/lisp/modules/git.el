@@ -39,10 +39,10 @@
    (org-mode  . diff-hl-mode)
    (magit-post-refresh . diff-hl-magit-post-refresh)))
 
-;; Exile Magit's Transient Folder to .local/cache/
-(setq transient-history-file (expand-file-name ".local/cache/transient/history.el" user-emacs-directory)
-      transient-values-file  (expand-file-name ".local/cache/transient/values.el" user-emacs-directory)
-      transient-levels-file  (expand-file-name ".local/cache/transient/levels.el" user-emacs-directory))
+;; Exile Magit's Transient Folder to cache directory
+(setq transient-history-file (expand-file-name "transient/history.el" me-local-cache-directory)
+      transient-values-file  (expand-file-name "transient/values.el" me-local-cache-directory)
+      transient-levels-file  (expand-file-name "transient/levels.el" me-local-cache-directory))
 
 (provide 'modules/git)
 ;;; git.el ends here

@@ -5,7 +5,16 @@
 
 ;;; Code:
 
-(defcustom me-local-cache-directory ".local/cache" "Directory to store cached things in")
+(defcustom me-local-cache-directory
+  (expand-file-name ".local/cache" user-emacs-directory)
+  "Directory to store cached things in")
+
+(defcustom me-local-backup-directory
+  (expand-file-name "backups" me-local-cache-directory)
+  "Directory to put backups in")
+
+(unless (file-exists-p me-local-backup-directory)
+  (make-directory me-backup-directory t))
 
 (defcustom me-leader-key "SPC" "Leader key for evil/general")
 

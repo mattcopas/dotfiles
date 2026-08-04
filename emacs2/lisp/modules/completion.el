@@ -43,12 +43,9 @@
   :ensure nil
   :demand t
   :init
-  (defvar mc-cache-directory (expand-file-name ".local/cache" user-emacs-directory))
 
-  (unless (file-exists-p mc-cache-directory)
-    (make-directory mc-cache-directory t))
   :config
-  (setq recentf-save-file (expand-file-name "recentf" mc-cache-directory)
+  (setq recentf-save-file (expand-file-name "recentf" me-local-cache-directory)
         recentf-max-saved-items 200
         recentf-max-menu-items 15
         recentf-exclude '("^/tmp/"

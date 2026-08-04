@@ -14,8 +14,8 @@
   ;; Cache projects for speed and set clean cache path
   (setq projectile-enable-caching t
         projectile-sort-order 'recently-active
-        projectile-cache-file (expand-file-name ".local/cache/projectile.cache" user-emacs-directory)
-        projectile-known-projects-file (expand-file-name ".local/cache/projectile-bookmarks.eld" user-emacs-directory))
+        projectile-cache-file (expand-file-name "projectile.cache" me-local-cache-directory)
+        projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" me-local-cache-directory))
 
   ;; Ignore common build/dependency folders to keep search fast
  (setq projectile-globally-ignored-directories
@@ -28,11 +28,11 @@
   (setq projectile-auto-discover-max-depth 4)
 
   ;; Put projectile's cache in.... the cache folder
-  (setq projectile-cache-file (expand-file-name ".local/cache/projectile.cache" user-emacs-directory)
-       projectile-known-projects-file (expand-file-name ".local/cache/projectile-bookmarks.eld" user-emacs-directory))
+  (setq projectile-cache-file (expand-file-name "projectile.cache" me-local-cache-directory)
+       projectile-known-projects-file (expand-file-name ".projectile-bookmarks.eld" me-local-cache-directory))
 
 (setq projectile-frecency-file 
-      (expand-file-name ".local/cache/projectile-frecency.eld" user-emacs-directory))
+      (expand-file-name "projectile-frecency.eld" me-local-cache-directory))
 
 ;; General Leader Keybindings for Projectile
 (with-eval-after-load 'general
