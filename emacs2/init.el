@@ -1,0 +1,10 @@
+;; Add the lisp directory to user-emacs-directory, so we can require them in here
+;; By doing this, we have to 'require' using the subdirectory (modules/evil)
+;; This is preferable to just (require 'evil) because it can cause clashes (eg with which-key)
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+;; Load the package manager module - this must come before any other modules
+(require 'modules/package-manager)
+
+(require 'modules/evil)
+(require 'modules/which-key)
