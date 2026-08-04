@@ -57,37 +57,39 @@
                           "\\.elc$"
                           "elpaca/repos/"
                           "elpaca/builds/"))
-  ;; 
-  ;; Consult (Enhanced search and navigation commands)
-  (use-package consult
-    :demand t
-    :config
-    ;; Enable live preview for buffer switching & ripgrep
-    (setq consult-preview-key 'any)
-    
-    ;; Map Consult commands into General.el leader keymaps
-    (with-eval-after-load 'general
-      (general-define-key
-       :states '(normal visual emacs)
-       :keymaps 'override
-       :prefix "SPC"
-       ;; Buffer navigation
-       "b"  '(:ignore t :which-key "buffer")
-       "bb" '(consult-buffer :which-key "switch buffer")
-       "bB" '(consult-buffer-other-window :which-key "switch buffer other window")
-       "bk" '(kill-current-buffer :which-key "kill buffer")
-       
-       ;; File searching
-       "f"  '(:ignore t :which-key "file")
-       "ff" '(find-file :which-key "find file")
-       "fr" '(consult-recent-file :which-key "recent files")
-       
-       ;; Code & Project Search
-       "s"  '(:ignore t :which-key "search")
-       "ss" '(consult-line :which-key "search current buffer")
-       "sp" '(consult-ripgrep :which-key "search project (ripgrep)")
-       "si" '(consult-imenu :which-key "search symbols (imenu)")
-       "so" '(consult-outline :which-key "search headings/outline")))) (recentf-mode 1))
+ (recentf-mode 1))
+
+;; Consult (Enhanced search and navigation commands)
+(use-package consult
+:demand t
+:config
+;; Enable live preview for buffer switching & ripgrep
+(setq consult-preview-key 'any)
+
+;; Map Consult commands into General.el leader keymaps
+(with-eval-after-load 'general
+    (general-define-key
+    :states '(normal visual emacs)
+    :keymaps 'override
+    :prefix "SPC"
+    ;; Buffer navigation
+    "b"  '(:ignore t :which-key "buffer")
+    "bb" '(consult-buffer :which-key "switch buffer")
+    "bB" '(consult-buffer-other-window :which-key "switch buffer other window")
+    "bk" '(kill-current-buffer :which-key "kill buffer")
+
+    ;; File searching
+    "f"  '(:ignore t :which-key "file")
+    "ff" '(find-file :which-key "find file")
+    "fr" '(consult-recent-file :which-key "recent files")
+
+    ;; Code & Project Search
+    "s"  '(:ignore t :which-key "search")
+    "ss" '(consult-line :which-key "search current buffer")
+    "sp" '(consult-ripgrep :which-key "search project (ripgrep)")
+    "si" '(consult-imenu :which-key "search symbols (imenu)")
+    "so" '(consult-outline :which-key "search headings/outline"))))
+
 
 ;; Corfu (In-Buffer Completion Popup)
 (use-package corfu
