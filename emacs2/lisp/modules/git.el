@@ -14,7 +14,11 @@
 (use-package magit
   :commands (magit-status magit-get-current-branch)
   :config
-  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  (with-eval-after-load 'evil
+    (evil-set-initial-state 'git-commit-mode 'insert)))
+
+  ;; Start commit message buffers in Evil Insert Mode
   
 ;; Leader Keybindings for Git (Defined directly via General)
 (with-eval-after-load 'general
