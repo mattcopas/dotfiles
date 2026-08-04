@@ -14,7 +14,7 @@
   "Directory to put backups in")
 
 (unless (file-exists-p me-local-backup-directory)
-  (make-directory me-backup-directory t))
+  (make-directory me-local-backup-directory t))
 
 (defcustom me-leader-key "SPC" "Leader key for evil/general")
 
