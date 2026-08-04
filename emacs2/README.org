@@ -7,21 +7,21 @@
 *** DONE Vim keybinds/General.el
 *** DONE which-key
 ** Visuals
-*** TODO Nerd Icons
-**** TODO Nerd Icons
-**** TODO Nerd Icons Completion
-*** TODO Helpful
-*** TODO Doom Modeline (requires nerd icons)
-*** TODO Doom themes
-*** TODO Rainbow delimiters
+*** DONE Nerd Icons
+**** DONE Nerd Icons
+*** DONE Helpful
+*** DONE Doom Modeline (requires nerd icons)
+*** DONE Doom themes
+*** DONE Rainbow delimiters
 ** Completion
-*** TODO Vertico stack
-**** TODO Consult (provides the search command(s))
-**** TODO Orderless (filter all the Consult candidates with fuzzy matching)
-**** TODO Vertico (renders the results)
-**** TODO Marginalia (enrich the results with file size, permissions etc etc)
-*** TODO Corfu
-*** TODO Cape
+*** DONE Vertico stack
+**** DONE Consult (provides the search command(s))
+**** DONE Orderless (filter all the Consult candidates with fuzzy matching)
+**** DONE Vertico (renders the results)
+**** DONE Marginalia (enrich the results with file size, permissions etc etc)
+**** DONE Nerd Icons Completion (requires nerd-icons)
+*** DONE Corfu
+*** DONE Cape
 ** Org Mode
 *** TODO Org mode
 *** TODO Org captures
@@ -32,10 +32,12 @@
 Org modern does extra stuff like making BEGIN_SRC anad Title, metadata-y stuff nicer
 **** TODO Org appear (show bold stuff as bold, italics as italic etc)
 ** Projects
-*** TODO Projectile
+*** DONE Projectile
 ** Developer stuff
-*** TODO Magit
+*** DONE Magit
 *** TODO Eglot (built in LSP)
 **** TODO Lua? 
 **** TODO Ansible? 
-**** TODO Pinescript (not sure if this exists)? 
+**** TODO Pinescript (not sure if this exists)?
+** Code improvements
+*** TODO make the leader key a variable - its hardcoded as SPC everywhere
