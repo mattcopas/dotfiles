@@ -2,6 +2,8 @@
 
 ;; Add evil mode
 (use-package evil
+  ;; Load this plugin straight away
+  :demand t
   :init
   ;; Mandatory settings for evil-collection compatibility
   (setq evil-want-integration t)
@@ -13,7 +15,7 @@
   
   ;; Use C-i for jump forward (standard vim C-i / C-o)
   (setq evil-want-C-i-jump t)
-  
+
   :config
   (evil-mode 1)
 
@@ -24,12 +26,14 @@
 ;; Add evil-collection (vim bindings across all built-in/package modes)
 (use-package evil-collection
   :after evil
+  :demand t
   :config
   (evil-collection-init))
 
 ;; general.el (leader key framework)
 (use-package general
   :after evil
+  :demand t
   :config
   ;; Define a reusable leader definer for SPC (Normal/Visual) and C-SPC (Insert/Emacs)
   (general-create-definer my/leader-keys
