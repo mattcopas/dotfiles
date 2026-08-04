@@ -9,3 +9,4 @@
 (require 'modules/evil)
 (require 'modules/which-key)
 (require 'modules/ui)
+(require 'modules/completion)
