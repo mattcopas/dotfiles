@@ -39,5 +39,13 @@ Org modern does extra stuff like making BEGIN_SRC anad Title, metadata-y stuff n
 **** TODO Lua? 
 **** TODO Ansible? 
 **** TODO Pinescript (not sure if this exists)?
-** Code improvements
-*** TODO make the leader key a variable - its hardcoded as SPC everywhere
+
+* Bugs
+** Initial package installs
+This takes a couple of attempts due to, i think, dependencies. As things get bigger this may become an issue.
+
+To reproduce:
+- Delete elpaca, eln-cache, .local
+- Start emacs - which forces packages to be downloaded from scratch
+- First attempt fails
+- Second attempt passes
