@@ -83,5 +83,36 @@
               (lambda (frame)
                 (with-selected-frame frame (my/setup-fonts))))
   (my/setup-fonts))
+
+;; Relative line numbers
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode 1)
+;; Disable line numbers in specific modes where they don't make sense
+(dolist (mode '(term-mode-hook
+                shell-mode-hook
+                eshell-mode-hook
+                dired-mode-hook
+                help-mode-hook
+                magit-status-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+;; 2. Dark Title Bar on macOS
+(when (eq system-type 'darwin)
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
+
+(use-package hl-line
+  :ensure nil
+  :demand t
+  :config
+  (setq hl-line-sticky-flag t)
+  
+  ;; Optional: Customize background color to make it clearly visible
+  ;; (adjust hex code to match your theme preference)
+  ;(custom-set-faces
+  ; '(hl-line ((t (:background "#2d3139" :extend t)))))
+
+  (global-hl-line-mode 1))
+
 (provide 'modules/ui)
 ;;; icons.el ends here
