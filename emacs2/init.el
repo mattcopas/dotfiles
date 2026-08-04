@@ -8,3 +8,4 @@
 
 (require 'modules/evil)
 (require 'modules/which-key)
+(require 'modules/ui)
