@@ -45,7 +45,6 @@
   ;; Root-level Quick Bindings & Group Definitions
   (my/leader-keys
    ;; Top-level quick actions
-   "SPC" '(execute-extended-command :which-key "M-x")
    "u"   '(universal-argument :which-key "Universal argument")
    
    ;; Buffer commands ("b")
