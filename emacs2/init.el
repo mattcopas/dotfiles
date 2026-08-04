@@ -12,3 +12,4 @@
 (require 'modules/completion)
 (require 'modules/snippets)
 (require 'modules/git)
+(require 'modules/project)
