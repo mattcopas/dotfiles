@@ -1,3 +1,7 @@
+;; Silence native compiler warnings during background package compilation
+;; To view these, see the *Warnings* buffer
+(setq native-comp-async-report-warnings-errors 'silent)
+
 ;; kill package.el as we're using elpaca
 (setq package-enable-at-startup nil)
 
