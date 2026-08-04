@@ -27,7 +27,14 @@
   ;; Set max directory depth during auto-discovery (Default is 1)
   (setq projectile-auto-discover-max-depth 4)
 
-;; 2. General Leader Keybindings for Projectile
+  ;; Put projectile's cache in.... the cache folder
+  (setq projectile-cache-file (expand-file-name ".local/cache/projectile.cache" user-emacs-directory)
+       projectile-known-projects-file (expand-file-name ".local/cache/projectile-bookmarks.eld" user-emacs-directory))
+
+(setq projectile-frecency-file 
+      (expand-file-name ".local/cache/projectile-frecency.eld" user-emacs-directory))
+
+;; General Leader Keybindings for Projectile
 (with-eval-after-load 'general
   (general-define-key
    :states '(normal visual emacs)

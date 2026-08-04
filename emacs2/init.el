@@ -13,3 +13,4 @@
 (require 'modules/snippets)
 (require 'modules/git)
 (require 'modules/project)
+(require 'modules/tidy-backup)
