@@ -73,7 +73,7 @@
    ;; Non-Windows Setup (Default OS font @ 18pt)
    ;; For when life is good
    (t
-    (set-face-attribute 'default nil :height 180)
+    (set-face-attribute 'default nil :height 150)
     (set-face-attribute 'fixed-pitch nil :height 1.0)
     (set-face-attribute 'variable-pitch nil :height 1.0))))
 
