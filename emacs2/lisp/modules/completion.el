@@ -89,5 +89,42 @@
        "si" '(consult-imenu :which-key "search symbols (imenu)")
        "so" '(consult-outline :which-key "search headings/outline")))) (recentf-mode 1))
 
+;; Corfu (In-Buffer Completion Popup)
+(use-package corfu
+  :demand t
+  :init
+  (global-corfu-mode 1)
+  :config
+  (setq corfu-auto t                 ; Enable auto-popup while typing
+        corfu-auto-delay 0.2         ; Delay in seconds before popup appears
+        corfu-auto-prefix 2          ; Minimum prefix length to trigger popup
+        corfu-cycle t                ; Allow cycling through candidates
+        corfu-preselect 'prompt      ; Preselect the prompt
+        corfu-quit-at-boundary 'separator)
+
+  ;; Enable Evil bindings inside the Corfu popup if Evil is loaded
+  (with-eval-after-load 'evil
+    (define-key corfu-map (kbd "C-j") #'corfu-next)
+    (define-key corfu-map (kbd "C-k") #'corfu-previous)))
+
+
+;; Cape (Completion At Point Extensions)
+(use-package cape
+  :demand t
+  :init
+  ;; Add useful backends to standard completion-at-point-functions
+  (add-to-list 'completion-at-point-functions #'cape-file)      ; Path completion
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)   ; Current buffer words
+  (add-to-list 'completion-at-point-functions #'cape-keyword)   ; Code keywords
+  :config
+  ;; Optional keybindings to manually trigger specific completion types
+  (with-eval-after-load 'general
+    (general-define-key
+     :states '(insert normal)
+     :prefix "C-c p"
+     "f" '(cape-file :which-key "complete path")
+     "d" '(cape-dabbrev :which-key "complete word")
+     "k" '(cape-keyword :which-key "complete keyword"))))
+
 (provide 'modules/completion)
 ;;; completion.el ends here
