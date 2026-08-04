@@ -58,5 +58,30 @@
      "hx" '(helpful-command :which-key "describe command")
      "hm" '(helpful-mode :which-key "describe mode"))))
 
+;; Fonts
+(defun my/setup-fonts ()
+  "Configure fonts across operating systems without Doom macros."
+  (cond
+   ;; Windows Setup (Cascadia Code @ 48pt)
+   ;; For when you're unfortunate enough to be using...shudder...windows
+   ((eq system-type 'windows-nt)
+    (let ((font-to-use "Cascadia Code"))
+      (set-face-attribute 'default nil :font font-to-use :height 480)
+      (set-face-attribute 'fixed-pitch nil :font font-to-use :height 1.0)
+      (set-face-attribute 'variable-pitch nil :font font-to-use :height 1.0)))
+
+   ;; Non-Windows Setup (Default OS font @ 18pt)
+   ;; For when life is good
+   (t
+    (set-face-attribute 'default nil :height 180)
+    (set-face-attribute 'fixed-pitch nil :height 1.0)
+    (set-face-attribute 'variable-pitch nil :height 1.0))))
+
+;; Apply fonts on startup (handles GUI frame & daemon startup)
+(if (daemonp)
+    (add-hook 'server-after-make-frame-hook
+              (lambda (frame)
+                (with-selected-frame frame (my/setup-fonts))))
+  (my/setup-fonts))
 (provide 'modules/ui)
 ;;; icons.el ends here
