@@ -67,14 +67,6 @@
    "gs"  '(magit-status :which-key "Magit status")
 
    ;; Window navigation/management ("w")
-   "w"   '(:ignore t :which-key "window")
-   "ww"  '(other-window :which-key "Other window")
-   "wd"  '(delete-window :which-key "Delete window")
-   "ws"  '(split-window-below :which-key "Split window below")
-   "wv"  '(split-window-right :which-key "Split window right")
-   "wh"  '(evil-window-left :which-key "Focus window left")
-   "wj"  '(evil-window-down :which-key "Focus window down")
-   "wk"  '(evil-window-up :which-key "Focus window up")
-   "wl"  '(evil-window-right :which-key "Focus window right")))
+   "w"   '(evil-write :which-key "Save file")))
 
 (provide 'modules/evil)
