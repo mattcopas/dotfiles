@@ -1,0 +1,41 @@
+#+title: Readme
+
+* Stuff to add
+** Core
+*** DONE Package manager
+*** DONE Module loader
+*** DONE Vim keybinds/General.el
+*** DONE which-key
+** Visuals
+*** TODO Nerd Icons
+**** TODO Nerd Icons
+**** TODO Nerd Icons Completion
+*** TODO Helpful
+*** TODO Doom Modeline (requires nerd icons)
+*** TODO Doom themes
+*** TODO Rainbow delimiters
+** Completion
+*** TODO Vertico stack
+**** TODO Consult (provides the search command(s))
+**** TODO Orderless (filter all the Consult candidates with fuzzy matching)
+**** TODO Vertico (renders the results)
+**** TODO Marginalia (enrich the results with file size, permissions etc etc)
+*** TODO Corfu
+*** TODO Cape
+** Org Mode
+*** TODO Org mode
+*** TODO Org captures
+*** TODO Org agendas
+*** TODO Org journal
+*** TODO Pretty stuff (whatever +pretty provides in doom emacs)
+**** TODO Org modern (Replaces org-bullets (depracated)  or org-superstar - a simpler alternative)
+Org modern does extra stuff like making BEGIN_SRC anad Title, metadata-y stuff nicer
+**** TODO Org appear (show bold stuff as bold, italics as italic etc)
+** Projects
+*** TODO Projectile
+** Developer stuff
+*** TODO Magit
+*** TODO Eglot (built in LSP)
+**** TODO Lua? 
+**** TODO Ansible? 
+**** TODO Pinescript (not sure if this exists)? 
