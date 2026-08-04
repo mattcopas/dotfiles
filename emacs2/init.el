@@ -11,3 +11,4 @@
 (require 'modules/ui)
 (require 'modules/completion)
 (require 'modules/snippets)
+(require 'modules/git)
