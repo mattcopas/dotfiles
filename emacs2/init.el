@@ -6,6 +6,7 @@
 ;; Load the package manager module - this must come before any other modules
 (require 'modules/package-manager)
 
+(require 'modules/globals)
 (require 'modules/evil)
 (require 'modules/which-key)
 (require 'modules/ui)

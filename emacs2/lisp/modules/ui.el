@@ -50,7 +50,7 @@
     (general-define-key
      :states '(normal visual emacs)
      :keymaps 'override
-     :prefix "SPC"
+     :prefix me-leader-key
      "h"  '(:ignore t :which-key "help")
      "hf" '(helpful-callable :which-key "describe function")
      "hv" '(helpful-variable :which-key "describe variable")

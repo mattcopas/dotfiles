@@ -71,7 +71,7 @@
     (general-define-key
     :states '(normal visual emacs)
     :keymaps 'override
-    :prefix "SPC"
+    :prefix me-leader-key
     ;; Buffer navigation
     "b"  '(:ignore t :which-key "buffer")
     "bb" '(consult-buffer :which-key "switch buffer")

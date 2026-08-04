@@ -39,7 +39,7 @@
   (general-create-definer my/leader-keys
     :states '(normal insert visual emacs)
     :keymaps 'override
-    :prefix "SPC"
+    :prefix me-leader-key
     :global-prefix "C-SPC")
 
   ;; Root-level Quick Bindings & Group Definitions

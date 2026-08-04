@@ -25,7 +25,7 @@
     (general-define-key
     :states '(normal visual emacs)
     :keymaps 'override
-    :prefix "SPC"
+    :prefix me-leader-key
     "g"  '(:ignore t :which-key "git")
     "gg" '(magit-status :which-key "magit status")
     "gb" '(magit-blame :which-key "magit blame")

@@ -39,10 +39,10 @@
   (general-define-key
    :states '(normal visual emacs)
    :keymaps 'override
-   :prefix "SPC"
+   :prefix me-leader-key
    "p"  '(:ignore t :which-key "project")
    "pp" '(projectile-switch-project :which-key "switch project")
-   "SPC" '(projectile-find-file :which-key "find file in project")
+   me-leader-key '(projectile-find-file :which-key "find file in project")
    "sp" '(consult-ripgrep :which-key "search in project")
    "pb" '(projectile-switch-to-buffer :which-key "switch project buffer")
    "pk" '(projectile-kill-buffers :which-key "kill project buffers")
