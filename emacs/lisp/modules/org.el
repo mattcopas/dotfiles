@@ -73,7 +73,7 @@
   (general-define-key
    :states '(normal visual emacs)
    :keymaps 'override
-   :prefix "SPC"
+   :prefix me-leader-key
    "o"  '(:ignore t :which-key "org")
    "oa" '(org-agenda :which-key "agenda")
    "X" '(org-capture :which-key "Org capture")
@@ -81,7 +81,7 @@
    "ot" '(org-todo :which-key "cycle todo state")
    "oA" '(org-archive-subtree :which-key "archive subtree"))
 
-  ;; Local leader keys inside Org buffers
+  ;; Local keys inside Org buffers
   (general-define-key
    :states '(normal visual)
    :keymaps 'org-mode-map
@@ -91,6 +91,20 @@
    "M-k"   'org-metaup
    "M-h"   'org-metaleft
    "M-l"   'org-metaright))
+
+(with-eval-after-load 'org
+  ;; Local leader keys inside Org buffers
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'org-mode-map
+   :prefix me-leader-key
+   "m" '(:ignore t :which-key "localleader/org")
+   "mt" '(:ignore t :which-key "todo")
+   "mtt" '((lambda ()
+	     (interactive) (org-todo "TODO")) :which-key "Todo")
+   "mtd" '((lambda ()
+	     (interactive) (org-todo "DONE")) :which-key "Done")))
+
 
 (provide 'modules/org)
 ;;; org.el ends here
