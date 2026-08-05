@@ -12,10 +12,6 @@
   :hook (org-mode . me/org-mode-setup)
   :config
   (setq org-directory "~/git/"
-	org-journal-directory "~/git/journal"
-	org-journal-file-format "%b-%Y.org"
-	org-journal-file-type 'monthly
-	org-journal-date-format "%a %e %b %Y" ; Mon 1 Jan 2023
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-agenda-files (list org-directory)
         
@@ -28,6 +24,7 @@
         org-src-tab-acts-natively t
         org-edit-src-content-indentation 0)
 
+
   ;; Define custom TODO keyword states & colors
   (setq org-todo-keywords
         '((sequence "TODO(t)" "IN PROGRESS(p)" "IN REVIEW(r)" "LOOP" "STRT(s)" "WAIT(w)" "HOLD(h)" "IDEA(i)" "|" "DONE(d)" "KILL(k)")
@@ -39,6 +36,17 @@
     (setq display-line-numbers-type 'relative)
     (display-line-numbers-mode 1)
     (visual-line-mode 1)))
+
+(use-package org-journal
+  ;; We don't need to bind variables in :config here because that's already done in the org block above.
+  :config
+  (setq org-journal-dir "~/git/journal"
+    org-journal-file-format "%b-%Y.org"
+    org-journal-file-type 'monthly
+    org-journal-date-format "%a %e %b %Y" ; Mon 1 Jan 2023
+    org-journal-find-file-fn #'find-file)
+  (setq org-journal-carryover-items  "TODO=\"TODO\"|TODO=\"PROJ\"|TODO=\"STRT\"|TODO=\"WAIT\"|TODO=\"HOLD\"")
+  :commands (org-journal-new-entry)) ; Tell emacs this is an interactive command. The alternative here is to wrap the call in a lambda that starts with (interactiv
 
 ;; Modern UI Enhancements (org-modern)
 (use-package org-modern
@@ -75,10 +83,10 @@
    :keymaps 'override
    :prefix me-leader-key
    "o"  '(:ignore t :which-key "org")
-   "oa" '(org-agenda :which-key "agenda")
+   "oA" '(org-agenda :which-key "agenda")
    "X" '(org-capture :which-key "Org capture")
    "ol" '(org-insert-link :which-key "insert link")
-   "ot" '(org-todo :which-key "cycle todo state")
+   "njj" '(org-journal-new-entry :which-key "New journal entry")
    "oA" '(org-archive-subtree :which-key "archive subtree"))
 
   ;; Local keys inside Org buffers
