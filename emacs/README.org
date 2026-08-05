@@ -23,18 +23,31 @@
 *** DONE Corfu
 *** DONE Cape
 ** Org Mode
-*** TODO Org mode
+*** DONE Org mode
+*** TODO <leader>mt{t,d,b,w,p,r} keybinds for statuses
 *** TODO Org captures
 *** TODO Org agendas
-*** TODO Org journal
-*** TODO Pretty stuff (whatever +pretty provides in doom emacs)
-**** TODO Org modern (Replaces org-bullets (depracated)  or org-superstar - a simpler alternative)
+*** DONE Org journal
+*** DONE Pretty stuff (whatever +pretty provides in doom emacs)
+**** DONE Org modern (Replaces org-bullets (depracated)  or org-superstar - a simpler alternative)
 Org modern does extra stuff like making BEGIN_SRC anad Title, metadata-y stuff nicer
-**** TODO Org appear (show bold stuff as bold, italics as italic etc)
+**** DONE Org appear (show bold stuff as *bold*, italics, as /italic/ etc)
 ** Projects
 *** DONE Projectile
 ** Developer stuff
 *** DONE Magit
+*** TODO smartparens
+*** TODO hl-todo
+*** TODO make emacs lisp as nice as it is in doom
+Need to add something like:
+
+(use-package highlight-quoted
+  :ensure t
+  :hook (emacs-lisp-mode . highlight-quoted-mode))
+
+(use-package highlight-defined
+  :ensure t
+  :hook (emacs-lisp-mode . highlight-defined-mode))
 *** TODO Eglot (built in LSP)
 **** TODO Lua? 
 **** TODO Ansible? 
@@ -49,3 +62,4 @@ To reproduce:
 - Start emacs - which forces packages to be downloaded from scratch
 - First attempt fails
 - Second attempt passes
+  
