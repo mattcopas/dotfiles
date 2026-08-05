@@ -56,8 +56,14 @@
      "hv" '(helpful-variable :which-key "describe variable")
      "hk" '(helpful-key :which-key "describe key")
      "hx" '(helpful-command :which-key "describe command")
-     ; Helpful doesn't have a helpful-mode - so use describe-mode
+     ; Helpful doesn't have a helpful-mode - so use describe-mod
      "hm" '(describe-mode :which-key "describe mode"))))
+
+(add-to-list 'display-buffer-alist
+             '("\\*\\(Help\\|helpful.*\\)\\*"
+               (display-buffer-reuse-mode-window display-buffer-at-bottom)
+               (window-height . 0.35)
+               (body-function . select-window)))
 
 ;; Fonts
 (defun my/setup-fonts ()
