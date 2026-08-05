@@ -15,3 +15,4 @@
 (require 'modules/git)
 (require 'modules/project)
 (require 'modules/tidy-backup)
+(require 'modules/org)
