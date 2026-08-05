@@ -56,7 +56,8 @@
      "hv" '(helpful-variable :which-key "describe variable")
      "hk" '(helpful-key :which-key "describe key")
      "hx" '(helpful-command :which-key "describe command")
-     "hm" '(helpful-mode :which-key "describe mode"))))
+     ; Helpful doesn't have a helpful-mode - so use describe-mode
+     "hm" '(describe-mode :which-key "describe mode"))))
 
 ;; Fonts
 (defun my/setup-fonts ()
