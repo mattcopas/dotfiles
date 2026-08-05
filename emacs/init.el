@@ -7,6 +7,8 @@
 (require 'modules/package-manager)
 
 (require 'modules/globals)
+(when (eq system-type 'darwin)
+  (require 'modules/macos))
 (require 'modules/evil)
 (require 'modules/which-key)
 (require 'modules/ui)
