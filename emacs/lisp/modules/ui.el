@@ -103,7 +103,7 @@
                 magit-status-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; 2. Dark Title Bar on macOS
+;; Dark title Bar on macOS
 (when (eq system-type 'darwin)
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
