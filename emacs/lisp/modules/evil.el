@@ -15,7 +15,7 @@
   
   ;; Use C-i for jump forward (standard vim C-i / C-o)
   (setq evil-want-C-i-jump t)
-
+  (setq evil-want-C-u-scroll t)
   :config
   (evil-mode 1)
 
