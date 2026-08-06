@@ -17,5 +17,8 @@
   (with-current-buffer "*scratch*"
     (smartparens-mode 1)))
 
+(use-package highlight-quoted
+  :hook (emacs-lisp-mode . highlight-quoted-mode))
+
 (provide 'modules/editor)
 ;;; editor.el ends here
