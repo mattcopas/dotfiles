@@ -1,5 +1,10 @@
 ;; modules/evil.el --- Evil mode and leader keybindings configuration
 
+;; Keep the system clipboard away from the kill ring - so yank and paste
+;; don't go to the system clipboard (ie make this more vim like)
+;; Use the + register to copy/paste from the system clipboard
+(setq select-enable-clipboard nil)
+
 ;; Add evil mode
 (use-package evil
   ;; Load this plugin straight away
