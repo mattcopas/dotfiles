@@ -121,5 +121,10 @@
 
   (global-hl-line-mode 1))
 
+;; Make scrolling smoother and keep a few lines on the screen
+(setq scroll-step 1
+      scroll-conservatively 1000
+      scroll-margin 7)
+
 (provide 'modules/ui)
 ;;; icons.el ends here
