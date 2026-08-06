@@ -18,3 +18,4 @@
 (require 'modules/project)
 (require 'modules/tidy-backup)
 (require 'modules/org)
+(require 'modules/editor)
