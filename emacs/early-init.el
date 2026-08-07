@@ -13,3 +13,4 @@
 (push '(scroll-bar-mode . nil) default-frame-alist)
 (setq inhibit-startup-message t)
 (setq visible-bell nil)
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
