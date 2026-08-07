@@ -187,6 +187,12 @@
    "mt" '(:ignore t :which-key "todo")
    "mtt" '((lambda ()
 	     (interactive) (org-todo "TODO")) :which-key "Todo")
+   "mtp" '((lambda ()
+	     (interactive) (org-todo "IN PROGRESS")) :which-key "In Progress")
+   "mtw" '((lambda ()
+	     (interactive) (org-todo "WAIT")) :which-key "Wait")
+   "mtw" '((lambda ()
+	     (interactive) (org-todo "IN REVIEW")) :which-key "In Review")
    "mtd" '((lambda ()
 	     (interactive) (org-todo "DONE")) :which-key "Done")))
 
