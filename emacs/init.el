@@ -19,3 +19,4 @@
 (require 'modules/tidy-backup)
 (require 'modules/org)
 (require 'modules/editor)
+(require 'modules/languages/java)
