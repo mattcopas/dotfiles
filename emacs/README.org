@@ -24,9 +24,16 @@
 *** DONE Cape
 ** Org Mode
 *** DONE Org mode
-*** TODO <leader>mt{t,d,b,w,p,r} keybinds for statuses
-*** TODO Org captures
-*** TODO Org agendas
+*** TODO <leader>mt{t,d,b,w,p,r} keybinds for statuses (inc. in agenda view)
+*** TODO Insert demoted item
+Doom has a special function for this +org/insert-item-below
+
+That said, C-RET is currently bound to evil's version of org-insert-item, and TAB works fine after that
+
+Perhaps unnecessary then?
+*** DONE Org captures
+*** DONE Org agendas
+*** TODO Org capture - clinet today
 *** DONE Org journal
 *** DONE Pretty stuff (whatever +pretty provides in doom emacs)
 **** DONE Org modern (Replaces org-bullets (depracated)  or org-superstar - a simpler alternative)
@@ -36,18 +43,18 @@ Org modern does extra stuff like making BEGIN_SRC anad Title, metadata-y stuff n
 *** DONE Projectile
 ** Developer stuff
 *** DONE Magit
-*** TODO smartparens
+*** DONE smartparens
 *** TODO hl-todo
 *** TODO make emacs lisp as nice as it is in doom
+Worth looking at the doom elisp config
+See https://github.com/doomemacs/modules/tree/main/modules/lang/emacs-lisp
+
 Need to add something like:
 
 (use-package highlight-quoted
   :ensure t
   :hook (emacs-lisp-mode . highlight-quoted-mode))
 
-(use-package highlight-defined
-  :ensure t
-  :hook (emacs-lisp-mode . highlight-defined-mode))
 *** TODO Eglot (built in LSP)
 **** TODO Lua? 
 **** TODO Ansible? 
