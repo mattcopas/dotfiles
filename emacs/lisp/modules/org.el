@@ -5,31 +5,23 @@
 
 ;;; Code:
 
-;; Core Org Configuration
-(use-package org
-  :ensure t ; Built-in to Emacs - BUT we want the latest version, so tell the package manager to download it anyway
-  :defer t
-  :hook (org-mode . me/org-mode-setup)
-  ;; Could do with moving this all into a file then calling that file in :config
-  :init
-  (setq me-private-directory "~/git/private-personal")
-  (setq me-private-personal-directory "~/git/private-personal")
-  (setq me-private-work-directory "~/git/private-work")
-  (setq me-private-client-directory "~/git/private-client")
-  (setq me-org-capture-todo-file (concat me-private-directory "/" ".todo.org"))
-  (setq me-org-capture-personal-todo-file (concat me-private-personal-directory "/" "todo.org"))
-  (setq me-org-capture-work-todo-file (concat me-private-work-directory "/" "todo.org"))
-  (setq me-org-capture-client-todo-file (concat me-private-client-directory "/" "notes.org"))
-  ;; Note we have to use backquote instead of quote here so that we can evaluate the variables before adding them to the list.
-  ;; See docs for function backquote
-  ;; Remove duplicates from the list - otherwise org agenda lists some tasks multiple times
-  (setq org-agenda-files (cl-remove-duplicates (list me-private-directory
-	    me-private-personal-directory
-	    me-private-client-directory
-	    me-private-work-directory) :test #'string-equal))
+(defun me/org-mode-setup ()
+  "Custom hook executed when opening any .org file."
+  (setq display-line-numbers-type 'relative)
+  (display-line-numbers-mode 1)
+  (visual-line-mode 1))
 
-  :config
-  (setq org-directory "~/git/"
+(defun me--configure-org ()
+  "Configure core Org settings."
+  (setq me-private-directory "~/git/private-personal"
+        me-private-personal-directory "~/git/private-personal"
+        me-private-work-directory "~/git/private-work"
+        me-private-client-directory "~/git/private-client"
+        me-org-capture-todo-file (concat me-private-directory "/" ".todo.org")
+        me-org-capture-personal-todo-file (concat me-private-personal-directory "/" "todo.org")
+        me-org-capture-work-todo-file (concat me-private-work-directory "/" "todo.org")
+        me-org-capture-client-todo-file (concat me-private-client-directory "/" "notes.org")
+        org-directory "~/git/"
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         ;; Visual cosmetics & indentation
         org-ellipsis " [...] "
@@ -38,20 +30,90 @@
         org-startup-folded 'overview
         org-src-fontify-natively t
         org-src-tab-acts-natively t
-        org-edit-src-content-indentation 0)
-
-
-  ;; Define custom TODO keyword states & colors
-  (setq org-todo-keywords
+        org-edit-src-content-indentation 0
+        ;; Define custom TODO keyword states & colors
+        org-todo-keywords
         '((sequence "TODO(t)" "IN PROGRESS(p)" "IN REVIEW(r)" "LOOP" "STRT(s)" "WAIT(w)" "HOLD(h)" "IDEA(i)" "|" "DONE(d)" "KILL(k)")
-	    (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")
-	    (sequence "|" "OKAY(o)" "YES(y)" "NO(n)")))
+          (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")
+          (sequence "|" "OKAY(o)" "YES(y)" "NO(n)"))
+        ;; Don't log when habits are completed by default
+        ;; This can be changed for a specific todo item by setting the PROPERTY LOGGING -- see docs for org-log-repeat
+        org-log-repeat nil
+        ;; Don't make tasks with subtasks a different colour in org agenda
+        ;; Is there a nicer way to mark tasks with subtasks in org agenda?
+        org-agenda-dim-blocked-tasks nil
+        ;; Set this to t to get rid of the section lines
+        org-agenda-compact-blocks nil
+        ;; In org agenda, dont show subtasks by default. This can be overridden for individual agenda views/sections -
+        ;; see the 'settings' section of the docs for org-agenda-custom-commands for details on overriding variables
+        org-tags-match-list-sublevels nil
+        org-refile-use-outline-path 'full-file-path
+        org-agenda-custom-commands
+        '(("c" "Simple agenda view"
+           ((tags "PRIORITY=\"A\""
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                   (org-agenda-overriding-header "High priority unfinished tasks")))
+            (agenda "")
+            (alltodo ""
+                     ((org-agenda-skip-function
+                       '(or (air-org-skip-subtree-if-priority ?A)
+                            ; is the nil condition needed here?
+                            (org-agenda-skip-if nil '(scheduled deadline))))))))
 
-  (defun me/org-mode-setup ()
-    "Custom hook executed when opening any .org file."
-    (setq display-line-numbers-type 'relative)
-    (display-line-numbers-mode 1)
-    (visual-line-mode 1)))
+          ("w" "Work agenda view"
+           ((tags "+work+PRIORITY=\"A\""
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if
+                                               'todo '("WAIT" "KILL" "DONE")))
+                   (org-agenda-overriding-header "High priority unfinished tasks")))
+            (tags-todo  "+work"
+                        ((org-agenda-skip-function '(org-agenda-skip-entry-if
+                                                     'todo '("TODO" "IN PROGRESS" "IN REVIEW" "KILL" "DONE")))
+                         (org-agenda-overriding-header "Blocked tasks")))
+            (tags "+SCHEDULED=\"<today>\""
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "KILL")))
+                   (org-agenda-overriding-header "Today's tasks")))
+            (tags "+SCHEDULED=\"<today>\""
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("DONE")))
+                   (org-agenda-overriding-header "Today's completed tasks")))
+            (tags "+SCHEDULED=\"<tomorrow>\""
+                  ((org-agenda-overriding-header "Tomorrow's tasks")))
+            (tags-todo "+work"
+                       ((org-agenda-skip-function
+                         '(or (air-org-skip-subtree-if-priority ?A)
+                              (org-agenda-skip-entry-if 'nottodo '("TODO" "IN PROGRESS"))))))))
+
+          ("p" "Personal agenda view"
+           ((tags "+personal+PRIORITY=\"A\""
+                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                   (org-agenda-overriding-header "High priority unfinished tasks")))
+            (tags-todo "+personal"
+                       ((org-agenda-skip-function
+                         '(or (air-org-skip-subtree-if-priority ?A)
+                              (org-agenda-skip-entry-if 'todo 'done))))))))
+        org-capture-templates
+        '(("t" "Todo" entry (file+headline me-org-capture-todo-file "Todo list") (function me-basic-todo-format))
+          ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
+          ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
+          ("W" "Work Todo - today" entry (file+headline me-org-capture-work-todo-file "Todo list")
+           (function me-scheduled-todo-format-today) :prepend t)
+          ("c" "Client Todo" entry (file+headline me-org-capture-client-todo-file "Stuff to do") (function me-basic-todo-format) :prepend t)))
+
+  ;; Remove duplicates from the list - otherwise org agenda lists some tasks multiple times
+  (setq org-agenda-files
+        (cl-remove-duplicates
+         (list me-private-directory
+               me-private-personal-directory
+               me-private-client-directory
+               me-private-work-directory)
+         :test #'string-equal)))
+
+;; Core Org Configuration
+(use-package org
+  :ensure t ; Built-in to Emacs - BUT we want the latest version, so tell the package manager to download it anyway
+  :defer t
+  :hook (org-mode . me/org-mode-setup)
+  :config
+  (me--configure-org))
 
 (use-package org-journal
   ;; We don't need to bind variables in :config here because that's already done in the org block above.
@@ -130,16 +192,6 @@
 
 ;; Enable Habits - see https://orgmode.org/manual/Tracking-your-habits.html
 ;(add-to-list 'org-modules 'habit)
-;; Don't log when habits are completed by default
-;; This can be changed for a specific todo item by setting the PROPERTY LOGGING -- see docs for org-log-repeat
-(setq org-log-repeat nil)
-
-; Don't make tasks with subtasks a different colour in org agenda
-; Is there a nicer way to mark tasks with subtasks in org agenda?
-(setq org-agenda-dim-blocked-tasks nil)
-
-;; Set this to t to get rid of the section lines
-(setq org-agenda-compact-blocks nil)
 
 ;; This and the below custom commands come from Aaron Beiber's blog post -
 ;; https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
@@ -174,54 +226,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   (interactive)
   (me/schedule-task-for "+1d"))
 
-;; In org agenda, dont show subtasks by default. This can  be overridden for individual agenda views/sections -
-;; see the 'settings' section of the docs for org-agenda-custom-commands for details on overriding variables
-(setq org-tags-match-list-sublevels nil)
-
-(setq org-refile-use-outline-path 'full-file-path)
-
-(setq org-agenda-custom-commands
-      '(("c" "Simple agenda view"
-          ((tags "PRIORITY=\"A\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                  (org-agenda-overriding-header "High priority unfinished tasks")))
-          (agenda "")
-          (alltodo ""
-                    ((org-agenda-skip-function
-                      '(or (air-org-skip-subtree-if-priority ?A)
-                          ; is the nil condition needed here?
-                          (org-agenda-skip-if nil '(scheduled deadline))))))))
-
-        ("w" "Work agenda view"
-                  ((tags "+work+PRIORITY=\"A\""
-                        ((org-agenda-skip-function '(org-agenda-skip-entry-if
-                                                     'todo '("WAIT" "KILL" "DONE")))
-                          (org-agenda-overriding-header "High priority unfinished tasks")))
-                  (tags-todo  "+work"
-                        ((org-agenda-skip-function '(org-agenda-skip-entry-if
-                                                     'todo '("TODO" "IN PROGRESS" "IN REVIEW" "KILL" "DONE")))
-                          (org-agenda-overriding-header "Blocked tasks")))
-                  (tags "+SCHEDULED=\"<today>\""
-                        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE" "KILL")))
-                         (org-agenda-overriding-header "Today's tasks")))
-                  (tags "+SCHEDULED=\"<today>\""
-                        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'nottodo '("DONE")))
-                         (org-agenda-overriding-header "Today's completed tasks")))
-                  (tags "+SCHEDULED=\"<tomorrow>\""
-                        ((org-agenda-overriding-header "Tomorrow's tasks")))
-                  (tags-todo "+work"
-                            ((org-agenda-skip-function
-                              '(or (air-org-skip-subtree-if-priority ?A)
-                                   (org-agenda-skip-entry-if 'nottodo '("TODO" "IN PROGRESS"))))))))
-
-        ("p" "Personal agenda view"
-                  ((tags "+personal+PRIORITY=\"A\""
-                        ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                          (org-agenda-overriding-header "High priority unfinished tasks")))
-                  (tags-todo "+personal"
-                            ((org-agenda-skip-function
-                              '(or (air-org-skip-subtree-if-priority ?A)
-                                   (org-agenda-skip-entry-if 'todo 'done)))))))))
 
 (defun me-basic-todo-format ()
   "Function returning a basic todo format. Note that the docs for org-capture-templates requirse the template parameter to be literal or a function returning a template"
@@ -231,12 +235,6 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
   "Function returning a scheduled todo format (scheduled for today). Note that the docs for org-capture-templates requirse the template parameter to be literal or a function returning a template"
   "* TODO %? \n SCHEDULED: %(org-insert-time-stamp (org-read-date nil t))")
 
-(setq org-capture-templates '(("t" "Todo" entry (file+headline me-org-capture-todo-file "Todo list") (function me-basic-todo-format))
-                              ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
-                              ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
-                              ("W" "Work Todo - today" entry (file+headline me-org-capture-work-todo-file "Todo list")
-                               (function me-scheduled-todo-format-today) :prepend t)
-                              ("c" "Client Todo" entry (file+headline me-org-capture-client-todo-file "Stuff to do") (function me-basic-todo-format) :prepend t)))
 
 (provide 'modules/org)
 ;;; org.el ends here
