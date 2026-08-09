@@ -2,13 +2,14 @@
 
 
 ;;; Commentary:
-;;
+;; See functions like sp-wrap-round to wrap things in brackets
 
 ;;; Code:
 
 (use-package smartparens
   ;; Most programming modes inherit from prog-mode, so this covers basically everything
-  :hook (prog-mode text-mode markdown-mode)
+  :hook ((prog-mode text-mode markdown-mode)
+	 (emacs-lisp-mode . smartparens-strict-mode))
   :config
   ;; load default config
   (require 'smartparens-config)

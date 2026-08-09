@@ -125,5 +125,12 @@
      "d" '(cape-dabbrev :which-key "complete word")
      "k" '(cape-keyword :which-key "complete keyword"))))
 
+(use-package elisp-demos
+  :ensure t
+  :config
+  (advice-add 'describe-function-1
+	      :after #'elisp-demos-advice-describe-function-1)
+  (advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update))
+
 (provide 'modules/completion)
 ;;; completion.el ends here

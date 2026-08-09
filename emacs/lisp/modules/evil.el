@@ -35,6 +35,10 @@
   :config
   (evil-collection-init))
 
+(use-package evil-cleverparens
+  :after evil
+  :hook (emacs-lisp-mode . evil-cleverparens-mode))
+
 ;; general.el (leader key framework)
 (use-package general
   :after evil
