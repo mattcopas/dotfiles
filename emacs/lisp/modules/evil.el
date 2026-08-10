@@ -37,7 +37,15 @@
 
 (use-package evil-cleverparens
   :after evil
-  :hook (emacs-lisp-mode . evil-cleverparens-mode))
+  :hook (emacs-lisp-mode . evil-cleverparens-mode)
+  :config
+  ;; Give curly bracket keys back to evil, and rebind the cleverparens
+  ;; versions using the Meta key as a modifier
+  (evil-define-key 'normal evil-cleverparens-mode-map
+    "}" 'evil-forward-paragraph
+    "{" 'evil-backward-paragraph
+    (kbd "M-}") 'evil-cp-next-closing
+    (kbd "M-{") 'evil-cp-previous-closing))
 
 ;; general.el (leader key framework)
 (use-package general
