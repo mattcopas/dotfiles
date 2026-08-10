@@ -78,4 +78,12 @@
    ;; Window navigation/management ("w")
    "w"   '(evil-write :which-key "Save file")))
 
+(defun me-highlight-region-before-apply (function start end &rest args)
+  "Highlight yanked text in region starting at START and ending at END before applying FUNCTION with ARGS"
+  (pulse-momentary-highlight-region start end)
+  (apply function start end args))
+
+(with-eval-after-load 'evil
+  (advice-add 'evil-yank :around #'me-highlight-region-before-apply))
+
 (provide 'modules/evil)
