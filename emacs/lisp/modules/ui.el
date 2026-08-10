@@ -126,5 +126,18 @@
       scroll-conservatively 1000
       scroll-margin 7)
 
+(use-package hl-todo
+  :config
+  (global-hl-todo-mode 1)
+  ;; Highlight todos in the magit commit log
+  (with-eval-after-load 'magit
+    (add-hook 'magit-log-wash-summary-hook #'hl-todo-search-and-highlight t)
+    (add-hook 'magit-revision-wash-message-hook #'hl-todo-search-and-highlight t)))
+
+(use-package magit-todos
+  :after (magit hl-todo)
+  :config
+  (magit-todos-mode 1))
+
 (provide 'modules/ui)
 ;;; icons.el ends here
