@@ -24,7 +24,8 @@
 *** DONE Cape
 ** Org Mode
 *** DONE Org mode
-*** TODO <leader>mt{t,d,b,w,p,r} keybinds for statuses (inc. in agenda view)
+*** DONE <leader>mt{t,d,b,w,p,r} keybinds for statuses (inc. in agenda view)
+*** DONE have org capture start in insert mode
 *** TODO Insert demoted item
 Doom has a special function for this +org/insert-item-below
 
@@ -44,7 +45,7 @@ Org modern does extra stuff like making BEGIN_SRC anad Title, metadata-y stuff n
 ** Developer stuff
 *** DONE Magit
 *** DONE smartparens
-*** TODO hl-todo
+*** DONE hl-todo
 *** TODO make emacs lisp as nice as it is in doom
 Worth looking at the doom elisp config
 See https://github.com/doomemacs/modules/tree/main/modules/lang/emacs-lisp

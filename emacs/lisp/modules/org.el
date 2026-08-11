@@ -109,9 +109,11 @@
 
 ;; Core Org Configuration
 (use-package org
+  :after evil
   :ensure t ; Built-in to Emacs - BUT we want the latest version, so tell the package manager to download it anyway
   :defer t
-  :hook (org-mode . me/org-mode-setup)
+  :hook ((org-mode . me/org-mode-setup)
+	 (org-capture-mode . evil-insert-state))
   :config
   (me--configure-org))
 
