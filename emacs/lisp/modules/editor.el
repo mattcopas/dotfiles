@@ -21,5 +21,9 @@
 (use-package highlight-quoted
   :hook (emacs-lisp-mode . highlight-quoted-mode))
 
+;; Note this will not effect Makefiles - as makefile-mode uses 8, because that's the
+;; standard practice in make
+(setq tab-width 4)
+
 (provide 'modules/editor)
 ;;; editor.el ends here
