@@ -30,6 +30,22 @@
   ;; which is quoted with #' (equivelant to ' but common to use for functions) needs to be quoted, as we do NOT
   ;; want to evaluate the function (delete a word) now.
   (define-key minibuffer-local-map (kbd "C-w") #'backward-kill-word)
+  (define-key minibuffer-local-map (kbd "C-a") #'move-beginning-of-line)
+  (define-key minibuffer-local-map (kbd "C-e") #'move-end-of-line)
+
+  (keymap-unset evil-ex-completion-map "C-w" t)
+  (keymap-unset evil-ex-completion-map "C-a" t)
+  (keymap-unset evil-ex-completion-map "C-e" t)
+  (define-key evil-ex-completion-map (kbd "C-w") #'backward-kill-word)
+  (define-key evil-ex-completion-map (kbd "C-a") #'move-beginning-of-line)
+  (define-key evil-ex-completion-map (kbd "C-e") #'move-end-of-line)
+  ;; FIXME these C-w/a/e binds don't work in the search (/?) modes in evil - even
+  ;; if you unset first with keymap-unset - interestingly C-w IS bound to the evil version of delete backward word
+  ;;in the search keymap, but doesn't work
+  (keymap-unset evil-ex-search-keymap "C-w" t)
+  (keymap-unset evil-ex-search-keymap "C-a" t)
+  (keymap-unset evil-ex-search-keymap "C-e" t)
+  (define-key evil-ex-search-keymap (kbd "C-w") #'backward-kill-word)
 
   ;; Use 'visual' line movement for gj/gk (navigates wrapped long lines naturally)
   (evil-global-set-key 'normal "j" 'evil-next-visual-line)
