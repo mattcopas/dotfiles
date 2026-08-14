@@ -15,7 +15,8 @@
 (require 'modules/completion)
 (require 'modules/snippets)
 (require 'modules/git)
-(require 'modules/project/projectile)
+;; Use project OR projectile - keybinds will clash otherwise!
+(require 'modules/project/project)
 (require 'modules/tidy-backup)
 (require 'modules/org)
 (require 'modules/editor)
