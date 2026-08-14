@@ -11,8 +11,10 @@
   :init
   (projectile-mode +1)
   :config
-  ;; Cache projects for speed and set clean cache path
-  (setq projectile-enable-caching t
+  ;; Don't cache projects as projectile is annoying to clear cache
+  ;; Also use hybrid indexing - alien seems to miss files for some reason
+  (setq projectile-indexing-method 'hybrid
+	projectile-enable-caching nil
         projectile-sort-order 'recently-active
         projectile-cache-file (expand-file-name "projectile.cache" me-local-cache-directory)
         projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" me-local-cache-directory))
@@ -22,10 +24,9 @@
         (append projectile-globally-ignored-directories
                 '(".git" "node_modules" "target" "elpaca" ".cache" "build" "dist"))))
   ;; Allow Projectile to search up to 3 or 4 levels deep into folders
-  (setq projectile-project-search-path '("~/git" "~/playground" "~/code" "~/projects" "~/.config"))
+  ;; The number in each pair is the depth
+  (setq projectile-project-search-path '(("~/git" . 2) ("~/playground" . 2) "~/code" "~/projects" "~/.config"))
   
-  ;; Set max directory depth during auto-discovery (Default is 1)
-  (setq projectile-auto-discover-max-depth 4)
 
   ;; Put projectile's cache in.... the cache folder
   (setq projectile-cache-file (expand-file-name "projectile.cache" me-local-cache-directory)
