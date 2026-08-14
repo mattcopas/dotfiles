@@ -21,7 +21,4 @@
 (require 'modules/editor)
 (require 'modules/languages/java)
 (require 'modules/ai)
-
-;; Start emacs in server mode so that emacsclient can be used
-;; eg for IntelliJ to jump over to magit
-(server-start)
+(require 'modules/server)
