@@ -50,5 +50,5 @@
    "pr" '(projectile-recentf :which-key "recent project files")
    "pD" '(projectile-dired :which-key "open project root in dired")))
 
-(provide 'modules/project)
+(provide 'modules/project/projectile)
 ;;; project.el ends here

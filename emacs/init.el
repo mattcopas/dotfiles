@@ -15,7 +15,7 @@
 (require 'modules/completion)
 (require 'modules/snippets)
 (require 'modules/git)
-(require 'modules/project)
+(require 'modules/project/projectile)
 (require 'modules/tidy-backup)
 (require 'modules/org)
 (require 'modules/editor)
