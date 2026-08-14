@@ -35,14 +35,6 @@
    :states '(normal visual emacs)
    :keymaps 'override
    :prefix me-leader-key
-   "pp" '(project-switch-project :which-key "switch project")
-   "ff" '(project-find-file :which-key "find file in project")))
-
-(with-eval-after-load 'general
-  (general-define-key
-   :states '(normal visual emacs)
-   :keymaps 'override
-   :prefix me-leader-key
    "p"  '(:ignore t :which-key "project")
    "pp" '(project-switch-project :which-key "switch project")
    me-leader-key '(project-find-file :which-key "find file in project")
