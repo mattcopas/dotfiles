@@ -24,6 +24,13 @@
   :config
   (evil-mode 1)
 
+  ;; Make C-w delete backwards in the minibuffer - ie like it does in the terminal
+  ;; This is a good example of quoting and not quoting. Note that minibuffer-local-map is not quoted. That's
+  ;; because define-key wants the actual keymap (so we need to evaluate minibuffer-local-map). However, the function
+  ;; which is quoted with #' (equivelant to ' but common to use for functions) needs to be quoted, as we do NOT
+  ;; want to evaluate the function (delete a word) now.
+  (define-key minibuffer-local-map (kbd "C-w") #'backward-kill-word)
+
   ;; Use 'visual' line movement for gj/gk (navigates wrapped long lines naturally)
   (evil-global-set-key 'normal "j" 'evil-next-visual-line)
   (evil-global-set-key 'normal "k" 'evil-previous-visual-line))
@@ -35,6 +42,8 @@
   :config
   (evil-collection-init))
 
+;; Note that this will override things like B in normal mode to not go all the way back to quotes, brackets etc.
+;; This is to help preserve structure. Can be tweaked of course if need be in the future.
 (use-package evil-cleverparens
   :after evil
   :hook (emacs-lisp-mode . evil-cleverparens-mode)
