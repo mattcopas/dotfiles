@@ -141,6 +141,7 @@
 
 ;; Auto-reveal markup on cursor hover (org-appear)
 (use-package org-appear
+  :ensure t
   :after org
   :hook (org-mode . org-appear-mode)
   :config
