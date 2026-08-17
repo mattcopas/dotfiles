@@ -14,7 +14,10 @@
 (use-package magit
   :commands (magit-status magit-get-current-branch)
   :config
-  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  ;; TODO - make magit commits (eg from Recent commits) display on the right
+  ;; DOOM does this, so might be able to copy from there
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+
   (with-eval-after-load 'evil
     (evil-set-initial-state 'git-commit-mode 'insert)))
 
