@@ -20,6 +20,9 @@
 (require 'modules/tidy-backup)
 (require 'modules/org)
 (require 'modules/editor)
+;; Put this BEFORE any languages - then those languages can use mason to auto install lsp servers
+(require 'modules/mason)
 (require 'modules/languages/java)
+(require 'modules/languages/yaml)
 (require 'modules/ai)
 (require 'modules/server)
