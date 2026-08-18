@@ -242,8 +242,14 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 
 (defun me-scheduled-todo-format-today ()
   "Function returning a scheduled todo format (scheduled for today). Note that the docs for org-capture-templates requirse the template parameter to be literal or a function returning a template"
-  "* TODO %? \n SCHEDULED: %(org-insert-time-stamp (org-read-date nil t))")
+  (me-scheduled-todo-format "+0d"))
 
+(defun me-scheduled-todo-format (relative-date)
+  "Return a scheduled todo format using RELATIVE-DATE to determine when it is scheduled for.
+See `org-read-date' for details on what can be used for RELATIVE-DATE"
+  ; Note the double % (%%)s - the only one we want format to interpret is the %s one - so we escape the others
+  ; See docstring for format
+  (format "* TODO %%? \n SCHEDULED: %%(org-insert-time-stamp (org-read-date nil t \"%s\" nil nil nil t))" relative-date))
 
 (provide 'modules/org)
 ;;; org.el ends here
