@@ -93,10 +93,18 @@
         org-capture-templates
         '(("t" "Todo" entry (file+headline me-org-capture-todo-file "Todo list") (function me-basic-todo-format))
           ("p" "Personal Todo" entry (file+headline me-org-capture-personal-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
-          ("w" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
-          ("W" "Work Todo - today" entry (file+headline me-org-capture-work-todo-file "Todo list")
+	  ("w" "Work")
+          ("ww" "Work Todo" entry (file+headline me-org-capture-work-todo-file "Todo list") (function me-basic-todo-format) :prepend t)
+          ("wt" "Work Todo - today" entry (file+headline me-org-capture-work-todo-file "Todo list")
            (function me-scheduled-todo-format-today) :prepend t)
-          ("c" "Client Todo" entry (file+headline me-org-capture-client-todo-file "Stuff to do") (function me-basic-todo-format) :prepend t)))
+          ("wT" "Work Todo - tomorrow" entry (file+headline me-org-capture-work-todo-file "Todo list")
+           (function me-scheduled-todo-format-tomorrow) :prepend t)
+	  ("c" "Client")
+          ("cc" "Client Todo" entry (file+headline me-org-capture-client-todo-file "Stuff to do") (function me-basic-todo-format) :prepend t)
+          ("ct" "Client Todo - today" entry (file+headline me-org-capture-client-todo-file "Stuff to do")
+           (function me-scheduled-todo-format-today) :prepend t)
+          ("cT" "Client Todo - tomorrow" entry (file+headline me-org-capture-client-todo-file "Stuff to do")
+           (function me-scheduled-todo-format-tomorrow) :prepend t)))
 
   ;; Remove duplicates from the list - otherwise org agenda lists some tasks multiple times
   (setq org-agenda-files
@@ -243,6 +251,10 @@ PRIORITY may be one of the characters ?A, ?B, or ?C."
 (defun me-scheduled-todo-format-today ()
   "Function returning a scheduled todo format (scheduled for today). Note that the docs for org-capture-templates requirse the template parameter to be literal or a function returning a template"
   (me-scheduled-todo-format "+0d"))
+
+(defun me-scheduled-todo-format-tomorrow ()
+  "Function returning a scheduled todo format (scheduled for tomorrow). Note that the docs for org-capture-templates requirse the template parameter to be literal or a function returning a template"
+  (me-scheduled-todo-format "+1d"))
 
 (defun me-scheduled-todo-format (relative-date)
   "Return a scheduled todo format using RELATIVE-DATE to determine when it is scheduled for.
