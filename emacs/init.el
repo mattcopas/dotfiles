@@ -26,3 +26,4 @@
 (require 'modules/languages/yaml)
 (require 'modules/ai)
 (require 'modules/server)
+(require 'modules/pdf)
