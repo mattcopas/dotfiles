@@ -47,5 +47,20 @@
       transient-values-file  (expand-file-name "transient/values.el" me-local-cache-directory)
       transient-levels-file  (expand-file-name "transient/levels.el" me-local-cache-directory))
 
+
+(defun me-backup-commit ()
+  "Commit everything in the current repository in a commit called 'backup'."
+
+  ;; We need to make this interactive to appear as part of M-x (evaluate-extended-command)
+  ;; Otherwise it would only appear under M-: (eval-expression)
+  ;; See https://stackoverflow.com/questions/29199807/why-are-some-emacs-functions-not-available-via-m-x for more detail
+  (interactive)
+  (if (y-or-n-p (format "Backup directory %s to git?" default-directory))
+  (progn
+    (shell-command "git add . && git commit -am 'backup' && git push origin")
+    (message "Committed and pushed to origin!"))
+  (progn
+    (message "Ok - aborted"))))
+
 (provide 'modules/git)
 ;;; git.el ends here
