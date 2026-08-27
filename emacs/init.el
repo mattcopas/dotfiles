@@ -19,6 +19,11 @@
 (require 'modules/project/project)
 (require 'modules/tidy-backup)
 (require 'modules/org)
+(require 'modules/ai)
+(require 'modules/server)
+(require 'modules/pdf)
+
+;; Languages
 (require 'modules/editor)
 ;; Put this BEFORE any languages - then those languages can use mason to auto install lsp servers
 (require 'modules/mason)
@@ -27,6 +32,4 @@
 (require 'modules/languages/markdown)
 (require 'modules/languages/terraform)
 (require 'modules/languages/mql)
-(require 'modules/ai)
-(require 'modules/server)
-(require 'modules/pdf)
+
