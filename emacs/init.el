@@ -26,6 +26,7 @@
 (require 'modules/languages/yaml)
 (require 'modules/languages/markdown)
 (require 'modules/languages/terraform)
+(require 'modules/languages/mql)
 (require 'modules/ai)
 (require 'modules/server)
 (require 'modules/pdf)
