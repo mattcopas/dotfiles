@@ -1,4 +1,4 @@
-;; modules/package-manager.el --- Package Manager (elpaca) setup
+;;; modules/package-manager.el --- Package Manager setup -*- lexical-binding: t; -*-
 
 ;; All this lovely boilerplace is taken from the Github docs - https://github.com/progfolio/elpaca
 

@@ -1,4 +1,4 @@
-;; modules/evil.el --- Evil mode and leader keybindings configuration
+;;; modules/evil.el --- Evil mode and leader keybinds configuration -*- lexical-binding: t; -*-
 
 ;; Keep the system clipboard away from the kill ring - so yank and paste
 ;; don't go to the system clipboard (ie make this more vim like)

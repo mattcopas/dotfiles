@@ -1,3 +1,5 @@
+;;; early-init.el --- Emacs early init file -*- lexical-binding: t; -*-
+
 ;; Silence native compiler warnings during background package compilation
 ;; To view these, see the *Warnings* buffer
 (setq native-comp-async-report-warnings-errors 'silent)

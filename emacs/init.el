@@ -1,3 +1,5 @@
+;;; init.el --- Emacs init file -*- lexical-binding: t; -*-
+
 ;; Add the lisp directory to user-emacs-directory, so we can require them in here
 ;; By doing this, we have to 'require' using the subdirectory (modules/evil)
 ;; This is preferable to just (require 'evil) because it can cause clashes (eg with which-key)
