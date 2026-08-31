@@ -4,6 +4,14 @@
 ;; 
 
 ;;; Code:
+(defvar me-project-directories '(
+				("~/git" . t)
+				("~/playground" . t)
+				"~/.config"
+				"~/.mt5/drive_c/Program Files/MetaTrader 5/MQL5/Experts/Advisors")
+  "Project directories. These are discovered by project,el when me-discover-projects is invoked.
+Elements can either be a conse cell (DIRECTORY . RECURSIVEP) or a string. RECURSIVEP determines if recursion should be used or not. For strings, recursion is not used.")
+
 (use-package project
   :ensure nil
   :config
@@ -14,11 +22,15 @@
     (interactive)
     (message "Discovering projects...")
     (async-start
-     (lambda ()
+     ;; This needs a backtick so we can evaluate me-project-directories when the lambda is constructed. We can't just call the variable, as doing this
+     ;; with async start means we're in a new emacs process, so the variable won't be available
+     ;; The async call is also the reason we have to (require 'project) in the lambda.
+     `(lambda ()
        (require 'project)
-       (project-remember-projects-under "~/git" t)
-       (project-remember-projects-under "~/playground" t)
-       (project-remember-projects-under "~/.config")
+       (dolist (entry ',me-project-directories)
+	 (if (consp entry)
+	     (project-remember-projects-under (car entry) (cdr entry))
+	   (project-remember-projects-under entry)))
        ;; Call this last, so that the secondl lambda receives all the projects discovered in this asnyc process
        (project-known-project-roots))
 
