@@ -29,8 +29,10 @@ Elements can either be a conse cell (DIRECTORY . RECURSIVEP) or a string. RECURS
        (require 'project)
        (dolist (entry ',me-project-directories)
 	 (if (consp entry)
-	     (project-remember-projects-under (car entry) (cdr entry))
-	   (project-remember-projects-under entry)))
+	     (when (file-directory-p (car entry))
+	       (project-remember-projects-under (car entry) (cdr entry)))
+	   (when (file-directory-p entry)
+	     (project-remember-projects-under entry))))
        ;; Call this last, so that the secondl lambda receives all the projects discovered in this asnyc process
        (project-known-project-roots))
 
