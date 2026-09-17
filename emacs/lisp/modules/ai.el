@@ -5,9 +5,11 @@
 
 ;;; Code:
 
-(use-package pi-coding-agent
+;; This used to be called pi-coding-agent but was renamed...
+(use-package pilish
+  :ensure (:host "github.com" :repo "dnouri/pilish")
   :config
-  (defalias 'pi 'pi-coding-agent "Pi Coding Agent"))
+  (defalias 'pi 'pilish "Pi Coding Agent"))
 
 (provide 'modules/ai)
 ;;; ai.el ends here
