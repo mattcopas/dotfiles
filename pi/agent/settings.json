@@ -1,0 +1,20 @@
+{
+  "packages": [
+    "npm:@jamesjfoong/pi-ollama",
+    "npm:split-editor",
+    "npm:@spences10/pi-themes",
+    "npm:@victor-software-house/pi-curated-themes",
+    "npm:pi-copilot-usage",
+    "npm:@joemccann/pi-pdf",
+    "npm:pi-rtk-optimizer",
+    "git:github.com/DietrichGebert/ponytail",
+    "git:github.com/mattcopas/pi-auto-toggle"
+  ],
+  "lastChangelogVersion": "0.85.1",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "gpt-5.4",
+  "defaultThinkingLevel": "medium",
+  "theme": "brogrammer",
+  "doubleEscapeAction": "fork",
+  "hideThinkingBlock": true
+}
