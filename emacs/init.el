@@ -34,4 +34,6 @@
 (require 'modules/languages/markdown)
 (require 'modules/languages/terraform)
 (require 'modules/languages/mql)
+(require 'modules/languages/json)
+(require 'modules/languages/php)
 
