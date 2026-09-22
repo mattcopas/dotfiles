@@ -19,14 +19,11 @@
 		    (setq-local indent-tabs-mode nil)
 		    (setq yaml-indent-offset 2))))
 
+(me/configure-mason-for-mode 'yaml-ts-mode "yaml-language-server")
 ;; We can have multuiple (use-package eglot) blocks because use-package appends stuff, instead of overwriting it
 (use-package eglot
   :after mason
   :ensure nil
-  :hook (yaml-ts-mode . (lambda ()
-			  (unless (mason-installed-p "yaml-language-server")
-			    (mason-install "yaml-language-server"))))
-  :hook (yaml-ts-mode . eglot-ensure)
   :hook (yaml-ts-mode . (lambda ()
                           (setq-local eglot-workspace-configuration
                                       '((:yaml
