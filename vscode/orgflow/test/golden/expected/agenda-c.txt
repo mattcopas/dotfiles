@@ -1,0 +1,68 @@
+High priority unfinished tasks
+  todo:       TODO [#A] Buy a bike                                  :personal::
+  todo:       TODO [#A] Important parent                            :personal::
+  acme:       TODO [#A] Urgent client task                            :client::
+  todo:       TODO [#A] Fix production bug                              :work::
+  todo:       TODO [#A] Priority parent                                 :work::
+
+===============================================================================
+Week-agenda (W46):
+Monday      9 November 2026 W46
+  todo:       Plain with repeating timestamp                        :personal::
+Tuesday    10 November 2026
+Wednesday  11 November 2026
+               8:00...... ----------------
+  acme:        9:00...... Scheduled:  TODO Client task one            :client::
+              10:00...... ----------------
+              10:30...... now - - - - - - - - - - - - - - - - - - - - - - - - -
+              12:00...... ----------------
+              14:00...... ----------------
+  todo:       14:30...... Scheduled:  IN PROGRESS Refactor billing      :work::
+              16:00...... ----------------
+              18:00...... ----------------
+              20:00...... ----------------
+  todo:       Deadline:   TODO [#A] Fix production bug                  :work::
+  todo:       Sched. 9x:  STRT Started personal thing               :personal::
+  todo:       Sched. 7x:  TODO Repeating weekly                     :personal::
+  todo:       Scheduled:  TODO [#B] Water plants                    :personal::
+  todo:       Scheduled:  DONE Finished chore                       :personal::
+  todo:       Scheduled:  Plain heading no keyword                  :personal::
+  todo:       Scheduled:  TODO Scheduled and deadline                   :work::
+  todo:       10 d. ago:  TODO Overdue deadline                         :work::
+  todo:       Deadline:   DONE Done with deadline today                 :work::
+  todo:       In   2 d.:  TODO Repeating restart                    :personal::
+  todo:       In   3 d.:  TODO Scheduled and deadline                   :work::
+  todo:       In   9 d.:  TODO Upcoming deadline in warning             :work::
+Thursday   12 November 2026
+  todo:        9:15...... Plain with timestamp                      :personal::
+  todo:       Scheduled:  TODO Repeating catch-up                   :personal::
+  todo:       Scheduled:  IN REVIEW Review payment PR                   :work::
+Friday     13 November 2026
+  todo:       Scheduled:  TODO Repeating catch-up                   :personal::
+  todo:       Scheduled:  TODO Scheduled friday                         :work::
+  todo:       Deadline:   TODO Repeating restart                    :personal::
+Saturday   14 November 2026
+  todo:       Scheduled:  TODO Repeating catch-up                   :personal::
+  todo:       Deadline:   TODO Scheduled and deadline                   :work::
+Sunday     15 November 2026
+  todo:       Scheduled:  TODO Repeating catch-up                   :personal::
+  todo:       Deadline:   TODO Repeating restart                    :personal::
+
+===============================================================================
+Global list of TODO items of type: ALL
+  todo:       IDEA Write a blog post                                :personal::
+  todo:       WAIT Reply from landlord                              :personal::
+  acme:       TODO Also work tagged                              :client::work:
+  acme:       TODO Deep client task                                   :client::
+  todo:       WAIT Blocked on vendor                                    :work::
+  todo:       HOLD Parked migration                                     :work::
+  todo:       LOOP Weekly report loop                                   :work::
+  todo:       TODO Plain work task                                      :work::
+  todo:       TODO Child inherits tags                          :work:project::
+  todo:       [ ] Checkbox keyword open                         :work:project::
+  todo:       [-] Checkbox keyword started                      :work:project::
+  todo:       [?] Checkbox keyword waiting                      :work:project::
+  todo:       IN PROGRESS Parent in progress                    :work::project:
+  todo:       TODO Nested below in progress                     :work:project::
+  todo:       IN PROGRESS Also in progress below                :work:project::
+  todo:       TODO [#C] Low priority task                               :work::

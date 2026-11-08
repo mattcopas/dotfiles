@@ -1,0 +1,43 @@
+High priority unfinished tasks
+  todo:       TODO [#A] Fix production bug                              :work::
+  todo:       TODO [#A] Priority parent                                 :work::
+
+===============================================================================
+Blocked tasks
+  todo:       WAIT Blocked on vendor                                    :work::
+  todo:       HOLD Parked migration                                     :work::
+  todo:       LOOP Weekly report loop                                   :work::
+  todo:       [ ] Checkbox keyword open                         :work:project::
+  todo:       [-] Checkbox keyword started                      :work:project::
+  todo:       [?] Checkbox keyword waiting                      :work:project::
+
+===============================================================================
+Today's tasks
+  todo:       TODO [#B] Water plants                                :personal::
+  todo:       Plain heading no keyword                              :personal::
+  todo:       TODO Scheduled and deadline                               :work::
+
+===============================================================================
+Today's completed tasks
+  todo:       DONE Finished chore                                   :personal::
+
+===============================================================================
+Tomorrow's tasks
+  todo:       TODO Repeating catch-up                               :personal::
+  todo:       IN REVIEW Review payment PR                               :work::
+
+===============================================================================
+Headlines with TAGS match: +work
+  acme:       TODO Also work tagged                              :client::work:
+  todo:       IN PROGRESS Refactor billing                              :work::
+  todo:       TODO Plain work task                                      :work::
+  todo:       TODO Overdue deadline                                     :work::
+  todo:       TODO Upcoming deadline in warning                         :work::
+  todo:       TODO Deadline beyond warning                              :work::
+  todo:       TODO Short warning deadline                               :work::
+  todo:       TODO Scheduled and deadline                               :work::
+  todo:       TODO Scheduled friday                                     :work::
+  todo:       TODO Scheduled next month                                 :work::
+  todo:       TODO Child inherits tags                          :work:project::
+  todo:       IN PROGRESS Parent in progress                    :work::project:
+  todo:       TODO [#C] Low priority task                               :work::

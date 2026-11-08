@@ -1,0 +1,10 @@
+#+TITLE: Capture
+
+* Before
+* Todo list
+Intro line.
+** TODO Work plain
+** TODO Existing one
+** TODO Existing two
+Body.
+* After

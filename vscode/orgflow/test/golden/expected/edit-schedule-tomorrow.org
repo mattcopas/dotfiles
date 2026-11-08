@@ -1,0 +1,15 @@
+* TODO Heading with no planning
+SCHEDULED: <2026-11-12 Thu>
+Body text.
+* TODO Heading with scheduled
+SCHEDULED: <2026-11-12 Thu>
+* TODO Heading with deadline only
+SCHEDULED: <2026-11-12 Thu> DEADLINE: <2026-02-02 Mon>
+Body text.
+* TODO Heading with both
+SCHEDULED: <2026-11-12 Thu> DEADLINE: <2026-02-02 Mon>
+* TODO Heading with drawer
+SCHEDULED: <2026-11-12 Thu>
+:PROPERTIES:
+:ID: abc
+:END:

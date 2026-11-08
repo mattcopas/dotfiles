@@ -1,0 +1,10 @@
+* Wed 11 Nov 2026
+:PROPERTIES:
+:CREATED:  20261111
+:END:
+** 08:00 Earlier today
+* Sat 14 Nov 2026
+:PROPERTIES:
+:CREATED:  20261114
+:END:
+** 08:00 A later day already exists

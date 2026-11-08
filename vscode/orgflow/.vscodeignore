@@ -1,0 +1,13 @@
+**
+!package.json
+!README.md
+!IT-NOTE.md
+!NOTICE
+!language-configuration.json
+!syntaxes/**
+!themes/**
+!out/extension.js
+!out/keySequence.js
+!out/projects.js
+!out/features/**
+!out/org/**

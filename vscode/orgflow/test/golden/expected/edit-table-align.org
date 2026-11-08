@@ -1,0 +1,12 @@
+* First table
+| Name        | Qty |
+|-------------+-----|
+| apple       |   3 |
+| banana long |  12 |
+| x           |     |
+
+* Second table
+| a          |   b | c    |
+|------------+-----+------|
+| words here | 1.5 |      |
+| more       |  22 | text |

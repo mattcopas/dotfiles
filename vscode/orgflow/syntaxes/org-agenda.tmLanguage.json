@@ -1,0 +1,74 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Org Agenda",
+  "scopeName": "source.org-agenda",
+  "patterns": [
+    {
+      "match": "^=+$",
+      "name": "comment.separator.agenda"
+    },
+    {
+      "match": "^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\\b.*$",
+      "name": "string.date.agenda"
+    },
+    {
+      "match": "^\\s+[ \\d]\\d:\\d\\d\\.{6} -+$",
+      "name": "comment.grid.agenda"
+    },
+    {
+      "match": "^\\s+[ \\d]\\d:\\d\\d\\.{6} now[ -]*$",
+      "name": "entity.name.function.now.agenda"
+    },
+    {
+      "begin": "^  (?=\\S+:\\s)",
+      "end": "$",
+      "patterns": [
+        {
+          "include": "#item"
+        }
+      ]
+    },
+    {
+      "match": "^\\S.*$",
+      "name": "entity.name.section.agenda"
+    }
+  ],
+  "repository": {
+    "item": {
+      "patterns": [
+        {
+          "match": "\\G\\S+:",
+          "name": "entity.name.type.category.agenda"
+        },
+        {
+          "match": "[ \\d]\\d:\\d\\d(?:\\.{6}|-\\d+:\\d\\d)",
+          "name": "constant.other.time.agenda"
+        },
+        {
+          "match": "(?:Scheduled:|Deadline:|Sched\\.\\s*\\d+x:|In\\s+\\d+ d\\.:|\\s*\\d+ d\\. ago:)",
+          "name": "constant.other.leader.agenda"
+        },
+        {
+          "match": "(?<=\\s)(?:DONE|KILL|\\[X\\]|OKAY|YES|NO)(?=\\s|$)",
+          "name": "keyword.done.agenda"
+        },
+        {
+          "match": "(?<=\\s)(?:TODO|IN PROGRESS|IN REVIEW|LOOP|STRT|WAIT|HOLD|IDEA|\\[ \\]|\\[-\\]|\\[\\?\\])(?=\\s|$)",
+          "name": "keyword.todo.agenda"
+        },
+        {
+          "match": "\\[#[A-Z0-9]+\\]",
+          "name": "constant.other.priority.agenda"
+        },
+        {
+          "match": "\\s(:[\\w@#%:]+:)$",
+          "captures": {
+            "1": {
+              "name": "entity.name.tag.agenda"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

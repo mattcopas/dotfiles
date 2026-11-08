@@ -19,8 +19,38 @@
       "commands": [":w"]
     }
   ],
+  "vim.normalModeKeyBindings": [
+    { "before": ["j"], "after": ["g", "j"] },
+    { "before": ["k"], "after": ["g", "k"] }
+  ],
+  "vim.foldfix": true,
+  "vim.useSystemClipboard": false,
+  "vim.highlightedyank.enable": true,
   "vim.hlsearch": true,
   "vim.incsearch": true,
   "vim.smartcase": true,
-  "vim.leader": "<space>"
+  "vim.leader": "<space>",
+  "editor.fontFamily": "'Fira Code', 'monospace', monospace",
+  "workbench.colorTheme": "Doom One",
+  "workbench.editor.showTabs": "none",
+  "workbench.editor.enablePreview": false,
+  "workbench.activityBar.location": "hidden",
+  "workbench.startupEditor": "none",
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "toggle",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "chat.commandCenter.enabled": false,
+  "editor.minimap.enabled": false,
+  "breadcrumbs.enabled": false,
+  "editor.lineNumbers": "relative",
+  "editor.cursorSurroundingLines": 7,
+  "editor.scrollBeyondLastLine": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.renderLineHighlight": "all",
+  "[org]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": { "other": false, "comments": false, "strings": false },
+    "editor.foldingStrategy": "auto",
+    "editor.showFoldingControls": "never"
+  }
 }

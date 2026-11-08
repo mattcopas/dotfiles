@@ -1,0 +1,13 @@
+High priority unfinished tasks
+  todo:       TODO [#A] Buy a bike                                  :personal::
+  todo:       TODO [#A] Important parent                            :personal::
+
+===============================================================================
+Headlines with TAGS match: +personal
+  todo:       TODO [#B] Water plants                                :personal::
+  todo:       IDEA Write a blog post                                :personal::
+  todo:       WAIT Reply from landlord                              :personal::
+  todo:       STRT Started personal thing                           :personal::
+  todo:       TODO Repeating weekly                                 :personal::
+  todo:       TODO Repeating catch-up                               :personal::
+  todo:       TODO Repeating restart                                :personal::

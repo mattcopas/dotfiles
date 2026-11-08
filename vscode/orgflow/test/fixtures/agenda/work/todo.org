@@ -1,0 +1,44 @@
+#+FILETAGS: :work:
+
+* Todo list
+** TODO [#A] Fix production bug
+DEADLINE: <2026-11-11 Wed>
+** IN PROGRESS Refactor billing
+SCHEDULED: <2026-11-11 Wed 14:30>
+** IN REVIEW Review payment PR
+SCHEDULED: <2026-11-12 Thu>
+** WAIT Blocked on vendor
+** HOLD Parked migration
+** LOOP Weekly report loop
+** TODO Plain work task
+** TODO [#C] Low priority task
+** TODO Overdue deadline
+DEADLINE: <2026-11-01 Sun>
+** TODO Upcoming deadline in warning
+DEADLINE: <2026-11-20 Fri>
+** TODO Deadline beyond warning
+DEADLINE: <2026-12-20 Sun>
+** TODO Short warning deadline
+DEADLINE: <2026-11-20 Fri -3d>
+** DONE Done with deadline today
+DEADLINE: <2026-11-11 Wed>
+** DONE Done overdue deadline
+DEADLINE: <2026-11-02 Mon>
+** TODO Scheduled and deadline
+SCHEDULED: <2026-11-11 Wed> DEADLINE: <2026-11-14 Sat>
+** TODO Scheduled friday
+SCHEDULED: <2026-11-13 Fri>
+** TODO Scheduled next month
+SCHEDULED: <2026-12-02 Wed>
+** Parent heading :project:
+*** TODO Child inherits tags
+*** [ ] Checkbox keyword open
+*** [-] Checkbox keyword started
+*** [?] Checkbox keyword waiting
+*** [X] Checkbox keyword done
+*** OKAY Done-only keyword
+** IN PROGRESS Parent in progress :project:
+*** TODO Nested below in progress
+*** IN PROGRESS Also in progress below
+** TODO [#A] Priority parent
+*** TODO Hidden below priority parent

@@ -1,44 +1,5 @@
 // Place your key bindings in this file to override the defaults
 [
-  // cmd+k opens emacs magit - similar to intellij's version via External Tools
-  // TODO Move this to settings.json as a vim normal mode command
-  // Mapping this to space g g overrides space...
-  {
-    "key": "cmd+k",
-    "command": "runCommands",
-    "args": {
-      "commands": [
-        {
-          "command": "workbench.action.terminal.new"
-        },
-        {
-          "command": "workbench.action.terminal.sendSequence",
-          "args": {
-            // # included after exit because vscode appends a source command for some reason. This ensures it is ignored
-            "text": "emacsclient -n -e \"(progn (x-focus-frame nil) (magit-status))\" && exit #"
-          }
-        },
-      ]
-    }
-  },
-  {
-    "key": "ctrl+k",
-    "command": "runCommands",
-    "args": {
-      "commands": [
-        {
-          "command": "workbench.action.terminal.new"
-        },
-        {
-          "command": "workbench.action.terminal.sendSequence",
-          "args": {
-            // # included after exit because vscode appends a source command for some reason. This ensures it is ignored
-            "text": "emacsclient -n -e \"(progn (x-focus-frame nil) (magit-status))\" && exit #"
-          }
-        },
-      ]
-    }
-  },
   {
     "key": "ctrl+g",
     "command": "workbench.action.focusActiveEditorGroup",
@@ -77,7 +38,7 @@
   {
     "key": "cmd+shift+b",
     "command": "workbench.action.toggleActivityBarVisibility"
-  }
+  },
 
   // Switch between terminal windows
   {
@@ -113,12 +74,35 @@
     "when": "filesExplorerFocus"
   },
 
+  // Org and its agenda own TAB. These live here rather than in the orgflow extension,
+  // because a user keybinding always beats VSCodeVim's own TAB binding.
+  {
+    "key": "tab",
+    "command": "orgflow.org.cycle",
+    "when": "editorTextFocus && editorLangId == 'org' && vim.mode == 'Normal'"
+  },
+  {
+    "key": "shift+tab",
+    "command": "orgflow.org.globalCycle",
+    "when": "editorTextFocus && editorLangId == 'org' && vim.mode == 'Normal'"
+  },
+  {
+    "key": "tab",
+    "command": "orgflow.agenda.openBeside",
+    "when": "editorTextFocus && editorLangId == 'org-agenda' && vim.mode == 'Normal'"
+  },
+  {
+    "key": "enter",
+    "command": "orgflow.agenda.open",
+    "when": "editorTextFocus && editorLangId == 'org-agenda' && vim.mode == 'Normal'"
+  },
+
   // Magic keybindings
   // from https://marketplace.visualstudio.com/items?itemName=kahole.magit
   {
     "key": "tab",
     "command": "extension.vim_tab",
-    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert' && editorLangId != 'magit'"
+    "when": "editorFocus && vim.active && !inDebugRepl && vim.mode != 'Insert' && editorLangId != 'magit' && editorLangId != 'org' && editorLangId != 'org-agenda'"
   },
   {
     "key": "tab",

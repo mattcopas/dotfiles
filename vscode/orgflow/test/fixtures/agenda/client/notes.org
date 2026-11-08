@@ -1,0 +1,12 @@
+#+CATEGORY: acme
+#+FILETAGS: :client:
+
+Text before the first heading <2026-11-11 Wed>.
+
+* Stuff to do
+** TODO Client task one
+SCHEDULED: <2026-11-11 Wed 09:00>
+** TODO [#A] Urgent client task
+** TODO Also work tagged :work:
+** Reference
+*** TODO Deep client task

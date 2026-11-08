@@ -1,0 +1,29 @@
+#+TITLE: Personal fixture
+
+* Todo list :personal:
+** TODO [#A] Buy a bike
+** TODO [#B] Water plants
+SCHEDULED: <2026-11-11 Wed>
+** IDEA Write a blog post
+** WAIT Reply from landlord
+** DONE Finished chore
+SCHEDULED: <2026-11-11 Wed>
+** KILL Abandoned chore
+** TODO [#A] Important parent
+*** TODO Child of important parent
+** STRT Started personal thing
+SCHEDULED: <2026-11-02 Mon>
+** TODO Repeating weekly
+SCHEDULED: <2026-11-04 Wed +1w>
+** TODO Repeating catch-up
+SCHEDULED: <2026-11-12 Thu ++1d>
+** TODO Repeating restart
+DEADLINE: <2026-11-13 Fri .+2d>
+** Plain heading no keyword
+SCHEDULED: <2026-11-11 Wed>
+** Plain with timestamp
+Meeting note <2026-11-12 Thu 09:15> in the body.
+** Plain with repeating timestamp
+Standup <2026-11-02 Mon +1w>.
+** Plain with inactive timestamp
+Not on the agenda [2026-11-11 Wed].

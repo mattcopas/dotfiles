@@ -1,0 +1,18 @@
+* TODO Plus repeater
+SCHEDULED: <2026-11-04 Wed +1w>
+* TODO Plus plus repeater
+SCHEDULED: <2026-10-01 Thu ++1w>
+* TODO Dot plus repeater
+DEADLINE: <2026-10-01 Thu .+3d>
+* IN PROGRESS Month repeater returns to in progress
+SCHEDULED: <2026-10-31 Sat +1m>
+* TODO Timestamp with time repeater
+SCHEDULED: <2026-11-04 Wed 09:30 +1d>
+* TODO Both repeaters
+SCHEDULED: <2026-11-04 Wed +1w> DEADLINE: <2026-11-06 Fri +1w>
+* TODO Scheduled no repeater with repeating deadline
+SCHEDULED: <2026-11-04 Wed> DEADLINE: <2026-11-06 Fri +1w>
+* TODO Body timestamp repeater
+Body <2026-11-04 Wed +1w> text.
+* TODO No repeater at all
+SCHEDULED: <2026-11-04 Wed>

@@ -1,0 +1,23 @@
+* Mon  9 Nov 2026
+:PROPERTIES:
+:CREATED:  20261109
+:END:
+** 09:00 Morning note
+Just text stays behind.
+** TODO 10:00 Carried item
+Body of carried item.
+** DONE 11:00 Done stays
+** 12:00 Parent note
+Parent body.
+*** TODO Nested carried
+Nested body.
+*** Plain sibling stays
+*** HOLD Second nested
+Second body.
+** STRT 13:00 Started carried
+*** Child of started
+** IN PROGRESS 14:00 Not in the carryover list
+** 15:00 Link stamp
+*** WAIT With stamps
+Note <2026-11-09 Mon> plain stamp.
+SCHEDULED: <2026-11-09 Mon>

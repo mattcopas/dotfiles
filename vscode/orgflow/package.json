@@ -1,0 +1,1358 @@
+{
+  "name": "orgflow",
+  "displayName": "Orgflow",
+  "description": "Org mode, agenda, journal, which-key menus and project switching for VS Code, with a Doom One theme.",
+  "version": "0.1.0",
+  "publisher": "mcopas-local",
+  "private": true,
+  "license": "UNLICENSED",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Themes",
+    "Keymaps",
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "onLanguage:org"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "org",
+        "aliases": [
+          "Org",
+          "org"
+        ],
+        "extensions": [
+          ".org"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "org-agenda",
+        "aliases": [
+          "Org Agenda"
+        ],
+        "extensions": [
+          ".org-agenda"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "org",
+        "scopeName": "source.org",
+        "path": "./syntaxes/org.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.bash": "shellscript",
+          "meta.embedded.block.c": "c",
+          "meta.embedded.block.cpp": "cpp",
+          "meta.embedded.block.css": "css",
+          "meta.embedded.block.dockerfile": "dockerfile",
+          "meta.embedded.block.go": "go",
+          "meta.embedded.block.html": "html",
+          "meta.embedded.block.java": "java",
+          "meta.embedded.block.javascript": "javascript",
+          "meta.embedded.block.json": "json",
+          "meta.embedded.block.markdown": "markdown",
+          "meta.embedded.block.php": "php",
+          "meta.embedded.block.python": "python",
+          "meta.embedded.block.ruby": "ruby",
+          "meta.embedded.block.rust": "rust",
+          "meta.embedded.block.sql": "sql",
+          "meta.embedded.block.typescript": "typescript",
+          "meta.embedded.block.xml": "xml",
+          "meta.embedded.block.yaml": "yaml"
+        }
+      },
+      {
+        "language": "org-agenda",
+        "scopeName": "source.org-agenda",
+        "path": "./syntaxes/org-agenda.tmLanguage.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Doom One",
+        "uiTheme": "vs-dark",
+        "path": "./themes/doom-one-color-theme.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "orgflow.whichKey",
+        "title": "Orgflow: Open Leader Menu"
+      },
+      {
+        "command": "orgflow.switchProject",
+        "title": "Orgflow: Switch Project"
+      },
+      {
+        "command": "orgflow.agenda",
+        "title": "Orgflow: Open Agenda"
+      },
+      {
+        "command": "orgflow.capture",
+        "title": "Orgflow: Capture"
+      },
+      {
+        "command": "orgflow.journal.newEntry",
+        "title": "Orgflow: New Journal Entry"
+      },
+      {
+        "command": "orgflow.org.setTodo",
+        "title": "Orgflow: Set TODO State"
+      },
+      {
+        "command": "orgflow.org.schedule",
+        "title": "Orgflow: Schedule"
+      },
+      {
+        "command": "orgflow.org.scheduleToday",
+        "title": "Orgflow: Schedule for Today"
+      },
+      {
+        "command": "orgflow.org.scheduleTomorrow",
+        "title": "Orgflow: Schedule for Tomorrow"
+      },
+      {
+        "command": "orgflow.org.deadline",
+        "title": "Orgflow: Set Deadline"
+      },
+      {
+        "command": "orgflow.org.setTags",
+        "title": "Orgflow: Set Tags"
+      },
+      {
+        "command": "orgflow.org.priorityUp",
+        "title": "Orgflow: Priority Up"
+      },
+      {
+        "command": "orgflow.org.priorityDown",
+        "title": "Orgflow: Priority Down"
+      },
+      {
+        "command": "orgflow.org.cycle",
+        "title": "Orgflow: Cycle Fold or Next Table Cell"
+      },
+      {
+        "command": "orgflow.org.globalCycle",
+        "title": "Orgflow: Cycle All Folds"
+      },
+      {
+        "command": "orgflow.org.insertLink",
+        "title": "Orgflow: Insert Link"
+      },
+      {
+        "command": "orgflow.org.openLink",
+        "title": "Orgflow: Open Link at Cursor"
+      },
+      {
+        "command": "orgflow.org.alignTable",
+        "title": "Orgflow: Align Table"
+      }
+    ],
+    "keybindings": [
+      {
+        "key": "space",
+        "command": "runCommands",
+        "when": "editorTextFocus && vim.active && vim.mode =~ /^(Normal|Visual|VisualLine|VisualBlock)$/",
+        "args": {
+          "commands": [
+            "workbench.action.focusStatusBar",
+            {
+              "command": "orgflow.whichKey",
+              "args": "armed"
+            }
+          ]
+        }
+      },
+      {
+        "key": "space",
+        "command": "orgflow.whichKey",
+        "when": "!editorTextFocus && !inputFocus && !terminalFocus && !inQuickOpen && !listFocus"
+      },
+      {
+        "key": "ctrl+g",
+        "command": "workbench.action.closeQuickOpen",
+        "when": "inQuickOpen"
+      },
+      {
+        "key": "ctrl+j",
+        "command": "workbench.action.quickOpenSelectNext",
+        "when": "inQuickOpen"
+      },
+      {
+        "key": "ctrl+k",
+        "command": "workbench.action.quickOpenSelectPrevious",
+        "when": "inQuickOpen"
+      },
+      {
+        "key": "tab",
+        "command": "orgflow.org.cycle",
+        "when": "editorTextFocus && editorLangId == org && vim.mode == 'Normal'"
+      },
+      {
+        "key": "tab",
+        "command": "orgflow.org.cycle",
+        "when": "editorTextFocus && editorLangId == org && orgflow.inTable && vim.mode == 'Insert' && !suggestWidgetVisible && !inSnippetMode"
+      },
+      {
+        "key": "shift+tab",
+        "command": "orgflow.org.globalCycle",
+        "when": "editorTextFocus && editorLangId == org && vim.mode == 'Normal'"
+      },
+      {
+        "key": "enter",
+        "command": "orgflow.org.openLink",
+        "when": "editorTextFocus && editorLangId == org && orgflow.onLink && vim.mode == 'Normal'"
+      },
+      {
+        "key": "alt+j",
+        "command": "orgflow.org.moveDown",
+        "when": "editorTextFocus && editorLangId == org && vim.mode == 'Normal'"
+      },
+      {
+        "key": "alt+k",
+        "command": "orgflow.org.moveUp",
+        "when": "editorTextFocus && editorLangId == org && vim.mode == 'Normal'"
+      },
+      {
+        "key": "alt+h",
+        "command": "orgflow.org.promote",
+        "when": "editorTextFocus && editorLangId == org && vim.mode == 'Normal'"
+      },
+      {
+        "key": "alt+l",
+        "command": "orgflow.org.demote",
+        "when": "editorTextFocus && editorLangId == org && vim.mode == 'Normal'"
+      },
+      {
+        "key": "alt+shift+h",
+        "command": "orgflow.org.promoteSubtree",
+        "when": "editorTextFocus && editorLangId == org && vim.mode == 'Normal'"
+      },
+      {
+        "key": "alt+shift+l",
+        "command": "orgflow.org.demoteSubtree",
+        "when": "editorTextFocus && editorLangId == org && vim.mode == 'Normal'"
+      },
+      {
+        "key": "enter",
+        "command": "orgflow.agenda.open",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "tab",
+        "command": "orgflow.agenda.openBeside",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "t",
+        "command": "orgflow.org.setTodo",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "r",
+        "command": "orgflow.agenda.refresh",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "q",
+        "command": "orgflow.agenda.quit",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "]",
+        "command": "orgflow.agenda.later",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "[",
+        "command": "orgflow.agenda.earlier",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "shift+h",
+        "command": "orgflow.agenda.dateEarlier",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "shift+l",
+        "command": "orgflow.agenda.dateLater",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "shift+j",
+        "command": "orgflow.org.priorityDown",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "shift+k",
+        "command": "orgflow.org.priorityUp",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "shift+c",
+        "command": "orgflow.capture",
+        "when": "editorTextFocus && editorLangId == org-agenda && vim.mode == 'Normal'"
+      },
+      {
+        "key": "a",
+        "command": "orgflow.menuKey",
+        "args": "a",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+a",
+        "command": "orgflow.menuKey",
+        "args": "A",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "b",
+        "command": "orgflow.menuKey",
+        "args": "b",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+b",
+        "command": "orgflow.menuKey",
+        "args": "B",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "c",
+        "command": "orgflow.menuKey",
+        "args": "c",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+c",
+        "command": "orgflow.menuKey",
+        "args": "C",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "d",
+        "command": "orgflow.menuKey",
+        "args": "d",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+d",
+        "command": "orgflow.menuKey",
+        "args": "D",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "e",
+        "command": "orgflow.menuKey",
+        "args": "e",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+e",
+        "command": "orgflow.menuKey",
+        "args": "E",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "f",
+        "command": "orgflow.menuKey",
+        "args": "f",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+f",
+        "command": "orgflow.menuKey",
+        "args": "F",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "g",
+        "command": "orgflow.menuKey",
+        "args": "g",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+g",
+        "command": "orgflow.menuKey",
+        "args": "G",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "h",
+        "command": "orgflow.menuKey",
+        "args": "h",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+h",
+        "command": "orgflow.menuKey",
+        "args": "H",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "i",
+        "command": "orgflow.menuKey",
+        "args": "i",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+i",
+        "command": "orgflow.menuKey",
+        "args": "I",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "j",
+        "command": "orgflow.menuKey",
+        "args": "j",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+j",
+        "command": "orgflow.menuKey",
+        "args": "J",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "k",
+        "command": "orgflow.menuKey",
+        "args": "k",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+k",
+        "command": "orgflow.menuKey",
+        "args": "K",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "l",
+        "command": "orgflow.menuKey",
+        "args": "l",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+l",
+        "command": "orgflow.menuKey",
+        "args": "L",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "m",
+        "command": "orgflow.menuKey",
+        "args": "m",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+m",
+        "command": "orgflow.menuKey",
+        "args": "M",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "n",
+        "command": "orgflow.menuKey",
+        "args": "n",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+n",
+        "command": "orgflow.menuKey",
+        "args": "N",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "o",
+        "command": "orgflow.menuKey",
+        "args": "o",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+o",
+        "command": "orgflow.menuKey",
+        "args": "O",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "p",
+        "command": "orgflow.menuKey",
+        "args": "p",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+p",
+        "command": "orgflow.menuKey",
+        "args": "P",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "q",
+        "command": "orgflow.menuKey",
+        "args": "q",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+q",
+        "command": "orgflow.menuKey",
+        "args": "Q",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "r",
+        "command": "orgflow.menuKey",
+        "args": "r",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+r",
+        "command": "orgflow.menuKey",
+        "args": "R",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "s",
+        "command": "orgflow.menuKey",
+        "args": "s",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+s",
+        "command": "orgflow.menuKey",
+        "args": "S",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "t",
+        "command": "orgflow.menuKey",
+        "args": "t",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+t",
+        "command": "orgflow.menuKey",
+        "args": "T",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "u",
+        "command": "orgflow.menuKey",
+        "args": "u",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+u",
+        "command": "orgflow.menuKey",
+        "args": "U",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "v",
+        "command": "orgflow.menuKey",
+        "args": "v",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+v",
+        "command": "orgflow.menuKey",
+        "args": "V",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "w",
+        "command": "orgflow.menuKey",
+        "args": "w",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+w",
+        "command": "orgflow.menuKey",
+        "args": "W",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "x",
+        "command": "orgflow.menuKey",
+        "args": "x",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+x",
+        "command": "orgflow.menuKey",
+        "args": "X",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "y",
+        "command": "orgflow.menuKey",
+        "args": "y",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+y",
+        "command": "orgflow.menuKey",
+        "args": "Y",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "z",
+        "command": "orgflow.menuKey",
+        "args": "z",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+z",
+        "command": "orgflow.menuKey",
+        "args": "Z",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "0",
+        "command": "orgflow.menuKey",
+        "args": "0",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "1",
+        "command": "orgflow.menuKey",
+        "args": "1",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "2",
+        "command": "orgflow.menuKey",
+        "args": "2",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "3",
+        "command": "orgflow.menuKey",
+        "args": "3",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "4",
+        "command": "orgflow.menuKey",
+        "args": "4",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "5",
+        "command": "orgflow.menuKey",
+        "args": "5",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "6",
+        "command": "orgflow.menuKey",
+        "args": "6",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "7",
+        "command": "orgflow.menuKey",
+        "args": "7",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "8",
+        "command": "orgflow.menuKey",
+        "args": "8",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "9",
+        "command": "orgflow.menuKey",
+        "args": "9",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "-",
+        "command": "orgflow.menuKey",
+        "args": "-",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": ".",
+        "command": "orgflow.menuKey",
+        "args": ".",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "/",
+        "command": "orgflow.menuKey",
+        "args": "/",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "shift+-",
+        "command": "orgflow.menuKey",
+        "args": "_",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "space",
+        "command": "orgflow.menuKey",
+        "args": " ",
+        "when": "statusBarFocused"
+      },
+      {
+        "key": "escape",
+        "command": "orgflow.menuKey",
+        "args": "\u001b",
+        "when": "statusBarFocused"
+      }
+    ],
+    "configuration": {
+      "title": "Orgflow",
+      "properties": {
+        "orgflow.todoKeywords": {
+          "type": "array",
+          "description": "TODO keyword sequences in org notation, with | before the done states.",
+          "default": [
+            [
+              "TODO(t)",
+              "IN PROGRESS(p)",
+              "IN REVIEW(r)",
+              "LOOP",
+              "STRT(s)",
+              "WAIT(w)",
+              "HOLD(h)",
+              "IDEA(i)",
+              "|",
+              "DONE(d)",
+              "KILL(k)"
+            ],
+            [
+              "[ ](T)",
+              "[-](S)",
+              "[?](W)",
+              "|",
+              "[X](D)"
+            ],
+            [
+              "|",
+              "OKAY(o)",
+              "YES(y)",
+              "NO(n)"
+            ]
+          ]
+        },
+        "orgflow.agenda.files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Org files or directories for the agenda. Directories aren't searched recursively, and dotfiles are skipped, matching org-agenda-files.",
+          "default": [
+            "~/git/private-personal",
+            "~/git/private-client",
+            "~/git/private-work"
+          ]
+        },
+        "orgflow.agenda.width": {
+          "type": "number",
+          "description": "Column that agenda tags right-align to.",
+          "default": 100
+        },
+        "orgflow.agenda.deadlineWarningDays": {
+          "type": "number",
+          "default": 14,
+          "description": "Days before a deadline that it starts appearing on today."
+        },
+        "orgflow.agenda.views": {
+          "type": "array",
+          "description": "Custom agenda views, each a key, a description and a list of blocks.",
+          "default": [
+            {
+              "key": "c",
+              "description": "Simple agenda view",
+              "blocks": [
+                {
+                  "type": "tags",
+                  "match": "PRIORITY=\"A\"",
+                  "header": "High priority unfinished tasks",
+                  "skip": [
+                    {
+                      "if": "todo",
+                      "value": "done"
+                    }
+                  ]
+                },
+                {
+                  "type": "agenda"
+                },
+                {
+                  "type": "alltodo",
+                  "skip": [
+                    {
+                      "if": "priority",
+                      "value": "A",
+                      "scope": "subtree"
+                    },
+                    {
+                      "if": "scheduled"
+                    },
+                    {
+                      "if": "deadline"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "w",
+              "description": "Work agenda view",
+              "blocks": [
+                {
+                  "type": "tags",
+                  "match": "+work+PRIORITY=\"A\"",
+                  "header": "High priority unfinished tasks",
+                  "skip": [
+                    {
+                      "if": "todo",
+                      "value": [
+                        "WAIT",
+                        "KILL",
+                        "DONE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tags-todo",
+                  "match": "+work",
+                  "header": "Blocked tasks",
+                  "skip": [
+                    {
+                      "if": "todo",
+                      "value": [
+                        "TODO",
+                        "IN PROGRESS",
+                        "IN REVIEW",
+                        "KILL",
+                        "DONE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tags",
+                  "match": "+SCHEDULED=\"<today>\"",
+                  "header": "Today's tasks",
+                  "skip": [
+                    {
+                      "if": "todo",
+                      "value": [
+                        "DONE",
+                        "KILL"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tags",
+                  "match": "+SCHEDULED=\"<today>\"",
+                  "header": "Today's completed tasks",
+                  "skip": [
+                    {
+                      "if": "nottodo",
+                      "value": [
+                        "DONE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "tags",
+                  "match": "+SCHEDULED=\"<tomorrow>\"",
+                  "header": "Tomorrow's tasks"
+                },
+                {
+                  "type": "tags-todo",
+                  "match": "+work",
+                  "skip": [
+                    {
+                      "if": "priority",
+                      "value": "A",
+                      "scope": "subtree"
+                    },
+                    {
+                      "if": "nottodo",
+                      "value": [
+                        "TODO",
+                        "IN PROGRESS"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "p",
+              "description": "Personal agenda view",
+              "blocks": [
+                {
+                  "type": "tags",
+                  "match": "+personal+PRIORITY=\"A\"",
+                  "header": "High priority unfinished tasks",
+                  "skip": [
+                    {
+                      "if": "todo",
+                      "value": "done"
+                    }
+                  ]
+                },
+                {
+                  "type": "tags-todo",
+                  "match": "+personal",
+                  "skip": [
+                    {
+                      "if": "priority",
+                      "value": "A",
+                      "scope": "subtree"
+                    },
+                    {
+                      "if": "todo",
+                      "value": "done"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "orgflow.capture.templates": {
+          "type": "array",
+          "description": "Capture templates. A two-letter key sits under a one-letter group. Schedule is a date such as +0d.",
+          "default": [
+            {
+              "key": "t",
+              "description": "Todo",
+              "file": "~/git/private-personal/.todo.org",
+              "headline": "Todo list"
+            },
+            {
+              "key": "p",
+              "description": "Personal Todo",
+              "file": "~/git/private-personal/todo.org",
+              "headline": "Todo list",
+              "prepend": true
+            },
+            {
+              "key": "w",
+              "description": "Work"
+            },
+            {
+              "key": "ww",
+              "description": "Work Todo",
+              "file": "~/git/private-work/todo.org",
+              "headline": "Todo list",
+              "prepend": true
+            },
+            {
+              "key": "wt",
+              "description": "Work Todo - today",
+              "file": "~/git/private-work/todo.org",
+              "headline": "Todo list",
+              "prepend": true,
+              "schedule": "+0d"
+            },
+            {
+              "key": "wT",
+              "description": "Work Todo - tomorrow",
+              "file": "~/git/private-work/todo.org",
+              "headline": "Todo list",
+              "prepend": true,
+              "schedule": "+1d"
+            },
+            {
+              "key": "c",
+              "description": "Client"
+            },
+            {
+              "key": "cc",
+              "description": "Client Todo",
+              "file": "~/git/private-client/notes.org",
+              "headline": "Stuff to do",
+              "prepend": true
+            },
+            {
+              "key": "ct",
+              "description": "Client Todo - today",
+              "file": "~/git/private-client/notes.org",
+              "headline": "Stuff to do",
+              "prepend": true,
+              "schedule": "+0d"
+            },
+            {
+              "key": "cT",
+              "description": "Client Todo - tomorrow",
+              "file": "~/git/private-client/notes.org",
+              "headline": "Stuff to do",
+              "prepend": true,
+              "schedule": "+1d"
+            }
+          ]
+        },
+        "orgflow.journal.directory": {
+          "type": "string",
+          "default": "~/git/journal",
+          "description": "Directory holding journal files."
+        },
+        "orgflow.journal.fileFormat": {
+          "type": "string",
+          "default": "%b-%Y.org",
+          "description": "Journal file name format."
+        },
+        "orgflow.journal.dateFormat": {
+          "type": "string",
+          "default": "%a %e %b %Y",
+          "description": "Format of each day's heading."
+        },
+        "orgflow.journal.carryover": {
+          "type": "string",
+          "default": "TODO=\"TODO\"|TODO=\"PROJ\"|TODO=\"STRT\"|TODO=\"WAIT\"|TODO=\"HOLD\"",
+          "description": "Match expression for items moved to today's entry. Empty turns carryover off."
+        },
+        "orgflow.startupFolded": {
+          "type": "boolean",
+          "default": true,
+          "description": "Open org files showing top-level headings only, like org-startup-folded overview."
+        },
+        "orgflow.hideMarkup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Hide emphasis markers and link targets, revealing them on the cursor line."
+        },
+        "orgflow.projects.roots": {
+          "type": "array",
+          "description": "Where to look for projects. Each is a path, which checks its direct children, or { path, recursive }.",
+          "default": [
+            {
+              "path": "~/git",
+              "recursive": true
+            },
+            {
+              "path": "~/playground",
+              "recursive": true
+            },
+            "~/.config"
+          ]
+        },
+        "orgflow.projects.openIn": {
+          "type": "string",
+          "enum": [
+            "newWindow",
+            "currentWindow"
+          ],
+          "default": "newWindow",
+          "description": "Where SPC p p opens a project. An already open project just comes to the front."
+        },
+        "orgflow.whichKey.menu": {
+          "type": "array",
+          "description": "The leader menu. A node has a key and name, plus children or a command with optional args. Nodes with languages only appear in those languages.",
+          "default": [
+            {
+              "key": " ",
+              "name": "Find file in project",
+              "command": "workbench.action.quickOpen"
+            },
+            {
+              "key": "w",
+              "name": "Save file",
+              "command": "workbench.action.files.save"
+            },
+            {
+              "key": "X",
+              "name": "Org capture",
+              "command": "orgflow.capture"
+            },
+            {
+              "key": "b",
+              "name": "+buffer",
+              "children": [
+                {
+                  "key": "b",
+                  "name": "Switch buffer",
+                  "command": "workbench.action.showAllEditorsByMostRecentlyUsed"
+                },
+                {
+                  "key": "k",
+                  "name": "Kill buffer",
+                  "command": "workbench.action.closeActiveEditor"
+                },
+                {
+                  "key": "r",
+                  "name": "Revert buffer",
+                  "command": "workbench.action.files.revert"
+                },
+                {
+                  "key": "n",
+                  "name": "Next buffer",
+                  "command": "workbench.action.nextEditor"
+                },
+                {
+                  "key": "p",
+                  "name": "Previous buffer",
+                  "command": "workbench.action.previousEditor"
+                }
+              ]
+            },
+            {
+              "key": "f",
+              "name": "+file",
+              "children": [
+                {
+                  "key": "f",
+                  "name": "Find file",
+                  "command": "workbench.action.files.openFile"
+                },
+                {
+                  "key": "r",
+                  "name": "Recent files",
+                  "command": "workbench.action.openRecent"
+                },
+                {
+                  "key": "s",
+                  "name": "Save file",
+                  "command": "workbench.action.files.save"
+                }
+              ]
+            },
+            {
+              "key": "g",
+              "name": "+git",
+              "children": [
+                {
+                  "key": "g",
+                  "name": "Magit status",
+                  "command": "magit.status"
+                },
+                {
+                  "key": "s",
+                  "name": "Magit status",
+                  "command": "magit.status"
+                }
+              ]
+            },
+            {
+              "key": "n",
+              "name": "+notes",
+              "children": [
+                {
+                  "key": "j",
+                  "name": "+journal",
+                  "children": [
+                    {
+                      "key": "j",
+                      "name": "New journal entry",
+                      "command": "orgflow.journal.newEntry"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "o",
+              "name": "+org",
+              "children": [
+                {
+                  "key": "A",
+                  "name": "Agenda",
+                  "command": "orgflow.agenda"
+                },
+                {
+                  "key": "l",
+                  "name": "Insert link",
+                  "command": "orgflow.org.insertLink",
+                  "languages": [
+                    "org"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "p",
+              "name": "+project",
+              "children": [
+                {
+                  "key": "p",
+                  "name": "Switch project",
+                  "command": "orgflow.switchProject"
+                },
+                {
+                  "key": "b",
+                  "name": "Project buffers",
+                  "command": "workbench.action.showAllEditorsByMostRecentlyUsed"
+                },
+                {
+                  "key": "k",
+                  "name": "Kill project buffers",
+                  "command": "workbench.action.closeAllEditors"
+                },
+                {
+                  "key": "r",
+                  "name": "Recent project files",
+                  "command": "workbench.action.quickOpen"
+                },
+                {
+                  "key": "D",
+                  "name": "Project root in explorer",
+                  "command": "workbench.view.explorer"
+                }
+              ]
+            },
+            {
+              "key": "s",
+              "name": "+search",
+              "children": [
+                {
+                  "key": "s",
+                  "name": "Search buffer",
+                  "command": "actions.find"
+                },
+                {
+                  "key": "p",
+                  "name": "Search project",
+                  "command": "workbench.action.quickTextSearch"
+                },
+                {
+                  "key": "P",
+                  "name": "Search project (panel)",
+                  "command": "workbench.action.findInFiles"
+                },
+                {
+                  "key": "i",
+                  "name": "Search symbols",
+                  "command": "workbench.action.gotoSymbol"
+                },
+                {
+                  "key": "o",
+                  "name": "Search headings",
+                  "command": "workbench.action.gotoSymbol"
+                }
+              ]
+            },
+            {
+              "key": "m",
+              "name": "+org local",
+              "languages": [
+                "org",
+                "org-agenda"
+              ],
+              "children": [
+                {
+                  "key": "t",
+                  "name": "+todo",
+                  "children": [
+                    {
+                      "key": "t",
+                      "name": "Todo",
+                      "command": "orgflow.org.setTodo",
+                      "args": "TODO"
+                    },
+                    {
+                      "key": "p",
+                      "name": "In Progress",
+                      "command": "orgflow.org.setTodo",
+                      "args": "IN PROGRESS"
+                    },
+                    {
+                      "key": "w",
+                      "name": "In Review",
+                      "command": "orgflow.org.setTodo",
+                      "args": "IN REVIEW"
+                    },
+                    {
+                      "key": "W",
+                      "name": "Wait",
+                      "command": "orgflow.org.setTodo",
+                      "args": "WAIT"
+                    },
+                    {
+                      "key": "d",
+                      "name": "Done",
+                      "command": "orgflow.org.setTodo",
+                      "args": "DONE"
+                    },
+                    {
+                      "key": "m",
+                      "name": "Pick a state",
+                      "command": "orgflow.org.setTodo"
+                    }
+                  ]
+                },
+                {
+                  "key": "s",
+                  "name": "+schedule",
+                  "children": [
+                    {
+                      "key": "t",
+                      "name": "Today",
+                      "command": "orgflow.org.scheduleToday"
+                    },
+                    {
+                      "key": "T",
+                      "name": "Tomorrow",
+                      "command": "orgflow.org.scheduleTomorrow"
+                    },
+                    {
+                      "key": "s",
+                      "name": "Pick a date",
+                      "command": "orgflow.org.schedule"
+                    }
+                  ]
+                },
+                {
+                  "key": "d",
+                  "name": "Set deadline",
+                  "command": "orgflow.org.deadline"
+                },
+                {
+                  "key": "q",
+                  "name": "Set tags",
+                  "command": "orgflow.org.setTags",
+                  "languages": [
+                    "org"
+                  ]
+                },
+                {
+                  "key": "a",
+                  "name": "Align table",
+                  "command": "orgflow.org.alignTable",
+                  "languages": [
+                    "org"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "test": "npm run compile && node --test out/test/*.test.js",
+    "test:integration": "npm run compile && ./test/run-integration.sh",
+    "test:e2e": "node test/e2e/run.mjs",
+    "golden": "./test/golden/generate.sh",
+    "assets": "node scripts/generate-assets.js",
+    "package": "npm run compile && vsce package --skip-license --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.0",
+    "@types/vscode": "1.90.0",
+    "@vscode/vsce": "3.6.0",
+    "typescript": "5.8.3"
+  }
+}

@@ -13,22 +13,31 @@ case "$unameOS" in
 
 esac
 
-function link_keybindings() {
-  echo "Linking vscode keybindings for operating system $os"
-  case "$os" in
-    Mac*) vscode_keybindings_path="$HOME/Library/Application Support/Code/User/keybindings.json";;
-    Linux*) vscode_keybindings_path="$HOME/.config/Code - OSS/User/keybindings.json";;
-    *)
-      echo "Unknown operating system $os"
-      exit 1
-      ;;
-  esac
+case "$os" in
+  Mac*) vscode_user_directory="$HOME/Library/Application Support/Code/User";;
+  Linux*) vscode_user_directory="$HOME/.config/Code - OSS/User";;
+esac
 
-
-  dotfile_keybindings_path="$absolute_script_directory/keybindings.json"
-  echo "Linking dotfile keybindings $dotfile_keybindings_path to vscode path $vscode_keybindings_path"
-
-  ln -sf "$dotfile_keybindings_path" "$vscode_keybindings_path"
+function link_file() {
+  local file_name="$1"
+  echo "Linking vscode $file_name for operating system $os"
+  ln -sf "$absolute_script_directory/$file_name" "$vscode_user_directory/$file_name"
 }
 
-link_keybindings
+# Builds and installs the orgflow extension. Only runs with --extension, because it needs npm
+function install_orgflow() {
+  echo "Building and installing orgflow"
+  (
+    cd "$absolute_script_directory/orgflow" &&
+      npm ci &&
+      npm run package &&
+      code --install-extension "orgflow-$(node -p "require('./package.json').version").vsix" --force
+  )
+}
+
+link_file keybindings.json
+link_file settings.json
+
+if [[ "${1:-}" == "--extension" ]]; then
+  install_orgflow
+fi
