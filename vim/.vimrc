@@ -17,8 +17,7 @@ syntax on
 set hlsearch " use :nohl to remove highlighting after search
 set incsearch
 set ignorecase smartcase " Ignore case in searches unless a capital is present
-" Remove highlighting
-nnoremap <Space><Space> :noh<CR>
+" SPC SPC is find-file with Orgflow, so clearing search highlights is SPC s n
 
 set scrolloff=8 " start scrolling when cursor is 8 lines from the bottom
 
@@ -49,6 +48,18 @@ if $TERM == 'screen'
 endif
 set background=dark
 
+" Buffers, not tabs, as in Emacs. Unsaved buffers can stay open in the background.
+set hidden
+set showtabline=0
+set laststatus=2
+
+if has('termguicolors') && $COLORTERM =~# 'truecolor\|24bit'
+  set termguicolors
+  " Needed inside tmux, where Vim doesn't work these out for itself
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
 " Current line highlighting
 " set cursorline 
 " Highlight current line
@@ -77,15 +88,14 @@ noremap <S-h> gT
 nnoremap <leader>sc :setlocal spell spelllang=en<CR>:echo 'Run :set nospell remove highlighting'<CR>
 
 try
-  colorscheme solarized
+  colorscheme doom-one
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme desert
+  " Override search highlight colours
+  highlight Search ctermbg=LightYellow
+  " Override visual selection text color
+  highlight Visual ctermfg=LightYellow
 endtry
-
-" Override search highlight colours
-highlight Search ctermbg=LightYellow
-" Override visual selection text color
-highlight Visual ctermfg=LightYellow
 
 " When using git commit, start in insert mode - just like emacs
 autocmd FileType gitcommit exec 'autocmd VimEnter * startinsert'

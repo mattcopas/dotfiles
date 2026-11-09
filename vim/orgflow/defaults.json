@@ -1,0 +1,281 @@
+{
+  "agenda.deadlineWarningDays": 14,
+  "agenda.files": [
+    "~/git/private-personal",
+    "~/git/private-client",
+    "~/git/private-work"
+  ],
+  "agenda.views": [
+    {
+      "key": "c",
+      "description": "Simple agenda view",
+      "blocks": [
+        {
+          "type": "tags",
+          "match": "PRIORITY=\"A\"",
+          "header": "High priority unfinished tasks",
+          "skip": [
+            {
+              "if": "todo",
+              "value": "done"
+            }
+          ]
+        },
+        {
+          "type": "agenda"
+        },
+        {
+          "type": "alltodo",
+          "skip": [
+            {
+              "if": "priority",
+              "value": "A",
+              "scope": "subtree"
+            },
+            {
+              "if": "scheduled"
+            },
+            {
+              "if": "deadline"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "w",
+      "description": "Work agenda view",
+      "blocks": [
+        {
+          "type": "tags",
+          "match": "+work+PRIORITY=\"A\"",
+          "header": "High priority unfinished tasks",
+          "skip": [
+            {
+              "if": "todo",
+              "value": [
+                "WAIT",
+                "KILL",
+                "DONE"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tags-todo",
+          "match": "+work",
+          "header": "Blocked tasks",
+          "skip": [
+            {
+              "if": "todo",
+              "value": [
+                "TODO",
+                "IN PROGRESS",
+                "IN REVIEW",
+                "KILL",
+                "DONE"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tags",
+          "match": "+SCHEDULED=\"<today>\"",
+          "header": "Today's tasks",
+          "skip": [
+            {
+              "if": "todo",
+              "value": [
+                "DONE",
+                "KILL"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tags",
+          "match": "+SCHEDULED=\"<today>\"",
+          "header": "Today's completed tasks",
+          "skip": [
+            {
+              "if": "nottodo",
+              "value": [
+                "DONE"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tags",
+          "match": "+SCHEDULED=\"<tomorrow>\"",
+          "header": "Tomorrow's tasks"
+        },
+        {
+          "type": "tags-todo",
+          "match": "+work",
+          "skip": [
+            {
+              "if": "priority",
+              "value": "A",
+              "scope": "subtree"
+            },
+            {
+              "if": "nottodo",
+              "value": [
+                "TODO",
+                "IN PROGRESS"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "p",
+      "description": "Personal agenda view",
+      "blocks": [
+        {
+          "type": "tags",
+          "match": "+personal+PRIORITY=\"A\"",
+          "header": "High priority unfinished tasks",
+          "skip": [
+            {
+              "if": "todo",
+              "value": "done"
+            }
+          ]
+        },
+        {
+          "type": "tags-todo",
+          "match": "+personal",
+          "skip": [
+            {
+              "if": "priority",
+              "value": "A",
+              "scope": "subtree"
+            },
+            {
+              "if": "todo",
+              "value": "done"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "agenda.width": 100,
+  "capture.templates": [
+    {
+      "key": "t",
+      "description": "Todo",
+      "file": "~/git/private-personal/.todo.org",
+      "headline": "Todo list"
+    },
+    {
+      "key": "p",
+      "description": "Personal Todo",
+      "file": "~/git/private-personal/todo.org",
+      "headline": "Todo list",
+      "prepend": true
+    },
+    {
+      "key": "w",
+      "description": "Work"
+    },
+    {
+      "key": "ww",
+      "description": "Work Todo",
+      "file": "~/git/private-work/todo.org",
+      "headline": "Todo list",
+      "prepend": true
+    },
+    {
+      "key": "wt",
+      "description": "Work Todo - today",
+      "file": "~/git/private-work/todo.org",
+      "headline": "Todo list",
+      "prepend": true,
+      "schedule": "+0d"
+    },
+    {
+      "key": "wT",
+      "description": "Work Todo - tomorrow",
+      "file": "~/git/private-work/todo.org",
+      "headline": "Todo list",
+      "prepend": true,
+      "schedule": "+1d"
+    },
+    {
+      "key": "c",
+      "description": "Client"
+    },
+    {
+      "key": "cc",
+      "description": "Client Todo",
+      "file": "~/git/private-client/notes.org",
+      "headline": "Stuff to do",
+      "prepend": true
+    },
+    {
+      "key": "ct",
+      "description": "Client Todo - today",
+      "file": "~/git/private-client/notes.org",
+      "headline": "Stuff to do",
+      "prepend": true,
+      "schedule": "+0d"
+    },
+    {
+      "key": "cT",
+      "description": "Client Todo - tomorrow",
+      "file": "~/git/private-client/notes.org",
+      "headline": "Stuff to do",
+      "prepend": true,
+      "schedule": "+1d"
+    }
+  ],
+  "hideMarkup": true,
+  "journal.carryover": "TODO=\"TODO\"|TODO=\"PROJ\"|TODO=\"STRT\"|TODO=\"WAIT\"|TODO=\"HOLD\"",
+  "journal.dateFormat": "%a %e %b %Y",
+  "journal.directory": "~/git/journal",
+  "journal.fileFormat": "%b-%Y.org",
+  "projects.roots": [
+    {
+      "path": "~/git",
+      "recursive": true
+    },
+    {
+      "path": "~/playground",
+      "recursive": true
+    },
+    "~/.config"
+  ],
+  "startupFolded": true,
+  "todoKeywords": [
+    [
+      "TODO(t)",
+      "IN PROGRESS(p)",
+      "IN REVIEW(r)",
+      "LOOP",
+      "STRT(s)",
+      "WAIT(w)",
+      "HOLD(h)",
+      "IDEA(i)",
+      "|",
+      "DONE(d)",
+      "KILL(k)"
+    ],
+    [
+      "[ ](T)",
+      "[-](S)",
+      "[?](W)",
+      "|",
+      "[X](D)"
+    ],
+    [
+      "|",
+      "OKAY(o)",
+      "YES(y)",
+      "NO(n)"
+    ]
+  ]
+}
