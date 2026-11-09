@@ -234,12 +234,8 @@ function tagsBlock(
         minutes: null,
         endMinutes: null,
       });
-      // org-tags-match-list-sublevels is nil: a match hides its whole subtree.
-      let next = i + 1;
-      while (next < headings.length && headings[next].level > heading.level) {
-        next++;
-      }
-      i = next;
+      // org-tags-match-list-sublevels is t: a match doesn't hide its subtree.
+      i += 1;
     }
   }
   const header = block.header ?? `Headlines with TAGS match: ${block.match}`;

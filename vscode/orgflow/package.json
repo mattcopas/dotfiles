@@ -141,6 +141,14 @@
         "title": "Orgflow: Cycle Fold or Next Table Cell"
       },
       {
+        "command": "orgflow.org.shiftSelectionRight",
+        "title": "Orgflow: Demote Selected Headings, or Indent"
+      },
+      {
+        "command": "orgflow.org.shiftSelectionLeft",
+        "title": "Orgflow: Promote Selected Headings, or Unindent"
+      },
+      {
         "command": "orgflow.org.globalCycle",
         "title": "Orgflow: Cycle All Folds"
       },
@@ -221,6 +229,26 @@
         "key": "alt+k",
         "command": "orgflow.org.moveUp",
         "when": "editorTextFocus && editorLangId == org && vim.mode == 'Normal'"
+      },
+      {
+        "key": "shift+. shift+.",
+        "command": "orgflow.org.demote",
+        "when": "editorTextFocus && editorLangId == org && orgflow.onHeading && vim.mode == 'Normal'"
+      },
+      {
+        "key": "shift+, shift+,",
+        "command": "orgflow.org.promote",
+        "when": "editorTextFocus && editorLangId == org && orgflow.onHeading && vim.mode == 'Normal'"
+      },
+      {
+        "key": "shift+.",
+        "command": "orgflow.org.shiftSelectionRight",
+        "when": "editorTextFocus && editorLangId == org && (vim.mode == 'Visual' || vim.mode == 'VisualLine')"
+      },
+      {
+        "key": "shift+,",
+        "command": "orgflow.org.shiftSelectionLeft",
+        "when": "editorTextFocus && editorLangId == org && (vim.mode == 'Visual' || vim.mode == 'VisualLine')"
       },
       {
         "key": "alt+h",

@@ -40,4 +40,6 @@ Headlines with TAGS match: +work
   todo:       TODO Scheduled next month                                 :work::
   todo:       TODO Child inherits tags                          :work:project::
   todo:       IN PROGRESS Parent in progress                    :work::project:
+  todo:       TODO Nested below in progress                     :work:project::
+  todo:       IN PROGRESS Also in progress below                :work:project::
   todo:       TODO [#C] Low priority task                               :work::

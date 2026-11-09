@@ -614,7 +614,8 @@
         "entity.name.type.category.agenda"
       ],
       "settings": {
-        "foreground": "#4db5bd"
+        "foreground": "#84898e",
+        "fontStyle": ""
       }
     },
     {

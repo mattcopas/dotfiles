@@ -88,6 +88,16 @@
   },
   {
     "key": "tab",
+    "command": "orgflow.org.demote",
+    "when": "editorTextFocus && editorLangId == 'org' && orgflow.onHeading && vim.mode == 'Insert' && !suggestWidgetVisible && !inSnippetMode"
+  },
+  {
+    "key": "shift+tab",
+    "command": "orgflow.org.promote",
+    "when": "editorTextFocus && editorLangId == 'org' && orgflow.onHeading && vim.mode == 'Insert' && !suggestWidgetVisible && !inSnippetMode"
+  },
+  {
+    "key": "tab",
     "command": "orgflow.agenda.openBeside",
     "when": "editorTextFocus && editorLangId == 'org-agenda' && vim.mode == 'Normal'"
   },

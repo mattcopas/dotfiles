@@ -12,6 +12,7 @@ import {
   setPlanning,
   setTags,
   setTodo,
+  shiftHeadings,
   shiftPlanning,
 } from "../org/edits";
 import { fileNameToMonth, journalFileName, latestDayBefore } from "../org/journal";
@@ -467,5 +468,78 @@ describe("round trip on real org files", () => {
         }
       }
     }
+  });
+});
+
+describe("agenda grammar", () => {
+  const grammar = JSON.parse(readFileSync(join(__dirname, "../../syntaxes/org-agenda.tmLanguage.json"), "utf8"));
+  const prefix = new RegExp(grammar.repository.item.patterns[0].match.replace("\\G", "^"));
+  const parts = (line: string) => {
+    const match = line.slice(2).match(prefix);
+    assert.ok(match, line);
+    return { category: match[1], time: match[2], leader: match[3], done: match[4], todo: match[5], rest: line.slice(2 + match[0].length) };
+  };
+
+  test("only the item's own keyword is a keyword", () => {
+    const line = parts("  all:        TODO make new items have TODO status and WAIT for DONE");
+    assert.equal(line.todo, "TODO");
+    assert.equal(line.rest, " make new items have TODO status and WAIT for DONE");
+  });
+
+  test("a title that merely contains a keyword has none", () => {
+    const line = parts("  all:        Check the TODO list");
+    assert.equal(line.todo, undefined);
+    assert.equal(line.done, undefined);
+  });
+
+  test("a word that starts with a keyword isn't one", () => {
+    assert.equal(parts("  all:        TODOS for later").todo, undefined);
+    assert.equal(parts("  all:        NOTES for later").done, undefined);
+  });
+
+  test("the keyword is still found after a time and a leader", () => {
+    assert.deepEqual(parts("  work:        8:00...... Scheduled:  IN PROGRESS Task"), {
+      category: "work:", time: "8:00......", leader: "Scheduled:", done: undefined, todo: "IN PROGRESS", rest: " Task",
+    });
+    assert.equal(parts("  work:       14:00-15:30 DONE Task").done, "DONE");
+    assert.equal(parts("  work:       In   3 d.:  [ ] Task").todo, "[ ]");
+    assert.equal(parts("  work:        2 d. ago:  KILL Task").done, "KILL");
+    assert.equal(parts("  work:       Sched. 2x:  WAIT Task").todo, "WAIT");
+  });
+
+  test("every item in the real org output has its keyword in the prefix", () => {
+    const walk = (dir: string): string[] =>
+      readdirSync(dir, { withFileTypes: true }).flatMap((entry) =>
+        entry.isDirectory() ? walk(join(dir, entry.name)) : [join(dir, entry.name)],
+      );
+    const keyword = /\s(?:TODO|IN PROGRESS|IN REVIEW|LOOP|STRT|WAIT|HOLD|IDEA|DONE|KILL|OKAY|YES|NO)\s/;
+    let found = 0;
+    for (const file of walk(join(__dirname, "../../test/golden/expected"))) {
+      for (const line of readFileSync(file, "utf8").split("\n")) {
+        if (/^ {2}\S+:\s/.test(line) && keyword.test(line)) {
+          const item = parts(line);
+          assert.ok(item.todo || item.done, line);
+          found += 1;
+        }
+      }
+    }
+    assert.ok(found > 10, `only ${found} lines`);
+});
+});
+
+describe("shifting headings in a range", () => {
+  const config = makeConfig([["TODO", "|", "DONE"]]);
+  const text = "* One\nbody\n** TODO Two\n  indented\n* Three\n";
+
+  test("adds a star to each heading and leaves other lines alone", () => {
+    assert.equal(shiftHeadings(text, 0, 4, 1, config), "** One\nbody\n*** TODO Two\n  indented\n** Three\n");
+  });
+
+  test("only touches the range", () => {
+    assert.equal(shiftHeadings(text, 2, 3, 1, config), "* One\nbody\n*** TODO Two\n  indented\n* Three\n");
+  });
+
+  test("level 1 headings can't lose their star", () => {
+    assert.equal(shiftHeadings(text, 0, 4, -1, config), "* One\nbody\n* TODO Two\n  indented\n* Three\n");
   });
 });

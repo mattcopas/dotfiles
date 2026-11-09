@@ -10,6 +10,7 @@ import {
   setTags,
   setTodo,
   shiftHeading,
+  shiftHeadings,
   shiftPlanning,
   shiftSubtree,
 } from "../org/edits";
@@ -169,8 +170,8 @@ async function structureCommand(
   try {
     const result = run(normalized(editor.document), line);
     if (typeof result === "string") {
-      await replaceInDocument(editor.document, result);
       const shift = result.split("\n")[line].length - editor.document.lineAt(line).text.length;
+      await replaceInDocument(editor.document, result);
       moveCursor(editor, line, Math.max(0, character + shift));
     } else {
       await replaceInDocument(editor.document, result.text);
@@ -179,6 +180,25 @@ async function structureCommand(
   } catch (error) {
     report(error);
   }
+}
+
+// Visual > and <. As in evil-org, a selection that starts on a heading shifts its
+// headings, and any other selection indents as usual.
+async function shiftSelection(delta: 1 | -1) {
+  const editor = orgEditor();
+  if (!editor) {
+    return;
+  }
+  const { start, end, active } = editor.selection;
+  const onHeading = (line: number) => !!parseHeadingLine(editor.document.lineAt(line).text, orgConfig());
+  if (!onHeading(start.line) && !onHeading(active.line)) {
+    await vscode.commands.executeCommand("type", { text: delta > 0 ? ">" : "<" });
+    return;
+  }
+  const text = normalized(editor.document);
+  await replaceInDocument(editor.document, shiftHeadings(text, start.line, end.line, delta, orgConfig()));
+  await vscode.commands.executeCommand("extension.vim_escape");
+  moveCursor(editor, start.line, 0);
 }
 
 async function tableTab(editor: vscode.TextEditor) {
@@ -253,6 +273,7 @@ function updateContext(editor: vscode.TextEditor | undefined) {
   const isOrg = editor?.document.languageId === "org";
   const line = isOrg && editor ? editor.document.lineAt(editor.selection.active.line).text : "";
   void vscode.commands.executeCommand("setContext", "orgflow.inTable", isOrg && isTableLine(line));
+  void vscode.commands.executeCommand("setContext", "orgflow.onHeading", isOrg && !!parseHeadingLine(line, orgConfig()));
   void vscode.commands.executeCommand(
     "setContext",
     "orgflow.onLink",
@@ -306,6 +327,8 @@ export function activateOrgCommands(context: vscode.ExtensionContext) {
         moveSubtree(text, line, "up", orgConfig()),
       ),
     ),
+    register("orgflow.org.shiftSelectionRight", () => shiftSelection(1)),
+    register("orgflow.org.shiftSelectionLeft", () => shiftSelection(-1)),
     register("orgflow.org.promote", () =>
       structureCommand(null, (text, line) => shiftHeading(text, line, -1, orgConfig())),
     ),

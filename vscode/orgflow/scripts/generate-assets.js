@@ -266,7 +266,7 @@ const tokenColors = [
   token(["constant.other.leader.agenda"], c.orange),
   token(["comment.grid.agenda"], c.base5),
   token(["entity.name.function.now.agenda"], c.red),
-  token(["entity.name.type.category.agenda"], c.teal),
+  token(["entity.name.type.category.agenda"], docComment, ""),
   token(["constant.other.priority.agenda"], c.red),
   token(["comment.separator.agenda"], c.base4),
 ];
@@ -447,14 +447,22 @@ const agendaGrammar = {
   repository: {
     item: {
       patterns: [
-        { match: "\\G\\S+:", name: "entity.name.type.category.agenda" },
-        { match: "[ \\d]\\d:\\d\\d(?:\\.{6}|-\\d+:\\d\\d)", name: "constant.other.time.agenda" },
+        // One match for the whole prefix, so that words like TODO later in a title stay
+        // plain text. Only the word straight after the prefix is the item's keyword.
         {
-          match: "(?:Scheduled:|Deadline:|Sched\\.\\s*\\d+x:|In\\s+\\d+ d\\.:|\\s*\\d+ d\\. ago:)",
-          name: "constant.other.leader.agenda",
+          match:
+            "\\G(\\S+:)\\s+" +
+            "(?:(\\d{1,2}:\\d\\d(?:\\.{6}|-\\d{1,2}:\\d\\d))\\s+)?" +
+            "(?:(Scheduled:|Deadline:|Sched\\.\\s*\\d+x:|In\\s+\\d+ d\\.:|\\d+ d\\. ago:)\\s+)?" +
+            `(?:(${agendaKeywords.done})(?=\\s|$)|(${agendaKeywords.todo})(?=\\s|$))?`,
+          captures: {
+            1: { name: "entity.name.type.category.agenda" },
+            2: { name: "constant.other.time.agenda" },
+            3: { name: "constant.other.leader.agenda" },
+            4: { name: "keyword.done.agenda" },
+            5: { name: "keyword.todo.agenda" },
+          },
         },
-        { match: `(?<=\\s)(?:${agendaKeywords.done})(?=\\s|$)`, name: "keyword.done.agenda" },
-        { match: `(?<=\\s)(?:${agendaKeywords.todo})(?=\\s|$)`, name: "keyword.todo.agenda" },
         { match: "\\[#[A-Z0-9]+\\]", name: "constant.other.priority.agenda" },
         { match: "\\s(:[\\w@#%:]+:)$", captures: { 1: { name: "entity.name.tag.agenda" } } },
       ],

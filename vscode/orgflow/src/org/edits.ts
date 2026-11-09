@@ -264,6 +264,27 @@ export function shiftHeading(
   return lines.join("\n");
 }
 
+/**
+ * Shifts every heading in a range of lines, leaving other lines alone. A level 1 heading
+ * can't be promoted, so it stays as it is.
+ */
+export function shiftHeadings(
+  text: string,
+  first: number,
+  last: number,
+  delta: 1 | -1,
+  config: OrgConfig,
+): string {
+  const lines = text.split("\n");
+  for (let line = first; line <= last && line < lines.length; line++) {
+    const parsed = parseHeadingLine(lines[line], config);
+    if (parsed && parsed.level + delta >= 1) {
+      lines[line] = shiftStars(lines[line], delta);
+    }
+  }
+  return lines.join("\n");
+}
+
 /** org-shiftmetaleft and org-shiftmetaright: changes the whole subtree. */
 export function shiftSubtree(
   text: string,

@@ -204,6 +204,77 @@ try {
   key("Escape");
   await sleep(300);
 
+  // Indenting a heading changes its stars, and only its stars.
+  const SHIFT = join(W, "org/shift.org");
+  writeFileSync(SHIFT, "* Heading one\nbody\n** Second\n* Third\n");
+  execFileSync("code", [...CODE_ARGS, "--reuse-window", SHIFT], { env, stdio: "ignore" });
+  await waitFor(async () => /shift\.org/.test(await ev("document.title")), 8000);
+  await sleep(1500);
+  focusWin();
+  key("Escape");
+  await sleep(200);
+  key("z shift+r");
+  await sleep(500);
+  const saved = async () => {
+    key("Escape");
+    await sleep(200);
+    key("space w");
+    await sleep(700);
+    return readFileSync(SHIFT, "utf8");
+  };
+  const shiftKeys = async (keys) => {
+    key(keys);
+    await sleep(500);
+    return saved();
+  };
+  key("g g");
+  await sleep(300);
+  check(">> adds a star", (await shiftKeys("greater greater")).startsWith("** Heading one\n"));
+  check(">> again adds another", (await shiftKeys("greater greater")).startsWith("*** Heading one\n"));
+  check("<< removes one", (await shiftKeys("less less")).startsWith("** Heading one\n"));
+  check("<< removes the next", (await shiftKeys("less less")).startsWith("* Heading one\n"));
+  check("<< stops at one star", (await shiftKeys("less less")).startsWith("* Heading one\n"));
+  key("Escape");
+  await sleep(300);
+  key("j");
+  await sleep(300);
+  const indented = await shiftKeys("greater greater");
+  check(">> on body text still indents", /\n +body\n/.test(indented), JSON.stringify(indented));
+  check("<< on body text still unindents", (await shiftKeys("less less")).includes("\nbody\n"));
+  key("g g");
+  await sleep(300);
+  key("shift+v j j j");
+  await sleep(300);
+  check("Visual > adds a star to each heading only", (await shiftKeys("greater")) === "** Heading one\nbody\n*** Second\n** Third\n");
+  key("g g");
+  await sleep(300);
+  key("shift+v j j j");
+  await sleep(300);
+  check("Visual < removes them", (await shiftKeys("less")) === "* Heading one\nbody\n** Second\n* Third\n");
+  key("g g");
+  await sleep(300);
+  key("j j");
+  await sleep(300);
+  key("shift+a");
+  await sleep(300);
+  key("Tab");
+  await sleep(600);
+  type("X");
+  await sleep(300);
+  const tabbed = await saved();
+  check("TAB in Insert mode adds a star and keeps the cursor", tabbed.includes("\n*** SecondX\n"), JSON.stringify(tabbed));
+  key("shift+a");
+  await sleep(300);
+  key("shift+Tab");
+  await sleep(600);
+  const untabbed = await saved();
+  check("S-TAB in Insert mode removes one", untabbed.includes("\n** SecondX\n"), JSON.stringify(untabbed));
+  execFileSync("code", [...CODE_ARGS, "--reuse-window", NOTE], { env, stdio: "ignore" });
+  await sleep(1500);
+  focusWin();
+  key("Escape");
+  await sleep(300);
+
   // TAB cycling with a real key. Put the cursor on the first heading.
   key("g g");
   await sleep(150);

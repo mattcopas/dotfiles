@@ -46,6 +46,9 @@ In an org file:
 |---|---|
 | `TAB` | Cycle this subtree, or align a table and go to the next cell |
 | `S-TAB` | Cycle overview, contents, show all |
+| `>>` / `<<` on a heading | Add / remove a star, as `M-l` and `M-h` do. Elsewhere they indent as usual. Other motions, such as `>j`, do nothing on a heading |
+| `>` / `<` in Visual mode | Add / remove a star on each selected heading, if the selection starts on one or the cursor is on one |
+| `TAB` / `S-TAB` on a heading in Insert mode | Add / remove a star |
 | `M-j` / `M-k` | Move subtree down / up (or drag the line, off a heading) |
 | `M-h` / `M-l` | Promote / demote this heading |
 | `M-H` / `M-L` | Promote / demote the whole subtree |
