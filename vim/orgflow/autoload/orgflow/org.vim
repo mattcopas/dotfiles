@@ -203,6 +203,59 @@ export def Promote(delta: number, subtree: bool)
   endif
 enddef
 
+# Indenting a heading changes its stars, as evil-org does: a range that starts on a
+# heading shifts its headings, and any other range indents as usual.
+def ShiftRange(first: number, last: number, delta: number)
+  var column = col('.')
+  var cfg = config.OrgConfig()
+  if empty(parser.ParseHeadingLine(getline(first), cfg)) && empty(parser.ParseHeadingLine(getline('.'), cfg))
+    execute printf('silent :%d,%d%s', first, last, delta > 0 ? '>' : '<')
+    return
+  endif
+  var lines = files.BufferLines(bufnr())
+  var after = edits.ShiftHeadings(lines, first - 1, last - 1, delta, cfg)
+  if after == lines
+    echo 'Already at the top level'
+    return
+  endif
+  files.ApplyToBuffer(bufnr(), after)
+  cursor(first, first == last ? max([1, column + delta]) : 1)
+  silent! normal! zv
+enddef
+
+export def ShiftRightOperator(_: string)
+  ShiftRange(line("'["), line("']"), 1)
+enddef
+
+export def ShiftLeftOperator(_: string)
+  ShiftRange(line("'["), line("']"), -1)
+enddef
+
+# Going through an operator makes counts, motions and `.` work as they do for > and <.
+export def ShiftOperator(delta: number): string
+  &operatorfunc = delta > 0 ? 'orgflow#org#ShiftRightOperator' : 'orgflow#org#ShiftLeftOperator'
+  return 'g@'
+enddef
+
+export def ShiftVisual(delta: number)
+  var first = min([line('v'), line('.')])
+  var last = max([line('v'), line('.')])
+  execute "normal! \<Esc>"
+  ShiftRange(first, last, delta)
+enddef
+
+# TAB and S-TAB on a heading in Insert mode, with the cursor staying on the same text.
+def ShiftInInsert(delta: number)
+  var lnum = line('.')
+  var lines = files.BufferLines(bufnr())
+  var after = edits.ShiftHeadings(lines, lnum - 1, lnum - 1, delta, config.OrgConfig())
+  if after != lines
+    var column = col('.')
+    files.ApplyToBuffer(bufnr(), after)
+    cursor(lnum, column + delta)
+  endif
+enddef
+
 def TableTab()
   var lnum = line('.')
   var lines = files.BufferLines(bufnr())
@@ -218,6 +271,10 @@ enddef
 
 export def Cycle()
   var lnum = line('.')
+  if foldclosed(lnum) > 0
+    fold.OpenClosed(lnum)
+    return
+  endif
   var text = getline(lnum)
   if table.IsTableLine(text)
     TableTab()
@@ -240,8 +297,18 @@ enddef
 export def InsertTab()
   if table.IsTableLine(getline('.'))
     TableTab()
+  elseif parser.IsHeadingLine(getline('.'))
+    ShiftInInsert(1)
   else
     feedkeys("\<Tab>", 'nt')
+  endif
+enddef
+
+export def InsertShiftTab()
+  if parser.IsHeadingLine(getline('.'))
+    ShiftInInsert(-1)
+  else
+    feedkeys("\<S-Tab>", 'nt')
   endif
 enddef
 
@@ -403,7 +470,8 @@ export def Setup()
   setlocal foldmethod=expr
   setlocal foldexpr=orgflow#fold#Expr()
   setlocal foldtext=orgflow#fold#Text()
-  &l:fillchars = trim(substitute(&fillchars, 'fold:[^,]*,\?', '', '') .. ',fold: ', ',', 1)
+  setlocal foldminlines=0
+  &l:fillchars = trim(substitute(&fillchars, '\%(^\|,\)fold:[^,]*', '', '') .. ',fold: ', ',', 1)
   setlocal wrap linebreak breakindent
   setlocal autoread
   setlocal commentstring=#\ %s
@@ -425,6 +493,13 @@ export def Setup()
   nnoremap <buffer> <silent> <S-Tab> <Cmd>OrgGlobalCycle<CR>
   nnoremap <buffer> <silent> <CR> <Cmd>OrgEnter<CR>
   inoremap <buffer> <silent> <Tab> <Cmd>call orgflow#org#InsertTab()<CR>
+  inoremap <buffer> <silent> <S-Tab> <Cmd>call orgflow#org#InsertShiftTab()<CR>
+  nnoremap <buffer> <silent> <expr> > orgflow#org#ShiftOperator(1)
+  nnoremap <buffer> <silent> <expr> <lt> orgflow#org#ShiftOperator(-1)
+  nnoremap <buffer> <silent> <expr> >> orgflow#org#ShiftOperator(1) .. '_'
+  nnoremap <buffer> <silent> <expr> <lt><lt> orgflow#org#ShiftOperator(-1) .. '_'
+  xnoremap <buffer> <silent> > <Cmd>call orgflow#org#ShiftVisual(1)<CR>
+  xnoremap <buffer> <silent> <lt> <Cmd>call orgflow#org#ShiftVisual(-1)<CR>
   nnoremap <buffer> <silent> <M-j> <Cmd>OrgMoveDown<CR>
   nnoremap <buffer> <silent> <M-k> <Cmd>OrgMoveUp<CR>
   nnoremap <buffer> <silent> <M-h> <Cmd>OrgPromote<CR>

@@ -35,12 +35,22 @@ def Class(name: string, done: bool): string
   return 'orgAgendaTodo'
 enddef
 
+# Only the word straight after the category, time and leader is the item's keyword, so
+# words like TODO later in a title stay plain text.
+const TIME = '\d\{1,2}:\d\{2}\%(\.\{6}\|-\d\{1,2}:\d\{2}\)'
+const LEADER = 'Scheduled:\|Deadline:\|Sched\. *\d\+x:\|In \+\d\+ d\.:\|\d\+ d\. ago:'
+const PREFIX = printf('\%%(^  \S\{-}:\s\+\%%(%s\s\+\)\=\%%(\%%(%s\)\s\+\)\=\)\@<=', TIME, LEADER)
+
+def Keyword(name: string, done: bool)
+  execute printf('syntax match %s /%s%s\%%(\s\|$\)\@=/ contained', Class(name, done), escape(PREFIX, '/'), escape(name, '\/.*$^~[]'))
+enddef
+
 for sequence in config.OrgConfig().sequences
   for name in sequence.todo
-    execute printf('syntax match %s /\s\zs%s\ze\s/ contained', Class(name, false), escape(name, '\/.*$^~[]'))
+    Keyword(name, false)
   endfor
   for name in sequence.done
-    execute printf('syntax match %s /\s\zs%s\ze\s/ contained', Class(name, true), escape(name, '\/.*$^~[]'))
+    Keyword(name, true)
   endfor
 endfor
 

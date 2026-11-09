@@ -192,6 +192,21 @@ export def ShiftHeading(input: list<string>, line: number, delta: number, config
   return lines
 enddef
 
+# Shifts every heading in a range of lines, leaving other lines alone. A level 1 heading
+# can't be promoted, so it stays as it is.
+export def ShiftHeadings(input: list<string>, first: number, last: number, delta: number, config: dict<any>): list<string>
+  var lines = copy(input)
+  var line = first
+  while line <= last && line < len(lines)
+    var parsed = parser.ParseHeadingLine(lines[line], config)
+    if !empty(parsed) && parsed.level + delta >= 1
+      lines[line] = ShiftStars(lines[line], delta)
+    endif
+    line += 1
+  endwhile
+  return lines
+enddef
+
 # org-shiftmetaleft and org-shiftmetaright: changes the whole subtree.
 export def ShiftSubtree(input: list<string>, line: number, delta: number, config: dict<any>): list<string>
   var found = HeadingOrThrow(input, line, config)

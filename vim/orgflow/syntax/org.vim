@@ -23,9 +23,13 @@ while level <= 8
   level += 1
 endwhile
 
-# Leading stars become blanks, keeping the indentation, as org-hide-leading-stars does.
+# Leading stars are drawn in the background colour, as org-hide-leading-stars does. This
+# isn't conceal, because Vim shows concealed text on the cursor line and collapses a run
+# of it into one blank, which would move the title as the cursor lands on the line.
 syntax match orgStars /^\*\+ /me=e-1 contained contains=orgLeadingStars
-syntax match orgLeadingStars /^\*\+\ze\*/ conceal cchar=  contained
+if config.Get('hideMarkup')
+  syntax match orgLeadingStars /^\*\+\ze\*/ contained
+endif
 
 # Keyword classes follow Doom: active work, then blocked work, then finished work.
 def KeywordClass(name: string, done: bool): string
@@ -131,6 +135,7 @@ highlight default link orgHeading6 Function
 highlight default link orgHeading7 Title
 highlight default link orgHeading8 Identifier
 highlight default link orgStars Title
+highlight default link orgLeadingStars Ignore
 highlight default link orgKeywordTodo Todo
 highlight default link orgKeywordActive WarningMsg
 highlight default link orgKeywordWait Type

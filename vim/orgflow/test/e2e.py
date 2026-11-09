@@ -170,7 +170,9 @@ def build_home():
 
 def test_startup():
     start(str(home / "doc.org"))
-    expect("org file opens in overview", r"^\* TODO First :tag: …")
+    expect("org file opens in overview", r"^\* TODO First\s+:tag:\s*$")
+    expect("with its content folded", r"^ … \d+ lines")
+    check_value("headings keep their real colour when closed", "synIDattr(synID(search('^\\* TODO First', 'n'), 1, 1), 'name') !=# ''", "1")
     expect_gone("nothing wrong at startup", r"^(Error|E\d+)")
     check_value("the colorscheme loaded from the package", "g:colors_name", "'doom-one'")
     check_value("the filetype is org", "&filetype", "'org'")
@@ -181,7 +183,8 @@ def test_startup():
 
 def test_folding_keys():
     start(str(home / "doc.org"))
-    expect("starts folded", r"^\* Second …")
+    expect("starts folded", r"^\* Second")
+    expect_gone("children hidden", r"Child one")
     send("g", "g", "j")
     send("Tab")
     expect("TAB shows children", r"CHILDREN")
@@ -250,6 +253,54 @@ def test_tab_off_a_heading():
     check_value("Ctrl-o goes back", "line('.')", "7")
     send("Tab")
     check_value("TAB jumps forward", "line('.')", "14")
+
+
+def test_headings_stay_put():
+    path = home / "levels.org"
+    path.write_text("* Top\n** Child\n*** Grandchild\n**** TODO Deep\n")
+    start(str(path))
+    command("normal! zRgg")
+    columns = "map(['Top', 'Child', 'Grandchild', 'TODO Deep'], {_, w -> screenpos(0, search(w, 'n'), match(getline(search(w, 'n')), w) + 1).col})"
+    check_value("each level is indented one further", f"{columns}", "[3, 4, 5, 6]")
+    for lnum in (2, 3, 4):
+        command(f"call cursor({lnum}, 1)")
+        check_value(f"titles don't move with the cursor on line {lnum}", f"{columns}", "[3, 4, 5, 6]")
+    check_value(
+        "leading stars are in the background colour",
+        "synIDattr(synIDtrans(synID(3, 1, 1)), 'fg') ==# synIDattr(hlID('Normal'), 'bg')",
+        "1",
+    )
+    check_value(
+        "and the last star isn't",
+        "synIDattr(synIDtrans(synID(3, 3, 1)), 'fg') ==# synIDattr(hlID('Normal'), 'bg')",
+        "0",
+    )
+    check_value("the file itself is untouched", "&modified", "0")
+
+
+def test_indenting_a_heading():
+    path = home / "shifting.org"
+    path.write_text("* Heading one\nbody\n** Second\n* Third\n")
+    start(str(path))
+    command("normal! zRgg")
+    send(">", ">")
+    check_value(">> adds a star", "getline(1)", "'** Heading one'")
+    send("<", "<")
+    check_value("<< removes it", "getline(1)", "'* Heading one'")
+    command("call cursor(3, 1)")
+    send("A")
+    send("Tab")
+    type_text("X")
+    send("Escape")
+    check_value("Insert TAB adds a star", "getline(3)", "'*** SecondX'")
+    send("A")
+    send("BTab")
+    send("Escape")
+    check_value("Insert S-TAB removes one", "getline(3)", "'** SecondX'")
+    command("call cursor(1, 1)")
+    send("V", "j", "j", "j", ">")
+    check_value("Visual > shifts every heading and no body line", "getline(1, 4)", "['** Heading one', 'body', '*** SecondX', '** Third']")
+    check_value("no error", "execute('messages') =~# 'E[0-9]\\+:'", "0")
 
 
 def test_concealing():
@@ -418,7 +469,7 @@ def test_agenda():
     send("Space", "m", "t", "W")
     expect_file("SPC m t W sets WAIT from the agenda", home / "git/private-work/todo.org", "** WAIT Fresh from outside")
     send("q")
-    expect("q returns", r"\* Second …")
+    expect("q returns", r"\* Second")
     # The simple view has the week, and [[ moves it.
     (home / "git/private-work/todo.org").write_text("* TODO Dated\nSCHEDULED: <2026-11-11 Wed>\n")
     send("Space", "o", "A", "c")
@@ -575,6 +626,8 @@ TESTS = [
     test_startup,
     test_folding_keys,
     test_tab_off_a_heading,
+    test_headings_stay_put,
+    test_indenting_a_heading,
     test_concealing,
     test_which_key,
     test_fast_typing_and_projects,

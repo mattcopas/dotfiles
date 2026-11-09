@@ -2,9 +2,11 @@ vim9script
 # Org folding on Vim's own folds. Vim can report fold state, so TAB works out where it
 # is in the cycle from the buffer each time and can't drift out of step.
 #
-# A closed fold always takes one screen line. So a parent's body gets its own fold only
-# when it has child headings, because that's the only case needing one: closing a leaf
-# heading hides its body without any extra line.
+# Vim draws a closed fold in one flat colour, so a heading is never inside its own fold:
+# only what's under it folds, which keeps headings and keywords in their real colours. A
+# heading of level N sits at fold level N - 1 and its content at level N. That closed
+# content needs a row of its own, because a closed fold always takes a screen line. A
+# parent's body has a further fold inside that, so it can hide while its children show.
 
 const DRAWER_START = '\c^\s*:\(PROPERTIES\|LOGBOOK\):\s*$'
 const DRAWER_END = '\c^\s*:END:\s*$'
@@ -51,16 +53,17 @@ export def Expr(): string
   var lnum = v:lnum
   var line = getline(lnum)
   var level = strlen(matchstr(line, '^\*\+\ze '))
+  var above = lnum > 1 ? strlen(matchstr(getline(lnum - 1), '^\*\+\ze ')) : 0
   if level > 0
-    return '>' .. level
+    # A child straight under its parent is the first line of the parent's content.
+    return above > 0 && above < level ? '>' .. (level - 1) : string(level - 1)
   endif
-  if lnum > 1
-    var above = strlen(matchstr(getline(lnum - 1), '^\*\+\ze '))
-    if above > 0 && BodyHasChildren(lnum, above)
-      return '>' .. (above + 1)
-    endif
+  var opensBlock = line =~ DRAWER_START || line =~ BLOCK_START
+  if above > 0
+    var depth = BodyHasChildren(lnum, above) ? above + 1 : above
+    return '>' .. (opensBlock ? depth + 1 : depth)
   endif
-  if line =~ DRAWER_START || line =~ BLOCK_START
+  if opensBlock
     return 'a1'
   endif
   if line =~ DRAWER_END || line =~ BLOCK_END
@@ -71,10 +74,7 @@ enddef
 
 export def Text(): string
   var count = v:foldend - v:foldstart + 1
-  var line = getline(v:foldstart)
-  return Level(v:foldstart) > 0
-    ? line .. ' …'
-    : matchstr(line, '^\s*') .. '… ' .. count .. ' lines'
+  return repeat(' ', v:foldlevel) .. printf('… %d %s', count, count == 1 ? 'line' : 'lines')
 enddef
 
 # Closes one fold at a line. Calling this twice on a line would close its parent.
@@ -82,17 +82,40 @@ def CloseAt(lnum: number)
   execute 'silent! :' .. lnum .. 'foldclose'
 enddef
 
-# Closes every fold below a heading but leaves that heading open. Works bottom up, so
-# each close hits the innermost fold, which can't close a parent by accident.
-def CloseBelow(start: number, end: number)
-  execute 'silent! :' .. start .. ',' .. end .. 'foldopen!'
+# Closes everything under a heading. Its content can begin with folds nested inside the
+# outer one, so this closes one level at a time until the whole subtree is covered.
+def CloseContent(heading: number)
+  var end = SubtreeEnd(heading)
+  if end == heading
+    return
+  endif
+  var tries = 0
+  while foldclosedend(heading + 1) < end && tries < 12
+    CloseAt(heading + 1)
+    tries += 1
+  endwhile
+enddef
+
+def IsContentClosed(heading: number): bool
+  var end = SubtreeEnd(heading)
+  return end > heading && foldclosedend(heading + 1) >= end
+enddef
+
+# Shows a heading's child headings, with everything under each of them closed. Works
+# bottom up, so each close hits the innermost fold.
+def ShowChildren(start: number, end: number)
+  execute 'silent! :' .. (start + 1) .. ',' .. end .. 'foldopen!'
   var lnum = end
   while lnum > start
-    if Level(lnum) > 0 || foldlevel(lnum) > foldlevel(lnum - 1)
-      CloseAt(lnum)
+    if Level(lnum) > 0
+      CloseContent(lnum)
     endif
     lnum -= 1
   endwhile
+  # The heading's own body, which comes before its first child.
+  if Level(start + 1) == 0
+    CloseAt(start + 1)
+  endif
 enddef
 
 # Opens a range, but keeps drawers shut, as org does.
@@ -107,10 +130,14 @@ def OpenAll(start: number, end: number)
   endwhile
 enddef
 
-def HasClosedHeadingBelow(start: number, end: number): bool
+def IsClosedDrawer(lnum: number): bool
+  return IsDrawerStart(foldclosed(lnum)) && getline(foldclosedend(lnum)) =~ DRAWER_END
+enddef
+
+def HasClosedContent(start: number, end: number): bool
   var lnum = start + 1
   while lnum <= end
-    if foldclosed(lnum) > 0 && !IsDrawerStart(foldclosed(lnum))
+    if foldclosed(lnum) > 0 && !IsClosedDrawer(lnum)
       return true
     endif
     var closedEnd = foldclosedend(lnum)
@@ -136,20 +163,32 @@ export def Cycle(lnum: number): string
   if end == lnum
     return 'EMPTY'
   endif
-  if foldclosed(lnum) > 0
+  if IsContentClosed(lnum)
     if HasChildHeading(lnum, end)
-      CloseBelow(lnum, end)
+      ShowChildren(lnum, end)
       return 'CHILDREN'
     endif
-    OpenAll(lnum, end)
+    OpenAll(lnum + 1, end)
     return 'SUBTREE'
   endif
-  if HasClosedHeadingBelow(lnum, end)
-    OpenAll(lnum, end)
+  if HasClosedContent(lnum, end)
+    OpenAll(lnum + 1, end)
     return 'SUBTREE'
   endif
-  CloseAt(lnum)
+  CloseContent(lnum)
   return 'FOLDED'
+enddef
+
+# TAB on the "… N lines" row of a closed fold opens it.
+export def OpenClosed(lnum: number)
+  var start = foldclosed(lnum)
+  var end = foldclosedend(lnum)
+  if IsClosedDrawer(lnum)
+    execute 'silent! :' .. start .. 'foldopen'
+  else
+    OpenAll(start, end)
+  endif
+  cursor(start, 1)
 enddef
 
 def IsOverview(): bool
@@ -158,7 +197,7 @@ def IsOverview(): bool
   while lnum <= last
     if Level(lnum) == 1
       var end = SubtreeEnd(lnum)
-      if end > lnum && foldclosed(lnum) < 0
+      if end > lnum && !IsContentClosed(lnum)
         return false
       endif
       lnum = end
@@ -170,14 +209,12 @@ enddef
 
 def ApplyContents()
   normal! zR
-  var last = line('$')
-  var lnum = last
+  var lnum = line('$')
   while lnum >= 1
-    var level = Level(lnum)
-    if level > 0
+    if Level(lnum) > 0
       # A leaf closes whole, and a parent stays open to show its children.
       if !HasChildHeading(lnum, SubtreeEnd(lnum))
-        CloseAt(lnum)
+        CloseContent(lnum)
       endif
     elseif lnum > 1 && foldlevel(lnum) > foldlevel(lnum - 1)
       CloseAt(lnum)
@@ -192,7 +229,7 @@ export def GlobalCycle(): string
   if IsOverview()
     ApplyContents()
     state = 'CONTENTS'
-  elseif HasClosedHeadingBelow(0, line('$'))
+  elseif HasClosedContent(0, line('$'))
     normal! zR
     OpenAll(1, line('$'))
     state = 'SHOW ALL'

@@ -93,7 +93,9 @@ In an org file:
 | Keys | Action |
 |---|---|
 | `TAB` | Cycle this subtree, align a table and go to the next cell, or jump forward as usual elsewhere |
-| `TAB` in Insert mode | Next table cell, or an ordinary tab elsewhere |
+| `TAB` in Insert mode | Next table cell, add a star on a heading, or an ordinary tab elsewhere |
+| `S-TAB` in Insert mode | Remove a star on a heading |
+| `>>` / `<<`, and `>` / `<` with a motion or in Visual mode | Add / remove a star on each heading, if the range starts on one or the cursor is on one. Elsewhere they indent as usual |
 | `S-TAB` | Cycle overview, contents, show all |
 | `M-j` / `M-k` | Move subtree down / up (or drag the line, off a heading) |
 | `M-h` / `M-l` | Promote / demote this heading |
@@ -101,7 +103,7 @@ In an org file:
 | `Enter` | Follow the link under the cursor |
 | `SPC o l` / `SPC m q` / `SPC m a` | Insert link / set tags / align table |
 
-Vim's own fold commands, such as `za`, work too, and `TAB` reads the real fold state each time.
+`TAB` on a `… N lines` row opens it. Vim's own fold commands, such as `za`, work too, and `TAB` reads the real fold state each time.
 
 In the agenda, all Vim motions, `/` and yank work as usual, along with:
 
@@ -128,7 +130,8 @@ Every command is also available directly, for example `:OrgTodo WAIT`, `:OrgSche
 **From VS Code**
 
 - Project switching changes Vim's working directory instead of opening a window, and your other buffers stay open.
-- A parent heading's body text can fold, as a line of its own in contents view. A closed fold always takes up a line in Vim.
+- Vim draws a closed fold in one flat colour, so only the content under a heading folds. Headings and keywords always keep their colours, and each closed section takes an extra `… N lines` row, so an overview is up to twice as long.
+- A parent heading's body text can fold separately from its children.
 - Wrapped lines indent, and the menu waits 0.7s like your Emacs one. The agenda week keys are `[[` and `]]`, and `gr` works, as in Emacs.
 - `SPC s i` (symbols) doesn't exist, because Vim has no language server built in.
 - A `{regex}` in an agenda match uses Vim's regex syntax, in very magic mode, not Emacs's.

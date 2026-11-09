@@ -150,12 +150,8 @@ def TagsBlock(block: dict<any>, files: list<dict<any>>, options: dict<any>): lis
         minutes: -1,
         endMinutes: -1,
       })
-      # org-tags-match-list-sublevels is nil: a match hides its whole subtree.
-      var next = i + 1
-      while next < len(headings) && headings[next].level > heading.level
-        next += 1
-      endwhile
-      i = next
+      # org-tags-match-list-sublevels is t: a match doesn't hide its subtree.
+      i += 1
     endwhile
   endfor
   var header = has_key(block, 'header') ? block.header : 'Headlines with TAGS match: ' .. get(block, 'match', '')

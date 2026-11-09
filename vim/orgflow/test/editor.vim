@@ -153,17 +153,20 @@ def TestFolds()
   var path = Fresh('folds.org', FOLD_TEXT)
   execute 'edit' path
   Check('filetype', &filetype, 'org')
-  Check('starts in overview', ClosedLines(), [2, 9, 15])
+  # Headings are never folded, so they keep their colours: only their content is.
+  Check('starts in overview', ClosedLines(), [3, 10, 16])
+  Check('top-level headings show', [foldclosed(2), foldclosed(9), foldclosed(14), foldclosed(15)], [-1, -1, -1, -1])
 
   # TAB on One: FOLDED, then CHILDREN, then SUBTREE, then FOLDED.
   cursor(2, 1)
   Check('children state', fold.Cycle(2), 'CHILDREN')
-  # One's own body line is single, so it can't close and stays visible.
-  Check('children hide bodies', ClosedLines(), [4, 6, 9, 15])
+  Check('children hide bodies', ClosedLines(), [3, 5, 7, 10, 16])
+  Check('children headings show', [foldclosed(4), foldclosed(6)], [-1, -1])
   Check('subtree state', fold.Cycle(2), 'SUBTREE')
-  Check('subtree shows all', ClosedLines(), [9, 15])
+  Check('subtree shows all', ClosedLines(), [10, 16])
   Check('folded state', fold.Cycle(2), 'FOLDED')
-  Check('folded', ClosedLines(), [2, 9, 15])
+  Check('folded', ClosedLines(), [3, 10, 16])
+  Check('the closed fold covers the subtree', foldclosedend(3), 8)
   Check('cycle repeats', fold.Cycle(2), 'CHILDREN')
 
   # A leaf has no CHILDREN step, and a drawer stays shut when its entry opens.
@@ -171,6 +174,7 @@ def TestFolds()
   Check('drawer stays closed', foldclosed(10), 10)
   Check('body visible', foldclosed(13), -1)
   Check('leaf closes', fold.Cycle(9), 'FOLDED')
+  Check('leaf content closes whole', [foldclosed(10), foldclosedend(10)], [10, 13])
 
   # A heading with nothing under it has nothing to cycle.
   Check('empty heading', fold.Cycle(14), 'EMPTY')
@@ -180,14 +184,35 @@ def TestFolds()
   Check('parent body is folded', foldclosed(16), 16)
   Check('child heading visible', foldclosed(18), -1)
 
+  # TAB on the row of a closed fold opens it.
+  normal! zM
+  cursor(3, 1)
+  execute 'OrgCycle'
+  Check('TAB on a closed row opens it', ClosedLines(), [10, 16])
+  Check('and lands on its first line', line('.'), 3)
+
   # Global cycle.
   normal! zM
   Check('contents', fold.GlobalCycle(), 'CONTENTS')
-  Check('contents shows all headings', [foldclosed(2), foldclosed(4), foldclosed(6), foldclosed(7), foldclosed(14), foldclosed(15), foldclosed(18)], [-1, 4, -1, 7, -1, -1, -1])
+  Check('contents shows all headings', [foldclosed(2), foldclosed(4), foldclosed(7), foldclosed(9), foldclosed(14), foldclosed(15), foldclosed(18)], [-1, -1, -1, -1, -1, -1, -1])
+  Check('contents hides bodies', [foldclosed(3), foldclosed(5), foldclosed(8), foldclosed(10), foldclosed(16)], [3, 5, 8, 10, 16])
   Check('show all', fold.GlobalCycle(), 'SHOW ALL')
   Check('show all keeps drawers', ClosedLines(), [10])
   Check('overview', fold.GlobalCycle(), 'OVERVIEW')
-  Check('back to overview', ClosedLines(), [2, 9, 15])
+  Check('back to overview', ClosedLines(), [3, 10, 16])
+
+  # Nesting several levels deep, with each kind of first line.
+  var deep = Fresh('deep.org', "* A\n** B\n*** C\nc body\n** D\n:PROPERTIES:\n:ID: 1\n:END:\nd body\n*** E\n* F\n")
+  execute 'edit' deep
+  Check('deep overview', ClosedLines(), [2])
+  Check('deep closed fold reaches the next top heading', foldclosedend(2), 10)
+  Check('a child straight under a parent', fold.Cycle(1), 'CHILDREN')
+  Check('both children show', [foldclosed(2), foldclosed(5)], [-1, -1])
+  Check('with their content closed', [foldclosedend(3), foldclosedend(6)], [4, 10])
+  Check('then the whole subtree', fold.Cycle(1), 'SUBTREE')
+  Check('apart from the drawer', ClosedLines(), [6])
+  Check('then folded', fold.Cycle(1), 'FOLDED')
+  Check('all under A', foldclosedend(2), 10)
   Reset()
 enddef
 TestFolds()
@@ -269,6 +294,58 @@ def TestOrgCommands()
   Check('TAB on a SCHEDULED line raises no error', cycleError, '')
   Check('and stays there', line('.'), 2)
   Reset()
+
+  # Indenting a heading changes its stars, and any other line indents as usual.
+  execute 'edit' Fresh('shift.org', "* One\nbody\n** Two\n* Three\n")
+  normal! zR
+  set shiftwidth=2 expandtab
+  cursor(1, 1)
+  feedkeys('>>', 'tx')
+  Check('>> adds a star', getline(1), '** One')
+  feedkeys('.', 'tx')
+  Check('. repeats it', getline(1), '*** One')
+  feedkeys('<<<<', 'tx')
+  Check('<< removes them', getline(1), '* One')
+  feedkeys('<<', 'tx')
+  Check('<< stops at one star', getline(1), '* One')
+  cursor(2, 1)
+  feedkeys('>>', 'tx')
+  Check('>> on a body line indents', getline(2), '  body')
+  feedkeys('<<', 'tx')
+  Check('<< on a body line unindents', getline(2), 'body')
+  cursor(1, 1)
+  feedkeys('3>>', 'tx')
+  Check('a count covers its lines', getline(1, 4), ['** One', 'body', '*** Two', '* Three'])
+  feedkeys('3<<', 'tx')
+  cursor(1, 1)
+  feedkeys('>G', 'tx')
+  Check('a motion works', getline(1, 4), ['** One', 'body', '*** Two', '** Three'])
+  feedkeys('<G', 'tx')
+  cursor(1, 1)
+  feedkeys('Vjjj>', 'tx')
+  Check('Visual > shifts headings only', getline(1, 4), ['** One', 'body', '*** Two', '** Three'])
+  cursor(1, 1)
+  feedkeys('Vjjj<', 'tx')
+  Check('Visual < shifts them back', getline(1, 4), ['* One', 'body', '** Two', '* Three'])
+  cursor(2, 1)
+  feedkeys('V>', 'tx')
+  Check('Visual > on a body line indents it', getline(2), '  body')
+  feedkeys('u', 'tx')
+  cursor(3, 1)
+  feedkeys("A\<Tab>X\<Esc>", 'tx')
+  Check('Insert TAB adds a star and keeps the cursor', getline(3), '*** TwoX')
+  feedkeys("A\<S-Tab>Y\<Esc>", 'tx')
+  Check('Insert S-TAB removes one', getline(3), '** TwoXY')
+  set shiftwidth& expandtab&
+  set nomodified
+  Reset()
+
+  # A window keeps its fillchars, so a second org file used to stop Setup part way.
+  execute 'edit' Fresh('first.org', "* One\n")
+  execute 'edit' Fresh('second.org', "* Two\n")
+  Check('a second org file in the window still gets set up', maparg('<Tab>', 'n') =~# 'OrgCycle', true)
+  Check('and has one fold fill character', len(matchlist(&l:fillchars, 'fold: ')) > 0 && &l:fillchars !~# ',,', true)
+  Reset()
 enddef
 TestOrgCommands()
 
@@ -298,6 +375,41 @@ def TestLinks()
   Reset()
 enddef
 TestLinks()
+
+# --- agenda highlighting -----------------------------------------------------
+def AgendaSyntaxAt(line: number, word: string, from = 1): string
+  var column = stridx(getline(line), word, from - 1) + 1
+  return synIDattr(synID(line, column, 1), 'name')
+enddef
+
+def TestAgendaSyntax()
+  Reset()
+  syntax enable
+  enew
+  setlocal buftype=nofile
+  setline(1, [
+    'Header',
+    '  all:        TODO make items have TODO status and WAIT for DONE',
+    '  all:        Check the TODO list',
+    '  all:        TODOS for later',
+    '  work:        8:00...... Scheduled:  IN PROGRESS Task',
+    '  work:       In   3 d.:  WAIT Task',
+    '  work:        2 d. ago:  DONE Task',
+  ])
+  set filetype=orgagenda
+  Check('the real keyword is coloured', AgendaSyntaxAt(2, 'TODO'), 'orgAgendaTodo')
+  Check('the same word in the title is not', AgendaSyntaxAt(2, 'TODO status'), 'orgAgendaItem')
+  Check('nor another keyword', AgendaSyntaxAt(2, 'WAIT'), 'orgAgendaItem')
+  Check('nor a done keyword', AgendaSyntaxAt(2, 'DONE'), 'orgAgendaItem')
+  Check('no keyword, no colour', AgendaSyntaxAt(3, 'TODO'), 'orgAgendaItem')
+  Check('a longer word is not a keyword', AgendaSyntaxAt(4, 'TODOS'), 'orgAgendaItem')
+  Check('found after a time and leader', AgendaSyntaxAt(5, 'IN PROGRESS'), 'orgAgendaActive')
+  Check('found after In N d.', AgendaSyntaxAt(6, 'WAIT'), 'orgAgendaWait')
+  Check('found after N d. ago', AgendaSyntaxAt(7, 'DONE'), 'orgAgendaDone')
+  syntax off
+  Reset()
+enddef
+TestAgendaSyntax()
 
 # --- agenda and capture, through real files ----------------------------------
 def TestAgendaFlow()
